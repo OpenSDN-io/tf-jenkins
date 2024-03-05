@@ -1,5 +1,5 @@
 [gerrit]
 host=gerrit.opensdn.io
 port=29418
-project=tungstenfabric/tf-jenkins.git
+project=opensdn-io/tf-jenkins.git
 defaultbranch=master

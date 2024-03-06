@@ -78,7 +78,7 @@
       - shell: |
           export ENVIRONMENT_OS=centos7
           source "$WORKSPACE/global.env"
-          $WORKSPACE/src/tungstenfabric/tf-jenkins/jobs/update-stage-images/create_workers.sh
+          $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/update-stage-images/create_workers.sh
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
@@ -87,7 +87,7 @@
           # do it as a latest source to override all exports
           source "${WORKSPACE}/vars.${JOB_NAME}.${JOB_RND}.env" || /bin/true
           echo "INFO: pull rhosp docker images and tag them as staging "
-          $WORKSPACE/src/tungstenfabric/tf-jenkins/jobs/update-stage-images/run.sh
+          $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/update-stage-images/run.sh
     publishers:
       - postbuildscript:
           builders:
@@ -102,7 +102,7 @@
                 - shell: |
                     source "$WORKSPACE/global.env"
                     source "$WORKSPACE/stackrc.$JOB_NAME.env"
-                    $WORKSPACE/src/tungstenfabric/tf-jenkins/infra/${SLAVE}/remove_workers.sh
+                    $WORKSPACE/src/opensdn-io/tf-jenkins/infra/${SLAVE}/remove_workers.sh
                     rm -f "$WORKSPACE/stackrc.$JOB_NAME.env"
       - archive:
           artifacts: '*.env'
@@ -181,7 +181,7 @@
       - shell: |
           export ENVIRONMENT_OS=centos7
           source "$WORKSPACE/global.env"
-          $WORKSPACE/src/tungstenfabric/tf-jenkins/jobs/update-stage-images/create_workers.sh
+          $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/update-stage-images/create_workers.sh
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
@@ -190,7 +190,7 @@
           # do it as a latest source to override all exports
           source "${WORKSPACE}/vars.${JOB_NAME}.${JOB_RND}.env" || /bin/true
           echo "INFO: tag all rhosp images as latest"
-          $WORKSPACE/src/tungstenfabric/tf-jenkins/jobs/update-stage-images/publish.sh
+          $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/update-stage-images/publish.sh
     publishers:
       - postbuildscript:
           builders:
@@ -205,7 +205,7 @@
                 - shell: |
                     source "$WORKSPACE/global.env"
                     source "$WORKSPACE/stackrc.$JOB_NAME.env"
-                    $WORKSPACE/src/tungstenfabric/tf-jenkins/infra/${SLAVE}/remove_workers.sh
+                    $WORKSPACE/src/opensdn-io/tf-jenkins/infra/${SLAVE}/remove_workers.sh
                     rm -f "$WORKSPACE/stackrc.$JOB_NAME.env"
       - archive:
           artifacts: '*.env'

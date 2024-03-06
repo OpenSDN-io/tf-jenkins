@@ -71,12 +71,12 @@
           set -eo pipefail
           source "$WORKSPACE/global.env"
 
-          ./src/tungstenfabric/tf-jenkins/jobs/update-caches/create_workers.sh
+          ./src/opensdn-io/tf-jenkins/jobs/update-caches/create_workers.sh
           source "$WORKSPACE/stackrc.$JOB_NAME.env"
           # main run
-          ./src/tungstenfabric/tf-jenkins/jobs/update-caches/run.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/update-caches/run.sh || res=1
           # collect logs
-          ./src/tungstenfabric/tf-jenkins/jobs/update-caches/collect_logs.sh
+          ./src/opensdn-io/tf-jenkins/jobs/update-caches/collect_logs.sh
           exit $res
     publishers:
       - postbuildscript:
@@ -94,7 +94,7 @@
                     if [ -e "$WORKSPACE/stackrc.$JOB_NAME.env" ]; then
                       echo "INFO: stackrc file found. remove workers."
                       source "$WORKSPACE/stackrc.$JOB_NAME.env"
-                      ./src/tungstenfabric/tf-jenkins/infra/$SLAVE/remove_workers.sh
+                      ./src/opensdn-io/tf-jenkins/infra/$SLAVE/remove_workers.sh
                     else
                       echo "INFO: stackrc file could not be found."
                     fi

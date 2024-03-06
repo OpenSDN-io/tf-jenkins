@@ -19,7 +19,7 @@ cat <<EOF | ssh -i $WORKER_SSH_KEY -F $my_dir/ssh_config openlab1
 [ "${DEBUG,,}" == "true" ] && set -x
 cd /tmp
 rm -rf tf-jenkins
-git clone https://github.com/tungstenfabric/tf-jenkins.git
+git clone https://github.com/opensdn-io/tf-jenkins.git
 cd tf-jenkins/contrib/bmc/bmc-cluster-tools/
 #Get env file from openlab1
 cp /root/tf-jenkins/contrib/bmc/bmc-cluster-tools/$lab* .

@@ -6,7 +6,7 @@ set -o pipefail
 sudo yum install -y wget curl skopeo
 
 echo "INFO: prepare list of docker image to cache from tf-devstack"
-./src/tungstenfabric/tf-devstack/common/get_image_cache.sh $(pwd)/imagelist
+./src/opensdn-io/tf-devstack/common/get_image_cache.sh $(pwd)/imagelist
 
 imagelist=$(pwd)/imagelist
 for image in $(cat $imagelist); do

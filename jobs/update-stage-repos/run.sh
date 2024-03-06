@@ -19,5 +19,5 @@ export CI_DOMAIN=$CI_DOMAIN
 export RHEL_USER=$RHEL_USER
 export RHEL_PASSWORD=$RHEL_PASSWORD
 export RHEL_POOL_ID=$RHEL_POOL_ID
-./src/tungstenfabric/tf-jenkins/jobs/update-stage-repos/sync.sh ${REPOS_TYPE}
+./src/opensdn-io/tf-jenkins/jobs/update-stage-repos/sync.sh ${REPOS_TYPE}
 EOF

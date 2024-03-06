@@ -32,10 +32,10 @@ export WORKSPACE=\$HOME
 export PATH=\$PATH:/usr/sbin
 export DEBUG=$DEBUG
 export CONTAINER_REGISTRY=$CONTAINER_REGISTRY
-./src/tungstenfabric/tf-dev-env/common/setup_docker.sh
+./src/opensdn-io/tf-dev-env/common/setup_docker.sh
 
 # to get DISTRO env variable
-source ./src/tungstenfabric/tf-dev-env/common/common.sh
+source ./src/opensdn-io/tf-dev-env/common/common.sh
 # setup additional packages
 if [ x"\$DISTRO" == x"ubuntu" ]; then
   export DEBIAN_FRONTEND=noninteractive

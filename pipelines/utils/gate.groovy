@@ -3,7 +3,7 @@ import groovy.json.JsonOutput
 
 // TODO: Fill up list of projects that can't be run in concurrent mode
 SERIAL_PROJECTS = [
-  'tungstenfabric/tf-kolla-ansible',
+  'opensdn-io/tf-kolla-ansible',
 ]
 
 // Function find base build fits to be the base build

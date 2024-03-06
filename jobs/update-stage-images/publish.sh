@@ -30,11 +30,11 @@ export REPOS_TYPE=$REPOS_TYPE
 export PATH=\$PATH:/usr/sbin
 
 export CONTAINER_REGISTRY=$CONTAINER_REGISTRY
-./src/tungstenfabric/tf-dev-env/common/setup_docker.sh
+./src/opensdn-io/tf-dev-env/common/setup_docker.sh
 
 echo "INFO: cat /etc/docker/daemon.json"
 cat /etc/docker/daemon.json
 
-./src/tungstenfabric/tf-jenkins/jobs/update-stage-images/publish_docker_images.sh
+./src/opensdn-io/tf-jenkins/jobs/update-stage-images/publish_docker_images.sh
 EOF
 echo "INFO: Publishing docker images is finished for $REPOS_TYPE"

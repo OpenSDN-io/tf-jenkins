@@ -31,7 +31,7 @@ for i in "${!OS_IMAGE_USERS[@]}"; do
 
   echo "INFO: pack image for $i and upload it"
   packer build -machine-readable -var "os_image=${i,,}" -var "ssh_user=${OS_IMAGE_USERS[$i]}" -debug \
-      ${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/packer/openstack.json
+      ${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/packer/openstack.json
   if ! OLD_IMAGES=$(openstack image list --tag prepared-${i,,} -c Name -f value | sort -nr | tail -n +4) ; then
     # python-openstackclient has a bug - it doesn't allow to use '--tag' param even it has it in help
     OLD_IMAGES=$(openstack image list -c Name -f value | grep "prepared-${i,,}" | sort -nr | tail -n +4)

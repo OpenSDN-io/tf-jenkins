@@ -99,7 +99,7 @@ wait_ssh sync_image_worker
 cd /tmp
 rm run.sh
 rm -rf tf-jenkins || true
-git clone "https://gerrit.opensdn.io/r/tungstenfabric/tf-jenkins"
+git clone "https://gerrit.opensdn.io/r/opensdn-io/tf-jenkins"
 
 cat <<EOF | tee -a run.sh
 #!/bin/bash

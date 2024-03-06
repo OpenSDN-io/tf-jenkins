@@ -55,7 +55,7 @@
           regexp: "DESCRIPTION (.*)"
       - shell: |
           source "$WORKSPACE/global.env"
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
       - shell: |
           source "$WORKSPACE/global.env"
-          $WORKSPACE/src/tungstenfabric/tf-jenkins/infra/${SLAVE}/cleanup_pipeline_workers.sh
+          $WORKSPACE/src/opensdn-io/tf-jenkins/infra/${SLAVE}/cleanup_pipeline_workers.sh

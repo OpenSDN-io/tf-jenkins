@@ -15,7 +15,7 @@ DELAY = 1
 SSH_CMD = 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 SSH_DEST = '-p 29418 tf-gerrit@progmaticlab.com'
 BRANCH = 'master'
-GERRIT_CMD = 'gerrit query --comments --patch-sets --format=JSON branch:' + BRANCH + ' status:merged projects:tungstenfabric limit:{}'
+GERRIT_CMD = 'gerrit query --comments --patch-sets --format=JSON branch:' + BRANCH + ' status:merged projects:opensdn-io limit:{}'
 
 # end of gating must not be too far from merge event (seconds)
 TIMDELTA_GATE_MERGE = 30
@@ -36,7 +36,7 @@ def log(message):
 class Checker():
 
     def get_last_merge(self):
-        # run query on gerrit and returns latest merge from master branch of tungstenfabric projects
+        # run query on gerrit and returns latest merge from master branch of opensdn-io projects
         return self._get_merged_reviews()[-1]
 
     def get_new_merges(self, last_merge):

@@ -25,8 +25,8 @@ rm -rf gitproject
 
 # fill repos
 cd git
-mkdir -p tungstenfabric
-cd tungstenfabric
+mkdir -p opensdn-io
+cd opensdn-io
 
 repos="tf-analytics \
 tf-ansible-deployer \
@@ -63,5 +63,5 @@ tf-web-core \
 tf-webui-third-party"
 
 for repo in $repos ; do
-    git clone --mirror git@github.com:tungstenfabric/${repo}.git
+    git clone --mirror git@github.com:opensdn-io/${repo}.git
 done

@@ -54,4 +54,4 @@
       - description-setter:
           regexp: "DESCRIPTION (.*)"
       - shell: |
-          ./src/tungstenfabric/tf-jenkins/infra/openstack/update_prepared_images.sh
+          ./src/opensdn-io/tf-jenkins/infra/openstack/update_prepared_images.sh

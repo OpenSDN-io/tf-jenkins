@@ -124,13 +124,13 @@ def _evaluate(evaluate_string) {
 
 def _get_data() {
   // read main file
-  def data = readYaml(file: "${WORKSPACE}/src/tungstenfabric/tf-jenkins/config/main.yaml")
+  def data = readYaml(file: "${WORKSPACE}/src/opensdn-io/tf-jenkins/config/main.yaml")
   // read includes
   def include_data = []
   for (item in data) {
     if (item.containsKey('include')) {
       for (file in item['include']) {
-        include_data += readYaml(file: "${WORKSPACE}/src/tungstenfabric/tf-jenkins/config/${file}")
+        include_data += readYaml(file: "${WORKSPACE}/src/opensdn-io/tf-jenkins/config/${file}")
       }
     }
   }

@@ -37,7 +37,7 @@
             "SLAVE_REGION={{user `slave_region`}}",
             "CI_DOMAIN={{user `ci_domain`}}"
          ],
-         "script":"{{user `workspace`}}/src/tungstenfabric/tf-jenkins/infra/packer/{{user `os_image`}}.sh"
+         "script":"{{user `workspace`}}/src/opensdn-io/tf-jenkins/infra/packer/{{user `os_image`}}.sh"
       }
    ]
 }

@@ -20,7 +20,7 @@
     builders:
       - shell: |
           #!/bin/bash -e
-          cd ./src/tungstenfabric/tf-jenkins/jjb
+          cd ./src/opensdn-io/tf-jenkins/jjb
           python3 -m venv .venv
           source .venv/bin/activate
           pip3 install setuptools wheel --upgrade

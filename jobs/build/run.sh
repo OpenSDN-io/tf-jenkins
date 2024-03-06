@@ -23,8 +23,8 @@ fi
 
 # transfer patchsets info into sandbox
 if [ -e $WORKSPACE/patchsets-info.json ]; then
-  mkdir -p $WORKSPACE/src/tungstenfabric/tf-dev-env/input/
-  cp -f $WORKSPACE/patchsets-info.json $WORKSPACE/src/tungstenfabric/tf-dev-env/input/
+  mkdir -p $WORKSPACE/src/opensdn-io/tf-dev-env/input/
+  cp -f $WORKSPACE/patchsets-info.json $WORKSPACE/src/opensdn-io/tf-dev-env/input/
 fi
 
 ssh_cmd="ssh -i $WORKER_SSH_KEY $SSH_OPTIONS"
@@ -33,7 +33,7 @@ echo "INFO: Build started: ENVIRONMENT_OS=$ENVIRONMENT_OS LINUX_DISTR=$LINUX_DIS
 
 export DEVENV_TAG=${DEVENV_TAG:-stable${TAG_SUFFIX}}
 export BUILD_MODE="fast"
-if grep -q "tungstenfabric/tf-dev-env" ./patchsets-info.json ; then
+if grep -q "opensdn-io/tf-dev-env" ./patchsets-info.json ; then
   # changes in tf-dev-env - we have to rebuild it
   export DEVENV_TAG="sandbox-$CONTRAIL_CONTAINER_TAG$TAG_SUFFIX"
 fi
@@ -65,7 +65,7 @@ fi
 
 export UBUNTU_CODENAME='jammy'
 for repofile in $mirror_list_for_build $mirror_list mirror-base-centos7.repo mirror-docker.repo mirror-pip.conf mirror-docker-daemon.json ubuntu-sources.list ; do
-  file="${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/${repofile}"
+  file="${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/${repofile}"
   cat $file | envsubst > $file.tmp
   mv $file.tmp $file
 done
@@ -103,7 +103,7 @@ export DEBUGINFO=$DEBUGINFO
 
 export CONTRAIL_PARALLEL_BUILD=$CONTRAIL_PARALLEL_BUILD
 
-cd src/tungstenfabric/tf-dev-env
+cd src/opensdn-io/tf-dev-env
 
 # TODO: use in future generic mirror approach
 # Copy yum repos for rhel from host to containers to use local mirrors
@@ -124,25 +124,25 @@ case "${ENVIRONMENT_OS,,}" in
     ;;
   centos* )
     # copy docker and base repos to local machine
-    sudo cp \${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/mirror-docker.repo /etc/yum.repos.d/
-    sudo cp \${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/mirror-base-centos7.repo /etc/yum.repos.d/
+    sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-docker.repo /etc/yum.repos.d/
+    sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-base-centos7.repo /etc/yum.repos.d/
     ;;
 esac
 for mirror in $mirror_list_for_build ; do
-  cp \${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/\$mirror ./container/
+  cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/\$mirror ./container/
 done
 for mirror in $mirror_list ; do
-  cp \${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/\$mirror ./config/etc/yum.repos.d/
+  cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/\$mirror ./config/etc/yum.repos.d/
 done
 
 mkdir -p ./config/etc/apt
-cp \${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/ubuntu-sources.list ./config/etc/apt/sources.list
+cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/ubuntu-sources.list ./config/etc/apt/sources.list
 
-cp \${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/mirror-pip.conf ./config/etc/pip.conf
-cp \${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/mirror-pip.conf ./container/pip.conf
+cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-pip.conf ./config/etc/pip.conf
+cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-pip.conf ./container/pip.conf
 
 sudo mkdir -p /etc/docker/
-sudo cp \${WORKSPACE}/src/tungstenfabric/tf-jenkins/infra/mirrors/mirror-docker-daemon.json /etc/docker/daemon.json
+sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-docker-daemon.json /etc/docker/daemon.json
 
 echo "INFO: df -h"
 df -h
@@ -196,7 +196,7 @@ set -eo pipefail
 export WORKSPACE=\$HOME
 export DEVENV_PUSH_TAG=$tag
 export CONTAINER_REGISTRY=$CONTAINER_REGISTRY
-src/tungstenfabric/tf-dev-env/run.sh upload
+src/opensdn-io/tf-dev-env/run.sh upload
 EOF
 
   if [[ "$res" != '0' ]] ; then

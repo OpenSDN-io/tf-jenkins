@@ -36,47 +36,47 @@
     name: tf-jenkins
     scm:
       - github:
-          organization: tungstenfabric
+          organization: opensdn-io
           repo: tf-jenkins
 
 - scm:
     name: tf-devstack
     scm:
       - github:
-          organization: tungstenfabric
+          organization: opensdn-io
           repo: tf-devstack
 
 - scm:
     name: tf-dev-env
     scm:
       - github:
-          organization: tungstenfabric
+          organization: opensdn-io
           repo: tf-dev-env
 
 - scm:
     name: tf-dev-test
     scm:
       - github:
-          organization: tungstenfabric
+          organization: opensdn-io
           repo: tf-dev-test
 
 - scm:
     name: tf-container-builder
     scm:
       - github:
-          organization: tungstenfabric
+          organization: opensdn-io
           repo: tf-container-builder
 
 - scm:
     name: tf-third-party
     scm:
       - github:
-          organization: tungstenfabric
+          organization: opensdn-io
           repo: tf-third-party
 
 - scm:
     name: tf-webui-third-party
     scm:
       - github:
-          organization: tungstenfabric
+          organization: opensdn-io
           repo: tf-webui-third-party

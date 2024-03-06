@@ -16,5 +16,5 @@ rsync -a -e "ssh -i $REPOUPDATER_SSH_KEY $SSH_OPTIONS" $WORKSPACE/src $dest:./
 cat <<EOF | ssh -i $REPOUPDATER_SSH_KEY $SSH_OPTIONS $dest
 export SLAVE_REGION=$SLAVE_REGION
 export CI_DOMAIN=$CI_DOMAIN
-./src/tungstenfabric/tf-jenkins/jobs/update-stage-repos/publish_stage.sh ${REPOS_TYPE}
+./src/opensdn-io/tf-jenkins/jobs/update-stage-repos/publish_stage.sh ${REPOS_TYPE}
 EOF

@@ -31,7 +31,7 @@ meetings:
       repeats: ''
       time: ''
 repositories:
-    - tungstenfabric/tf-jenkins
+    - opensdn-io/tf-jenkins
 committers:
     - <<: *tungstenfabric_tf-jenkins_ptl
     - name: 'Alexandre Levine'

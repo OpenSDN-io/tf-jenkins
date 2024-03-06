@@ -77,7 +77,7 @@
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
@@ -87,9 +87,9 @@
           export FULL_LOGS_PATH="${LOGS_PATH}/${STREAM}"
           export FULL_LOGS_URL="${LOGS_URL}/${STREAM}"
           # main run
-          ./src/tungstenfabric/tf-jenkins/jobs/aquascan/run.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/aquascan/run.sh || res=1
           # collect logs
-          ./src/tungstenfabric/tf-jenkins/jobs/aquascan/collect_logs.sh
+          ./src/opensdn-io/tf-jenkins/jobs/aquascan/collect_logs.sh
           exit $res
     publishers:
         - archive:

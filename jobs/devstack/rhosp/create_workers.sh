@@ -39,7 +39,7 @@ if [[ -n "$JUMPHOST" ]]; then
   source $stackrc_file_path
 
   if [[ "$PROVIDER" == 'bmc' ]]; then
-    $WORKSPACE/src/tungstenfabric/tf-devstack/rhosp/create_env.sh
+    $WORKSPACE/src/opensdn-io/tf-devstack/rhosp/create_env.sh
   elif [[ "$PROVIDER" == 'kvm' ]]; then
     # devstack requires to run scripts on KVM host
     # TODO: make it symmetric with openstack/bmc - rework devstack scripts
@@ -63,8 +63,8 @@ EOF
       echo "export $var=\"$val\"" >> $WORKSPACE/$script
     done
     cat <<EOF >> $WORKSPACE/$script
-src/tungstenfabric/tf-devstack/rhosp/cleanup.sh
-src/tungstenfabric/tf-devstack/rhosp/create_env.sh
+src/opensdn-io/tf-devstack/rhosp/cleanup.sh
+src/opensdn-io/tf-devstack/rhosp/create_env.sh
 EOF
     chmod a+x $WORKSPACE/$script
     ssh_cmd="ssh -i $WORKER_SSH_KEY $SSH_OPTIONS $SSH_EXTRA_OPTIONS"
@@ -125,7 +125,7 @@ else
     source $stackrc_file_path
     # TODO: rename vexxrc to openrc
     export vexxrc="$stackrc_file_path"
-    if $WORKSPACE/src/tungstenfabric/tf-devstack/rhosp/create_env.sh ; then
+    if $WORKSPACE/src/opensdn-io/tf-devstack/rhosp/create_env.sh ; then
       echo "INFO: Running up hooks"
       # hooks are impleneted for openstack only
       if [[ -e $my_dir/../../../infra/hooks/rhel/up.sh ]] ; then

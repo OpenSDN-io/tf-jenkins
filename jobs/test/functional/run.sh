@@ -12,16 +12,16 @@ echo "INFO: Test $TARGET started  $(date)"
 
 case $TARGET in
   "sanity" )
-    script="src/tungstenfabric/tf-dev-test/tf-sanity/run.sh"
+    script="src/opensdn-io/tf-dev-test/tf-sanity/run.sh"
     ;;
   "deployment" )
-    script="src/tungstenfabric/tf-dev-test/deployment-test/run.sh"
+    script="src/opensdn-io/tf-dev-test/deployment-test/run.sh"
     ;;
   "smoke" )
-    script="src/tungstenfabric/tf-dev-test/smoke-test/run.sh"
+    script="src/opensdn-io/tf-dev-test/smoke-test/run.sh"
     ;;
   "tempest" )
-    script="src/tungstenfabric/tf-dev-test/tempest/run.sh"
+    script="src/opensdn-io/tf-dev-test/tempest/run.sh"
     ;;
   *)
     echo "Variable TARGET is not set or incorrect"

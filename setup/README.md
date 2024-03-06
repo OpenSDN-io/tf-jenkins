@@ -49,7 +49,7 @@ sudo pip3 install "ansible<2.10"
 Then clone setup source code
 
 ```bash
-git clone https://github.com/tungstenfabric/tf-jenkins
+git clone https://github.com/opensdn-io/tf-jenkins
 cd tf-jenkins/setup
 ```
 

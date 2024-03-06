@@ -74,8 +74,8 @@
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-jenkins ./patchsets-info.json
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-devstack ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-devstack ./patchsets-info.json
       - shell: |
           set -eo pipefail
           export ENVIRONMENT_OS={environment_os}
@@ -86,7 +86,7 @@
 
           res=0
           # do exit later when all context will be saved to env_file
-          ./src/tungstenfabric/tf-jenkins/jobs/devstack/{deployer}/create_workers.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/devstack/{deployer}/create_workers.sh || res=1
           # add more information about current deployment for deploy-tf job
           ENV_FILE="$WORKSPACE/stackrc.$JOB_NAME.env"
           echo "export ORCHESTRATOR=$ORCHESTRATOR" >> "$ENV_FILE"
@@ -97,15 +97,15 @@
             exit 1
           fi
           source "$WORKSPACE/stackrc.$JOB_NAME.env"
-          source ./src/tungstenfabric/tf-jenkins/infra/${{SLAVE}}/definitions
+          source ./src/opensdn-io/tf-jenkins/infra/${{SLAVE}}/definitions
 
           export FULL_LOGS_PATH="$LOGS_PATH/$JOB_LOGS_PATH"
           ssh -i $LOGS_HOST_SSH_KEY $SSH_OPTIONS $LOGS_HOST_USERNAME@$LOGS_HOST "mkdir -p $FULL_LOGS_PATH"
 
-          ./src/tungstenfabric/tf-jenkins/jobs/devstack/{deployer}/deploy_platform.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/devstack/{deployer}/deploy_platform.sh || res=1
           if [[ $res == 1 ]]; then
             export DEBUG=false
-            ./src/tungstenfabric/tf-jenkins/jobs/devstack/{deployer}/collect_logs.sh || /bin/true
+            ./src/opensdn-io/tf-jenkins/jobs/devstack/{deployer}/collect_logs.sh || /bin/true
           fi
           exit $res
     publishers:
@@ -119,8 +119,8 @@
                       export ORCHESTRATOR={orchestrator}
                       source "$WORKSPACE/global.env"
                       source "$WORKSPACE/stackrc.$JOB_NAME.env"
-                      source ./src/tungstenfabric/tf-jenkins/infra/${{SLAVE}}/definitions
-                      ./src/tungstenfabric/tf-jenkins/jobs/devstack/{deployer}/remove_workers.sh
+                      source ./src/opensdn-io/tf-jenkins/infra/${{SLAVE}}/definitions
+                      ./src/opensdn-io/tf-jenkins/jobs/devstack/{deployer}/remove_workers.sh
       - archive:
           artifacts: '*.env'
 
@@ -172,17 +172,17 @@
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-jenkins ./patchsets-info.json
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-devstack ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-devstack ./patchsets-info.json
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
-          source ./src/tungstenfabric/tf-jenkins/infra/${{SLAVE}}/definitions
+          source ./src/opensdn-io/tf-jenkins/infra/${{SLAVE}}/definitions
           source "${{WORKSPACE}}/deps.${{JOB_NAME}}.${{JOB_RND}}.env" || /bin/true
           source "${{WORKSPACE}}/vars.${{JOB_NAME}}.${{JOB_RND}}.env" || /bin/true
 
           export FULL_LOGS_PATH="$LOGS_PATH/$JOB_LOGS_PATH"
-          ./src/tungstenfabric/tf-jenkins/jobs/devstack/{deployer}/deploy_tf.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/devstack/{deployer}/deploy_tf.sh || res=1
           exit $res
     publishers:
       - archive:
@@ -254,8 +254,8 @@
           regexp: "DESCRIPTION (.*)"
       - shell: |
           source "$WORKSPACE/global.env"
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-jenkins ./patchsets-info.json
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-devstack ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-devstack ./patchsets-info.json
       - shell: |
           source "$WORKSPACE/global.env"
           source "${WORKSPACE}/deps.${JOB_NAME}.${JOB_RND}.env" || /bin/true
@@ -264,10 +264,10 @@
           # deploy platform kills env in case of error - skip all things for this case
           # TODO: think how to skip this job for some cases
           if [[ -n "$instance_ip" ]]; then
-            if ! "$WORKSPACE/src/tungstenfabric/tf-jenkins/jobs/devstack/${DEPLOYER}/collect_logs.sh" ; then
+            if ! "$WORKSPACE/src/opensdn-io/tf-jenkins/jobs/devstack/${DEPLOYER}/collect_logs.sh" ; then
               echo "WARNING: logs couldn't be collected"
             fi
-            "$WORKSPACE/src/tungstenfabric/tf-jenkins/jobs/devstack/${DEPLOYER}/remove_workers.sh" || /bin/true
+            "$WORKSPACE/src/opensdn-io/tf-jenkins/jobs/devstack/${DEPLOYER}/remove_workers.sh" || /bin/true
           fi
     publishers:
       - archive:

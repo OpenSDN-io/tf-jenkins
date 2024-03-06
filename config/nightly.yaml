@@ -1,7 +1,7 @@
 ---
 
 - project:
-    name: tungstenfabric
+    name: opensdn-io
     nightly:
       templates:
         - build-r21.4-centos

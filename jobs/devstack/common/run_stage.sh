@@ -53,7 +53,7 @@ if declare -f -F add_deployrc &>/dev/null ; then
   add_deployrc $WORKSPACE/$script
 fi
 
-echo "src/tungstenfabric/tf-devstack/${deployer}/run.sh $stage" >> $WORKSPACE/$script
+echo "src/opensdn-io/tf-devstack/${deployer}/run.sh $stage" >> $WORKSPACE/$script
 chmod a+x $WORKSPACE/$script
 
 ssh_cmd="ssh -i $WORKER_SSH_KEY $SSH_OPTIONS $SSH_EXTRA_OPTIONS"

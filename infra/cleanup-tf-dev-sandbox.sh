@@ -6,7 +6,7 @@ nexus_rest_url="http://nexus.$SLAVE_REGION.$CI_DOMAIN/service/rest/v1"
 registries="tungsten_ci tungsten_gate_cache"
 image_name="tf-dev-sandbox"
 
-if [[ -n $GERRIT_PROJECT && $GERRIT_PROJECT != 'tungstenfabric/tf-dev-env' ]] ; then
+if [[ -n $GERRIT_PROJECT && $GERRIT_PROJECT != 'opensdn-io/tf-dev-env' ]] ; then
   exit 0
 fi
 

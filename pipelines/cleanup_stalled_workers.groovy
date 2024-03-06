@@ -25,7 +25,7 @@ timestamps {
               withCredentials(bindings: slaves[label]) {
                 sh """
                   export SLAVE="${label}"
-                  $WORKSPACE/src/tungstenfabric/tf-jenkins/infra/${label}/cleanup_stalled_workers.sh
+                  $WORKSPACE/src/opensdn-io/tf-jenkins/infra/${label}/cleanup_stalled_workers.sh
                 """
               }
             }
@@ -44,11 +44,11 @@ def clone_self() {
     branches: [[name: "*/master"]],
     doGenerateSubmoduleConfigurations: false,
     submoduleCfg: [],
-    userRemoteConfigs: [[url: 'https://github.com/tungstenfabric/tf-jenkins.git']],
+    userRemoteConfigs: [[url: 'https://github.com/opensdn-io/tf-jenkins.git']],
     extensions: [
       [$class: 'CleanBeforeCheckout'],
       [$class: 'CloneOption', depth: 1],
-      [$class: 'RelativeTargetDirectory', relativeTargetDir: 'src/tungstenfabric/tf-jenkins']
+      [$class: 'RelativeTargetDirectory', relativeTargetDir: 'src/opensdn-io/tf-jenkins']
     ]
   ])
 }

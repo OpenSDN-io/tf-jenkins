@@ -75,8 +75,8 @@
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-jenkins ./patchsets-info.json
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-dev-env ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-dev-env ./patchsets-info.json
       - shell: |
           set -eo pipefail
           export TARGET={target}
@@ -86,7 +86,7 @@
 
           export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
           # main run
-          ./src/tungstenfabric/tf-jenkins/jobs/test/unit/run.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/test/unit/run.sh || res=1
           exit $res
     publishers:
       - postbuildscript:
@@ -108,7 +108,7 @@
 
                     # collect logs
                     export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
-                    ./src/tungstenfabric/tf-jenkins/jobs/test/unit/collect_logs.sh
+                    ./src/opensdn-io/tf-jenkins/jobs/test/unit/collect_logs.sh
       - archive:
           artifacts: '*.env'
 

@@ -3,7 +3,7 @@
 # cache project
 - project:
     names:
-      - tungstenfabric/tf-third-party-cache
+      - opensdn-io/tf-third-party-cache
     post-merge:
       jobs:
         update-caches:
@@ -11,7 +11,7 @@
 # just build projects including ubi8
 - project:
     names:
-      - tungstenfabric/tf-dpdk
+      - opensdn-io/tf-dpdk
     check:
       templates:
         - build-centos
@@ -24,11 +24,11 @@
 # simple checks
 - project:
     names:
-      - tungstenfabric/tf-vnc
-      - tungstenfabric/tf-test
-      - tungstenfabric/tf-dev-test
-      - tungstenfabric/tf-nova-vif-driver
-      - tungstenfabric/tf-heat-plugin
+      - opensdn-io/tf-vnc
+      - opensdn-io/tf-test
+      - opensdn-io/tf-dev-test
+      - opensdn-io/tf-nova-vif-driver
+      - opensdn-io/tf-heat-plugin
     check:
       templates:
         - ansible-os
@@ -42,7 +42,7 @@
 
 - project:
     names:
-      - tungstenfabric/tf-third-party-packages
+      - opensdn-io/tf-third-party-packages
     check:
       templates:
         - ansible-os
@@ -66,7 +66,7 @@
 # simple checks with ubi in gating
 - project:
     names:
-      - tungstenfabric/tf-packages
+      - opensdn-io/tf-packages
     check:
       templates:
         - ansible-os
@@ -80,7 +80,7 @@
 
 - project:
     names:
-      - tungstenfabric/tf-third-party
+      - opensdn-io/tf-third-party
     check:
       templates:
         - ansible-os
@@ -98,12 +98,12 @@
 # core TF projects with old style UT
 - project:
     names:
-      - tungstenfabric/tf-controller
-      - tungstenfabric/tf-api-client
-      - tungstenfabric/tf-common
-      - tungstenfabric/tf-analytics
-      - tungstenfabric/tf-neutron-plugin
-      - tungstenfabric/tf-build
+      - opensdn-io/tf-controller
+      - opensdn-io/tf-api-client
+      - opensdn-io/tf-common
+      - opensdn-io/tf-analytics
+      - opensdn-io/tf-neutron-plugin
+      - opensdn-io/tf-build
     check:
       templates:
         - test-unit
@@ -120,8 +120,8 @@
 # old web UI projects
 - project:
     names:
-      - tungstenfabric/tf-web-core
-      - tungstenfabric/tf-web-controller
+      - opensdn-io/tf-web-core
+      - opensdn-io/tf-web-controller
     check:
       templates:
         - test-unit-ui
@@ -137,7 +137,7 @@
 
 - project:
     names:
-      - tungstenfabric/tf-webui-third-party
+      - opensdn-io/tf-webui-third-party
     check:
       templates:
         - test-unit-ui
@@ -149,7 +149,7 @@
         - cleanup
 
 - project:
-    name: tungstenfabric/tf-ansible-deployer
+    name: opensdn-io/tf-ansible-deployer
     check:
       templates:
         - test-tox-pep8
@@ -164,7 +164,7 @@
         - cleanup
 
 - project:
-    name: tungstenfabric/tf-kolla-ansible
+    name: opensdn-io/tf-kolla-ansible
     check:
       templates:
         - ansible-os
@@ -175,7 +175,7 @@
         - cleanup
 
 - project:
-    name: tungstenfabric/tf-container-builder
+    name: opensdn-io/tf-container-builder
     check:
       templates:
         - ansible-os
@@ -192,7 +192,7 @@
         update-caches:
 
 - project:
-    name: tungstenfabric/tf-vrouter
+    name: opensdn-io/tf-vrouter
     check:
       templates:
         - test-unit
@@ -207,7 +207,7 @@
         - cleanup
 
 - project:
-    name: tungstenfabric/tf-helm-deployer
+    name: opensdn-io/tf-helm-deployer
     check:
       templates:
         - helm-k8s
@@ -220,7 +220,7 @@
         - cleanup
 
 - project:
-    name: tungstenfabric/tf-charms
+    name: opensdn-io/tf-charms
     check:
       templates:
         - test-tox-pep8
@@ -233,21 +233,21 @@
         - juju-os
 
 - project:
-    name: tungstenfabric/tf-tripleo-puppet
+    name: opensdn-io/tf-tripleo-puppet
     check:
       templates:
     gate:
       templates:
 
 - project:
-    name: tungstenfabric/tf-tripleo-heat-templates
+    name: opensdn-io/tf-tripleo-heat-templates
     check:
       templates:
     gate:
       templates:
 
 - project:
-    name: tungstenfabric/tf-operator
+    name: opensdn-io/tf-operator
     check:
       templates:
         - operator
@@ -259,7 +259,7 @@
         - cleanup
 
 - project:
-    name: tungstenfabric/tf-deployment-test
+    name: opensdn-io/tf-deployment-test
     check:
       templates:
         - test-tox-pep8
@@ -275,7 +275,7 @@
 # infra projects
 
 - project:
-    name: tungstenfabric/tf-dev-env
+    name: opensdn-io/tf-dev-env
     check:
       templates:
         - build-centos
@@ -294,7 +294,7 @@
         update-caches:
 
 - project:
-    name: tungstenfabric/tf-jenkins
+    name: opensdn-io/tf-jenkins
     check:
       templates:
         - build-centos
@@ -307,4 +307,4 @@
         update-caches:
 
 - project:
-    name: tungstenfabric/tf-devstack
+    name: opensdn-io/tf-devstack

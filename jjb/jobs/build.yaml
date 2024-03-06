@@ -80,8 +80,8 @@
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-jenkins ./patchsets-info.json
-          ./src/tungstenfabric/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src tungstenfabric/tf-dev-env ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-dev-env ./patchsets-info.json
       - shell: |
           set -eo pipefail
           export STAGE={stage}
@@ -91,19 +91,19 @@
           source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
 
           if [[ "$STAGE" == 'none' ]]; then
-            ./src/tungstenfabric/tf-jenkins/jobs/build/create_workers.sh
+            ./src/opensdn-io/tf-jenkins/jobs/build/create_workers.sh
             # stackrc is present only in this run. next build jobs will inherit this ENV via deps.XXX file
             source "$WORKSPACE/stackrc.$JOB_NAME.env"
           elif [[ "$STAGE" == 'cleanup' ]]; then
-            ./src/tungstenfabric/tf-jenkins/infra/$SLAVE/remove_workers.sh
+            ./src/opensdn-io/tf-jenkins/infra/$SLAVE/remove_workers.sh
             exit
           fi
 
-          source ./src/tungstenfabric/tf-jenkins/infra/$SLAVE/definitions
+          source ./src/opensdn-io/tf-jenkins/infra/$SLAVE/definitions
           export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
           # main run
-          ./src/tungstenfabric/tf-jenkins/jobs/build/run.sh || res=1
-          ./src/tungstenfabric/tf-jenkins/jobs/build/collect_logs.sh
+          ./src/opensdn-io/tf-jenkins/jobs/build/run.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/build/collect_logs.sh
           exit $res
     publishers:
       - postbuildscript:
@@ -120,7 +120,7 @@
                       source "$WORKSPACE/stackrc.$JOB_NAME.env" || /bin/true
                       source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
                       source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
-                      ./src/tungstenfabric/tf-jenkins/infra/$SLAVE/remove_workers.sh
+                      ./src/opensdn-io/tf-jenkins/infra/$SLAVE/remove_workers.sh
                       rm -f "$WORKSPACE/stackrc.$JOB_NAME.env"
       - archive:
           artifacts: '*.env'

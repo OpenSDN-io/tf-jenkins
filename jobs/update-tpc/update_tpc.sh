@@ -4,18 +4,18 @@ set -o pipefail
 [ "${DEBUG,,}" == "true" ] && set -x
 
 echo "INFO: prepare mirrors input"
-mkdir -p ./src/tungstenfabric/tf-dev-env/config/etc
-cp pip.conf ./src/tungstenfabric/tf-dev-env/config/etc/pip.conf
+mkdir -p ./src/opensdn-io/tf-dev-env/config/etc
+cp pip.conf ./src/opensdn-io/tf-dev-env/config/etc/pip.conf
 # TODO: add yum mirrors: base and docker
 
 echo "INFO: run dev-env and sync sources"
-./src/tungstenfabric/tf-dev-env/run.sh fetch
+./src/opensdn-io/tf-dev-env/run.sh fetch
 
 echo "INFO: preapre deps for TPP compilation"
-./src/tungstenfabric/tf-dev-env/run.sh configure tpp
+./src/opensdn-io/tf-dev-env/run.sh configure tpp
 
 echo "INFO: Buil TPP"
-./src/tungstenfabric/tf-dev-env/run.sh compile tpp
+./src/opensdn-io/tf-dev-env/run.sh compile tpp
 
 cat <<EOF >/tmp/upload.sh
 #!/bin/bash -e

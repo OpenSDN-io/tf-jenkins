@@ -70,8 +70,8 @@ tf-tripleo-heat-templates-src \
 "
 
 for image in $images ; do
-  if ! sudo docker pull "tungstenfabric/$image:$current_tag" ; then
-    echo "ERROR: image tungstenfabric/$image:$current_tag is not present in dockerhub"
+  if ! sudo docker pull "opensdn-io/$image:$current_tag" ; then
+    echo "ERROR: image opensdn-io/$image:$current_tag is not present in dockerhub"
   fi
 done
 

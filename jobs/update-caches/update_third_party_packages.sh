@@ -16,9 +16,9 @@ sudo python3 -m pip install urllib3
 
 export CACHE_DIR="$(pwd)/containers_cache"
 echo "INFO: download cache for tf-container-builder/containers/populate-cache.sh"
-./src/tungstenfabric/tf-container-builder/containers/populate-cache.sh
+./src/opensdn-io/tf-container-builder/containers/populate-cache.sh
 echo "INFO: download cache for tf-dev-env/container/populate-cache.sh"
-./src/tungstenfabric/tf-dev-env/container/populate-cache.sh
+./src/opensdn-io/tf-dev-env/container/populate-cache.sh
 
 echo "INFO: Upload containers cache files"
 pushd $CACHE_DIR
@@ -44,9 +44,9 @@ function update_third_party_cache() {
 }
 
 CACHE_DIR="$(pwd)/third_party"
-update_third_party_cache src/tungstenfabric/tf-third-party packages.xml $CACHE_DIR
-update_third_party_cache src/tungstenfabric/tf-webui-third-party packages.xml $CACHE_DIR
-update_third_party_cache src/tungstenfabric/tf-webui-third-party packages_dev.xml $CACHE_DIR
+update_third_party_cache src/opensdn-io/tf-third-party packages.xml $CACHE_DIR
+update_third_party_cache src/opensdn-io/tf-webui-third-party packages.xml $CACHE_DIR
+update_third_party_cache src/opensdn-io/tf-webui-third-party packages_dev.xml $CACHE_DIR
 
 echo "INFO: Upload third-party cached files"
 pushd $CACHE_DIR

@@ -29,7 +29,7 @@
     parents:
       - prepare-docs-sandbox
     jobs:
-      docs-doxygen
+      docs-doxygen:
         job-name: docs-doxygen
         lock: doxygen
         depends-on:

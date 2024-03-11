@@ -32,7 +32,7 @@ cd src/opensdn-io/tf-dev-env
 
 ./run.sh $@
 
-# TODO: push to gerrit
+# TODO: push to gerrit from tf-dev-sandbox:/root/contrail/doxygen-docs
 
 EOF
 

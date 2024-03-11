@@ -39,6 +39,11 @@
               key-file-variable: LOGS_HOST_SSH_KEY
               username-variable: LOGS_HOST_USERNAME
       - credentials-binding:
+          - ssh-user-private-key:
+              credential-id: gerrit
+              key-file-variable: GERRIT_SSH_KEY
+              username-variable: GERRIT_USERNAME
+      - credentials-binding:
           - text:
               credential-id: OS_USERNAME
               variable: OS_USERNAME

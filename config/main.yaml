@@ -76,6 +76,7 @@
     - templates-operator.yaml
     # - templates-rhosp.yaml
     - templates-tests.yaml
+    - templates-docs.yaml
     - nightly.yaml
     - staging.yaml
     - projects.yaml

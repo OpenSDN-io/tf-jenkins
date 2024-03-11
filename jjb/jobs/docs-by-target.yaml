@@ -1,0 +1,120 @@
+---
+
+- job-template:
+    name: "docs-{target}"
+    description: "generate docs with {target}"
+    defaults: global
+    scm:
+      - tf-jenkins
+      - tf-dev-env
+    parameters:
+      - label:
+          name: NODE_NAME
+      - string:
+          name: STREAM 
+      - string:
+          name: JOB_RND
+      - string:
+          name: PIPELINE_NAME
+      - string:
+          name: PIPELINE_NUMBER
+    wrappers:
+      - workspace-cleanup:
+          disable-deferred-wipeout: true
+      - timestamps
+      - credentials-binding:
+          - ssh-user-private-key:
+              credential-id: worker
+              key-file-variable: WORKER_SSH_KEY
+              username-variable: WORKER_USER_NAME
+              passphrase-variable: WORKER_PASSPHRASE
+    #   - credentials-binding:
+    #       - amazon-web-services:
+    #           credential-id: aws-creds
+    #           access-key: AWS_ACCESS_KEY_ID
+    #           secret-key: AWS_SECRET_ACCESS_KEY
+      - credentials-binding:
+          - ssh-user-private-key:
+              credential-id: logs_host
+              key-file-variable: LOGS_HOST_SSH_KEY
+              username-variable: LOGS_HOST_USERNAME
+      - credentials-binding:
+          - text:
+              credential-id: OS_USERNAME
+              variable: OS_USERNAME
+          - text:
+              credential-id: OS_PROJECT_ID
+              variable: OS_PROJECT_ID
+          - text:
+              credential-id: OS_PASSWORD
+              variable: OS_PASSWORD
+          - text:
+              credential-id: OS_DOMAIN_NAME
+              variable: OS_USER_DOMAIN_NAME
+          - text:
+              credential-id: OS_DOMAIN_NAME
+              variable: OS_PROJECT_DOMAIN_NAME
+          - text:
+              credential-id: OS_AUTH_URL
+              variable: OS_AUTH_URL
+    builders:
+      - copyartifact:
+          project: ${{PIPELINE_NAME}}
+          filter: "global.env,*.$JOB_RND.env,patchsets-info.json"
+          which-build: upstream-build
+          optional: true
+      - shell: |
+          source "$WORKSPACE/global.env"
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
+          desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND<br>"
+          desc+="Target: {target}<br>"
+          desc+="Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
+          echo "DESCRIPTION $desc"
+      - description-setter:
+          regexp: "DESCRIPTION (.*)"
+      - shell: |
+          set -eo pipefail
+          source "$WORKSPACE/global.env"
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-dev-env ./patchsets-info.json
+      - shell: |
+          set -eo pipefail
+          export TARGET={target}
+          source "$WORKSPACE/global.env"
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
+
+          export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
+          # main run
+          ./src/opensdn-io/tf-jenkins/jobs/docs/doxygen/run.sh || res=1
+          exit $res
+    publishers:
+      - postbuildscript:
+          builders:
+            - role: SLAVE
+              build-on:
+                - SUCCESS
+                - FAILURE
+                - ABORTED
+                - NOT_BUILT
+                - UNSTABLE
+              build-steps:
+                - shell: |
+                    set -eo pipefail
+                    export TARGET={target}
+                    source "$WORKSPACE/global.env"
+                    source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
+                    source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
+
+                    # collect logs
+                    export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
+                    ./src/opensdn-io/tf-jenkins/jobs/docs/doxygen/collect_logs.sh
+      - archive:
+          artifacts: '*.env'
+
+- project:
+    name: docs-by-target
+    target:
+      - doxygen
+    jobs:
+      - 'docs-{target}'

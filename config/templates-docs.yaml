@@ -1,0 +1,42 @@
+---
+
+# this is sandbox like prepare-test-sandbox - please refer to it
+- template:
+    name: prepare-docs-sandbox
+    jobs:
+      prepare-sandbox-docs-sandbox:
+        # it creates worker
+        job-name: build-prepare-sandbox
+        type: no-report
+        vars:
+          LINUX_DISTR: centos
+          PUBLISH_TYPE: stable
+          VM_TYPE: small
+      fetch-sources-docs-sandbox:
+        job-name: build-fetch-sources
+        type: no-report
+        depends-on:
+          - prepare-sandbox-docs-sandbox
+      cleanup-worker-docs-sandbox:
+        # it doesn't call devenv - it removes worker completly
+        job-name: build-cleanup
+        type: no-report,post-hook
+        depends-on:
+          - fetch-sources-docs-sandbox
+
+- template:
+    name: docs-doxygen
+    parents:
+      - prepare-docs-sandbox
+    jobs:
+      docs-doxygen
+        job-name: docs-doxygen
+        lock: doxygen
+        depends-on:
+          - fetch-sources-docs-sandbox
+        vars:
+          TARGET_SET: doxygen
+          LINUX_DISTR: centos
+      cleanup-worker-docs-sandbox:
+        depends-on:
+          - docs-doxygen

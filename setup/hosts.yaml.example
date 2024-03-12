@@ -105,3 +105,7 @@ all:
     aqua_scanner_pass: "somepassword"
     aqua_scanner_version: "4.2"
     aqua_license: "licence-base64-string"
+
+    #Discord integration webhooks
+    discord_webhook_nightly: "https://discord.com/api/webhooks/DiscordToken"
+    discord_webhook_sync_docs: "https://discord.com/api/webhooks/OtherDiscordToken"

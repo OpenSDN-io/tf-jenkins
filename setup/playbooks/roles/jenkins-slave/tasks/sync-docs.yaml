@@ -6,16 +6,16 @@
 
 - name: Copy syncdocs entrypoint
   template:
-    src: "syncdocs-entrypoint.sh.j2"
-    dest: "{{ docker_build_dir.path }}/entrypoint.sh"
+    src: "{{ item }}.j2"
+    dest: "{{ docker_build_dir.path }}/{{ item }}.sh"
+  with_items:
+    - entrypoint.sh
+    - sync_docs.sh
 
 - name: Copy entrypoint to build directory
   copy:
-    src: "{{ item }}"
-    dest: "{{ docker_build_dir.path }}/{{ item }}"
-  with_items:
-    - Dockerfile
-    - sync_docs.sh
+    src: "Dockerfile"
+    dest: "{{ docker_build_dir.path }}/Dockerfile"
 
 - name: Build syncdocs image
   docker_image:

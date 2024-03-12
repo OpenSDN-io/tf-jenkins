@@ -1,0 +1,12 @@
+#!/bin/bash -e
+date
+cd /docs
+if ! git pull | grep "Already up to date." ; then
+  /usr/bin/tox -e docs
+  cd _build/html
+  aws s3 sync . s3://docs.opensdn.io --delete --profile osdnwebsite
+  "Successfully synced"
+  DISCORD_WEBHOOK_URL={{ discord_webhook_sync_docs }}
+  msg="Changes in the https://github.com/opensdn-io/docs were succesfully synced to https://docs.opensdn.io"
+  curl -H "Content-Type: application/json" -d '{"username": "Docs Sync", "content": "'"$msg"'"}' $DISCORD_WEBHOOK_URL
+fi

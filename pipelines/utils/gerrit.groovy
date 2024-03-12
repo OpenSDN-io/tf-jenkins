@@ -98,6 +98,9 @@ def publish_results(pre_build_done, streams, results, full_duration, err_msg=nul
       verified = VERIFIED_FAIL_VALUES[env.GERRIT_PIPELINE]
     }
     notify_gerrit(check_msg, verified)
+    if (env.GERRIT_PIPELINE == 'nightly') {
+      notify_discord(check_msg)
+    }
     return verified
   } catch (err) {
     println("Failed to provide vote to gerrit")
@@ -343,6 +346,21 @@ def notify_gerrit(msg, verified=0, submit=false, change_id=null, branch=null, pa
         --message "${msg}"
     """
   }
+}
+
+def notify_discord(msg) {
+  println("Notify discord msg=\n${msg}")
+  withCredentials(
+    bindings: [string(credentialsId: 'DISCORD_WEBHOOK_NIGHTLY_URL', variable: 'DISCORD_WEBHOOK_NIGHTLY_URL')]) {
+      try {
+        sh """
+        curl -H "Content-Type: application/json" -d '{"username": "Nightly Build Report", "content": "'"$msg"'"}' \$DISCORD_WEBHOOK_NIGHTLY_URL
+        """
+    } catch (err) {
+      println("notify_discord returns non-zero code. Check code.")
+    }
+  }
+  return
 }
 
 def _has_approvals(strategy) {

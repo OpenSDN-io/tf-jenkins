@@ -4,6 +4,7 @@
     name: opensdn-io
     nightly:
       templates:
+        - docs-doxygen
         - build-r21.4-centos
         - test-unit
         - test-unit-ui

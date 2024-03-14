@@ -1,9 +1,3 @@
-declare -A vm_types=(['agent']='large' ['bgp']='large' ['opserver']='medium' ['group-one']='medium' ['group-two']='medium' ['ungrouped']='medium')
-if [[ -n "$TARGET_SET" ]]; then
-    export VM_TYPE=${vm_types[$TARGET_SET]}
-else
-    # UI, containers, ...
-    export VM_TYPE=small
-fi
+export VM_TYPE=small
 
 SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no"

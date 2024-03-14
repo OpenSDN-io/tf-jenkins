@@ -1,4 +1,4 @@
-export VM_TYPE=large
+export VM_TYPE=medium
 
 SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no"
 

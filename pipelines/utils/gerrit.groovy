@@ -353,8 +353,10 @@ def notify_discord(msg) {
   withCredentials(
     bindings: [string(credentialsId: 'DISCORD_WEBHOOK_NIGHTLY_URL', variable: 'DISCORD_WEBHOOK_NIGHTLY_URL')]) {
       try {
-        sh """
-        curl -H "Content-Type: application/json" -d '{"username": "Nightly Build Report", "content": "'"$msg"'"}' \$DISCORD_WEBHOOK_NIGHTLY_URL
+        def content = '{\n  "username": "Nightly Build Report",\n  "content": "' + "${msg.replace('\n','\\n')}" + '"\n}'
+        writeFile(file: '/tmp/notify.json', text: content)
+        sh """#!/bin/bash
+        curl -H 'Content-Type: application/json' -d  @/tmp/notify.json  \$DISCORD_WEBHOOK_NIGHTLY_URL
         """
     } catch (err) {
       println("notify_discord returns non-zero code. Check code.")

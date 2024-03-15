@@ -139,6 +139,7 @@
           USE_DATAPLANE_NETWORK: true
           ENVIRONMENT_OS: ubuntu20
           OPENSTACK_VERSION: yoga
+          ENVIRONMENT_OS: ubuntu22
     parents:
       - build-centos
     jobs:

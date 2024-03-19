@@ -94,7 +94,7 @@
 
 - name: Define gerrit URL-s with public name
   set_fact:
-    gerrit_urls: "{{ gerrit_hostname }}.{{ ci_domain }},{{ gerrit_url }}"
+    gerrit_urls: "{{ gerrit_hostname }}.{{ ci_domain }}.{{ gerrit_url }}"
   when: gerrit_url is defined
 
 - name: Create gerrit container

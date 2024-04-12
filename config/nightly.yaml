@@ -13,6 +13,7 @@
         # - ansible-k8s
         # - ansible-k8s-ha
         - ansible-os
+        - ansible-os-yoga
         #- ansible-os-ha-ziu
         - juju-k8s
         - juju-os

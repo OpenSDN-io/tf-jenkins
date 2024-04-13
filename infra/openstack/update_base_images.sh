@@ -62,13 +62,14 @@ fi
 
 if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'ROCKY9' ]]; then
   # 9.1 has gcc 11.2.1 which is only available for centos7 to build the kernel module
-  echo "INFO: download rocky linux 9.1 from download.rockylinux.org"
-  curl -LOs "https://dl.rockylinux.org/vault/rocky/9.1/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
-  curl -Ls "https://dl.rockylinux.org/vault/rocky/9.1/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM" -o rocky9-SHA256SUMS
+  # echo "INFO: download rocky linux 9.1 from download.rockylinux.org"
+  # curl -LOs "https://dl.rockylinux.org/vault/rocky/9.1/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
+  # curl -Ls "https://dl.rockylinux.org/vault/rocky/9.1/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM" -o rocky9-SHA256SUMS
 
   # 9.3 links
-  #curl -LOs "https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
-  #curl -Ls "https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM" -o rocky9-SHA256SUMS
+  echo "INFO: download rocky linux 9.3 from download.rockylinux.org"
+  curl -LOs "https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
+  curl -Ls "https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM" -o rocky9-SHA256SUMS
 
   sha256sum -c rocky9-SHA256SUMS --ignore-missing --status
 

@@ -19,6 +19,7 @@
           choices:
             - el7
             - el8
+            - el9
     wrappers:
       - workspace-cleanup:
           disable-deferred-wipeout: true
@@ -65,6 +66,10 @@
           echo "export TPC_VERSION=$TPC_VERSION" >> $WORKSPACE/global.env
           if [[ $TPC_VERSION == 'el7' ]]; then
             echo "export ENVIRONMENT_OS=centos7" >> $WORKSPACE/global.env
+          if [[ $TPC_VERSION == 'el9' ]]; then
+            echo "export ENVIRONMENT_OS=rocky9" >> $WORKSPACE/global.env
+            echo "export LINUX_DISTR=rocky9" >> $WORKSPACE/global.env
+            echo "export LINUX_DISTR_VER=9" >> $WORKSPACE/global.env
           else
             # el8 case
             #echo "export ENVIRONMENT_OS=centos8" >> $WORKSPACE/global.env

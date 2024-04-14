@@ -62,6 +62,10 @@
           job-name: update-tpc-source-repository
           job-params:
             TPC_VERSION: el8
+        update-tpc-source-repository-9:
+          job-name: update-tpc-source-repository
+          job-params:
+            TPC_VERSION: el9
 
 # simple checks with ubi in gating
 - project:

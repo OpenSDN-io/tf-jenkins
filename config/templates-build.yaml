@@ -59,7 +59,7 @@
     streams:
       build-rocky9:
         vars:
-          LINUX_DISTR: rocky
+          LINUX_DISTR: rockylinux
           LINUX_DISTR_VER: 9
           ENVIRONMENT_OS: rocky9
     jobs:

@@ -55,6 +55,61 @@
           - freeze-centos
 
 - template:
+    name: build-rocky9
+    streams:
+      build-rocky9:
+        vars:
+          LINUX_DISTR: rocky
+          LINUX_DISTR_VER: 9
+          ENVIRONMENT_OS: rocky9
+    jobs:
+      prepare-sandbox-rocky9:
+        # it creates worker
+        job-name: build-prepare-sandbox
+        stream: build-rocky9
+        vars:
+          DEVENV_TAG: frozen
+      fetch-sources-rocky9:
+        job-name: build-fetch-sources
+        stream: build-rocky9
+        depends-on:
+          - prepare-sandbox-rocky9
+      configure-rocky9:
+        job-name: build-configure
+        stream: build-rocky9
+        depends-on:
+          - fetch-sources-rocky9
+      package-deployers-rocky9:
+        job-name: build-package-deployers
+        stream: build-rocky9
+        depends-on:
+          - configure-rocky9
+      compile-rocky9:
+        job-name: build-compile
+        stream: build-rocky9
+        depends-on:
+          - package-deployers-rocky9
+      package-rocky9:
+        job-name: build-package
+        stream: build-rocky9
+        depends-on:
+          - compile-rocky9
+      freeze-rocky9:
+        job-name: build-freeze
+        stream: build-rocky9
+        depends-on:
+          - package-rocky9
+        vars:
+          PUBLISH_TYPE: frozen
+      cleanup-rocky9:
+        # it doesn't call devenv - it removes worker completly
+        job-name: build-cleanup
+        stream: build-rocky9
+        type: post-hook
+        depends-on:
+          - freeze-rocky9
+
+- template:
     name: build-ubi
     streams:
       build-ubi:

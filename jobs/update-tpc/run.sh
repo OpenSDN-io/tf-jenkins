@@ -7,9 +7,16 @@ my_file="$(readlink -e "$0")"
 my_dir="$(dirname $my_file)"
 
 source "$my_dir/definitions"
-
 TPC_REPO_NAME="yum-tpc-source-${TPC_VERSION}"
 DEVENV_TAG="tpcbuild-${TPC_VERSION}"
+
+echo "INFO: update TPC started $TPC_VERSION"
+
+for repofile in $mirror_list_for_build $mirror_list mirror-pip.conf mirror-docker-daemon.json ; do
+  file="${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/${repofile}"
+  cat $file | envsubst > $file.tmp
+  mv $file.tmp $file
+done
 
 rsync -a -e "ssh -i $WORKER_SSH_KEY $SSH_OPTIONS" {$WORKSPACE/src,$my_dir/update_tpc.sh} $IMAGE_SSH_USER@$instance_ip:./
 

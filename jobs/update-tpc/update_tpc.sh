@@ -5,8 +5,11 @@ set -o pipefail
 
 echo "INFO: prepare mirrors input"
 mkdir -p ./src/opensdn-io/tf-dev-env/config/etc
-cp pip.conf ./src/opensdn-io/tf-dev-env/config/etc/pip.conf
 # TODO: add yum mirrors: base and docker
+
+cp ./src/opensdn-io/tf-jenkins/infra/mirrors/mirror-pip.conf ./src/opensdn-io/tf-dev-env/config/etc/pip.conf
+sudo mkdir -p /etc/docker/
+sudo cp ./src/opensdn-io/tf-jenkins/infra/mirrors/mirror-docker-daemon.json /etc/docker/daemon.json
 
 echo "INFO: run dev-env and sync sources"
 ./src/opensdn-io/tf-dev-env/run.sh fetch

@@ -9,7 +9,7 @@ nexus_hostname: "nexus"
 nexus_user: "admin"
 
 gerrit_hostname: "gerrit"
-gerrit_user: "gerrit"
+gerrit_user: "tf-gerrit"
 
 monitoring_hostname: "monitoring"
 

@@ -68,7 +68,7 @@
             echo "export ENVIRONMENT_OS=centos7" >> $WORKSPACE/global.env
           elif [[ $TPC_VERSION == 'el9' ]]; then
             echo "export ENVIRONMENT_OS=rocky9" >> $WORKSPACE/global.env
-            echo "export LINUX_DISTR=rocky9" >> $WORKSPACE/global.env
+            echo "export LINUX_DISTR=rockylinux" >> $WORKSPACE/global.env
             echo "export LINUX_DISTR_VER=9" >> $WORKSPACE/global.env
           else
             # el8 case

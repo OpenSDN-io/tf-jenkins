@@ -260,3 +260,45 @@
           - deploy-tf-ansible-os-ha-ziu
           - test-deployment-ansible-os-ha-ziu
           - test-sanity-ansible-os-ha-ziu
+
+- template:
+    name: ansible-os-tempest
+    streams:
+      ansible-os-tempest:
+        vars:
+          USE_DATAPLANE_NETWORK: true
+          ENVIRONMENT_OS: ubuntu20
+    parents:
+      - build-centos
+    jobs:
+      deploy-platform-ansible-os-tempest:
+        job-name: deploy-platform-ansible-os
+        stream: ansible-os-tempest
+        depends-on:
+          # temporary solution
+          - package-centos
+      deploy-tf-ansible-os-tempest:
+        job-name: deploy-tf-ansible-os
+        stream: ansible-os-tempest
+        depends-on:
+          - package-centos
+          - deploy-platform-ansible-os-tempest
+      test-sanity-ansible-os-tempest:
+        job-name: test-sanity
+        stream: ansible-os-tempest
+        depends-on:
+          - deploy-tf-ansible-os-tempest
+      test-tempest-ansible-os-tempest:
+        job-name: test-tempest
+        stream: ansible-os-tempest
+        depends-on:
+          - deploy-tf-ansible-os-tempest
+      collect-logs-and-cleanup-ansible-os-tempest:
+        job-name: collect-logs-and-cleanup
+        stream: ansible-os-tempest
+        type: post-hook
+        depends-on:
+          - deploy-platform-ansible-os-tempest
+          - deploy-tf-ansible-os-tempest
+          - test-sanity-ansible-os-tempest
+          - test-tempest-ansible-os-tempest

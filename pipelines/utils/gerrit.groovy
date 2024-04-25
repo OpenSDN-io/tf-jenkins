@@ -21,6 +21,19 @@ def gerrit_build_started() {
   try {
     def msg = """TF CI Build Started (${env.GERRIT_PIPELINE}) ${BUILD_URL}"""
     notify_gerrit(msg, VERIFIED_STARTED_VALUES[env.GERRIT_PIPELINE])
+    if (env.GERRIT_PATCHSET_NUMBER == 1 && env.GERRIT_PIPELINE == "check") {
+        gerrit_url = gerrit_utils.resolve_gerrit_url()
+        msg = "New review:\n"
+        msg += "Commit message: ${env.GERRIT_CHANGE_COMMIT_MESSAGE}\n"
+        msg += "Review: $gerrit_url\n"
+        notify_discord(msg, 'gerrit-event')
+    } else if (env.GERRIT_PIPELINE == 'post-merge') {
+        gerrit_url = gerrit_utils.resolve_gerrit_url()
+        msg = "The review was merged\n"
+        msg += "Commit message: ${env.GERRIT_CHANGE_COMMIT_MESSAGE}\n"
+        msg += "Review: $gerrit_url\n"
+        notify_discord(msg, 'gerrit-event')
+    }
   } catch (err) {
     println("Failed to provide comment to gerrit")
     def msg = err.getMessage()
@@ -99,7 +112,7 @@ def publish_results(pre_build_done, streams, results, full_duration, err_msg=nul
     }
     notify_gerrit(check_msg, verified)
     if (env.GERRIT_PIPELINE == 'nightly') {
-      notify_discord(check_msg)
+      notify_discord(check_msg, 'nightly')
     }
     return verified
   } catch (err) {
@@ -348,20 +361,28 @@ def notify_gerrit(msg, verified=0, submit=false, change_id=null, branch=null, pa
   }
 }
 
-def notify_discord(msg) {
+def notify_discord(msg, channel) {
   println("Notify discord msg=\n${msg}")
-  withCredentials(
-    bindings: [string(credentialsId: 'DISCORD_WEBHOOK_NIGHTLY_URL', variable: 'DISCORD_WEBHOOK_NIGHTLY_URL')]) {
-      try {
-        def content = '{\n  "username": "Nightly Build Report",\n  "content": "' + "${msg.replace('\n','\\n')}" + '"\n}'
-        writeFile(file: '/tmp/notify.json', text: content)
-        sh """#!/bin/bash
-        curl -H 'Content-Type: application/json' -d  @/tmp/notify.json  \$DISCORD_WEBHOOK_NIGHTLY_URL
-        """
-    } catch (err) {
-      println("notify_discord returns non-zero code. Check code.")
-    }
+  if (channel == 'nightly') {
+    discord_url = 'DISCORD_WEBHOOK_NIGHTLY_URL'
+    discord_from = 'Nightly Build Report'
   }
+  if (channel == 'gerrit-event') {
+    discord_url = 'DISCORD_WEBHOOK_GERRIT_URL'
+    discord_from = 'Gerrit Report'
+  }
+  withCredentials(
+      bindings: [string(credentialsId: discord_url, variable: DISCORD_WEBHOOK_URL)]) {
+        try {
+          def content = '{\n  "username": "' + "${discord_from}" + '",\n  "content": "' + "${msg.replace('\n','\\n')}" + '"\n}'
+          writeFile(file: '/tmp/notify.json', text: content)
+          sh """#!/bin/bash
+          curl -H 'Content-Type: application/json' -d  @/tmp/notify.json  \$DISCORD_WEBHOOK_URL
+          """
+      } catch (err) {
+        println("notify_discord returns non-zero code. Check code.")
+      }
+    }
   return
 }
 

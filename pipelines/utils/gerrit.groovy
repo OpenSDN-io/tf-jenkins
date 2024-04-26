@@ -21,18 +21,17 @@ def gerrit_build_started() {
   try {
     def msg = """TF CI Build Started (${env.GERRIT_PIPELINE}) ${BUILD_URL}"""
     notify_gerrit(msg, VERIFIED_STARTED_VALUES[env.GERRIT_PIPELINE])
-    if (env.GERRIT_PATCHSET_NUMBER == 1 && env.GERRIT_PIPELINE == "check") {
-        gerrit_url = gerrit_utils.resolve_gerrit_url()
-        msg = "New review:\n"
-        msg += "Commit message: ${env.GERRIT_CHANGE_COMMIT_MESSAGE}\n"
-        msg += "Review: $gerrit_url\n"
-        notify_discord(msg, 'gerrit-event')
+    def path = "c/${env.GERRIT_PROJECT}/+/${env.GERRIT_CHANGE_NUMBER}"
+    def msg_header = new String(env.GERRIT_CHANGE_COMMIT_MESSAGE.decodeBase64()).split('\n')[0]
+    def commit_message = "${msg_header.substring(0, msg_header.length() < 50 ? msg_header.length() : 50)}"
+    if (env.GERRIT_PATCHSET_NUMBER == "1" && env.GERRIT_PIPELINE == "check") {
+        def review_msg = "New review.\n"
+        review_msg += "[${commit_message}](${resolve_gerrit_url()}${path})"
+        notify_discord(review_msg, 'gerrit-event')
     } else if (env.GERRIT_PIPELINE == 'post-merge') {
-        gerrit_url = gerrit_utils.resolve_gerrit_url()
-        msg = "The review was merged\n"
-        msg += "Commit message: ${env.GERRIT_CHANGE_COMMIT_MESSAGE}\n"
-        msg += "Review: $gerrit_url\n"
-        notify_discord(msg, 'gerrit-event')
+        def merged_msg = "The review was merged.\n"
+        merged_msg += "[${commit_message}](${resolve_gerrit_url()}${path})"
+        notify_discord(merged_msg, 'gerrit-event')
     }
   } catch (err) {
     println("Failed to provide comment to gerrit")
@@ -372,7 +371,7 @@ def notify_discord(msg, channel) {
     discord_from = 'Gerrit Report'
   }
   withCredentials(
-      bindings: [string(credentialsId: discord_url, variable: DISCORD_WEBHOOK_URL)]) {
+      bindings: [string(credentialsId: discord_url, variable: 'DISCORD_WEBHOOK_URL')]) {
         try {
           def content = '{\n  "username": "' + "${discord_from}" + '",\n  "content": "' + "${msg.replace('\n','\\n')}" + '"\n}'
           writeFile(file: '/tmp/notify.json', text: content)

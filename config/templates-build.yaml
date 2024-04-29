@@ -6,7 +6,6 @@
       build-centos:
         vars:
           LINUX_DISTR: centos
-          ENVIRONMENT_OS: rocky9
     jobs:
       prepare-sandbox-centos:
         # it creates worker
@@ -61,7 +60,6 @@
         vars:
           LINUX_DISTR: rockylinux
           LINUX_DISTR_VER: 9
-          ENVIRONMENT_OS: rocky9
     jobs:
       prepare-sandbox-rocky9:
         # it creates worker

@@ -17,7 +17,6 @@
           MONITORING_DEPLOY_TARGET: AIO
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: k8s
-          ENVIRONMENT_OS: rocky9
     parents:
       - build-centos
     jobs:
@@ -59,7 +58,6 @@
           MONITORING_DEPLOY_TARGET: HA
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: k8s
-          ENVIRONMENT_OS: rocky9
     parents:
       - build-centos
     jobs:
@@ -100,7 +98,6 @@
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: os
           USE_DATAPLANE_NETWORK: true
-          ENVIRONMENT_OS: ubuntu20
     parents:
       - build-centos
     jobs:
@@ -137,7 +134,6 @@
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: os
           USE_DATAPLANE_NETWORK: true
-          ENVIRONMENT_OS: ubuntu20
           OPENSTACK_VERSION: yoga
           ENVIRONMENT_OS: ubuntu22
     parents:
@@ -178,7 +174,6 @@
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: os
           USE_DATAPLANE_NETWORK: true
-          ENVIRONMENT_OS: ubuntu20
     parents:
       - build-centos
     jobs:
@@ -221,7 +216,6 @@
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: os
           USE_DATAPLANE_NETWORK: true
-          ENVIRONMENT_OS: ubuntu20
     parents:
       - build-centos
     jobs:
@@ -267,7 +261,6 @@
       ansible-os-tempest:
         vars:
           USE_DATAPLANE_NETWORK: true
-          ENVIRONMENT_OS: ubuntu20
     parents:
       - build-centos
     jobs:

@@ -36,7 +36,6 @@
           MONITORING_DEPLOY_TARGET: AIO
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: k8s
-          ENVIRONMENT_OS: ubuntu20
     parents:
       - build-centos
     jobs:
@@ -77,7 +76,6 @@
           MONITORING_DEPLOY_TARGET: HA
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: k8s
-          ENVIRONMENT_OS: ubuntu20
     parents:
       - build-centos
     jobs:
@@ -113,7 +111,6 @@
         vars:
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: k8s
-          ENVIRONMENT_OS: ubuntu20
           CONTAINER_RUNTIME: containerd
     parents:
       - build-centos
@@ -154,7 +151,6 @@
           MONITORING_DEPLOY_TARGET: AIO
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: os
-          ENVIRONMENT_OS: ubuntu20
     jobs:
       deploy-platform-juju-os:
         stream: juju-os
@@ -187,7 +183,6 @@
           MONITORING_DEPLOY_TARGET: HA
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: os
-          ENVIRONMENT_OS: ubuntu20
     jobs:
       deploy-platform-juju-os-ha:
         job-name: deploy-platform-juju-os
@@ -223,7 +218,6 @@
         vars:
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: os
-          ENVIRONMENT_OS: ubuntu20
           CONTAINER_RUNTIME: containerd
     jobs:
       deploy-platform-juju-os-containerd:
@@ -261,7 +255,6 @@
           MONITORING_DEPLOY_TARGET: HA
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: os
-          ENVIRONMENT_OS: ubuntu20
           CONTAINER_RUNTIME: containerd
     jobs:
       deploy-platform-juju-os-ha-containerd:
@@ -305,7 +298,6 @@
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: os,hybrid,k8s
           HUGE_PAGES_2MB: 512
-          ENVIRONMENT_OS: ubuntu20
     jobs:
       deploy-platform-juju-hybrid-ha-ziu:
         job-name: deploy-platform-juju-hybrid
@@ -359,7 +351,6 @@
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: os
           HUGE_PAGES_2MB: 512
-          ENVIRONMENT_OS: ubuntu20
     jobs:
       deploy-platform-juju-os-ha-ziu:
         job-name: deploy-platform-juju-os
@@ -451,7 +442,6 @@
           MONITORING_DEPLOY_TARGET: HA
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: hybrid,k8s
-          ENVIRONMENT_OS: ubuntu20
           HUGE_PAGES_2MB: 512
     jobs:
       deploy-platform-juju-hybrid-ha:

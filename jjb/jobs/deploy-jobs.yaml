@@ -277,7 +277,7 @@
     name: deploy
     project:
       - k8s-manifests:
-          environment_os: centos7
+          environment_os: rocky9
           deployer: k8s_manifests
           orchestrator: kubernetes
       - juju-k8s:
@@ -293,11 +293,11 @@
           deployer: juju
           orchestrator: hybrid
       - ansible-k8s:
-          environment_os: centos7
+          environment_os: rocky9
           deployer: ansible
           orchestrator: kubernetes
       - ansible-os:
-          environment_os: centos7
+          environment_os: ubuntu20
           deployer: ansible
           orchestrator: openstack
       - rhosp16:
@@ -305,7 +305,7 @@
           deployer: rhosp
           orchestrator: openstack
       - operator:
-          environment_os: centos7
+          environment_os: rocky9
           deployer: operator
           orchestrator: kubernetes
     jobs:

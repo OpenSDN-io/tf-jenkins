@@ -19,7 +19,7 @@ export VOLUME_TYPE="${VOLUME_TYPE:-ceph-ssd}"
 # medium   4       16 GB     t2.xlarge
 # large    8       32 GB     m4.2xlarge
 
-ENVIRONMENT_OS=${ENVIRONMENT_OS:-'centos7'}
+ENVIRONMENT_OS=${ENVIRONMENT_OS:-'rocky9'}
 
 declare -A VM_TYPES=( ['xsmall']='STD3-1-4' \
                       ['small']='STD3-2-8' \

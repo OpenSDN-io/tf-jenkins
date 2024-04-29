@@ -84,7 +84,6 @@
           source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
 
-          export ENVIRONMENT_OS=centos7
           export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
           ./src/opensdn-io/tf-jenkins/jobs/test/unit/create_workers.sh
           source "$WORKSPACE/stackrc.$JOB_NAME.env"

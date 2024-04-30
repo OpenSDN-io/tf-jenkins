@@ -151,6 +151,7 @@
           MONITORING_DEPLOY_TARGET: AIO
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: os
+          ENVIRONMENT_OS: ubuntu22
     jobs:
       deploy-platform-juju-os:
         stream: juju-os

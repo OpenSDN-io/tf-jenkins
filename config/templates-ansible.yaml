@@ -295,3 +295,42 @@
           - deploy-tf-ansible-os-tempest
           - test-sanity-ansible-os-tempest
           - test-tempest-ansible-os-tempest
+
+- template:
+    name: ansible-full-sanity
+    streams:
+      ansible-full-sanity:
+        vars:
+          MONITORING_DEPLOY_TARGET: AIO
+          MONITORING_DEPLOYER: ansible
+          MONITORING_ORCHESTRATOR: os
+          USE_DATAPLANE_NETWORK: true
+          TF_TEST_TARGET: "full_sanity"
+          ENVIRONMENT_OS: ubuntu20
+    parents:
+      - build-centos
+    jobs:
+      deploy-platform-ansible-full-sanity:
+        job-name: deploy-platform-ansible-os
+        stream: ansible-full-sanity
+        depends-on:
+          - compile-centos
+      deploy-tf-ansible-full-sanity:
+        job-name: deploy-tf-ansible-os
+        stream: ansible-full-sanity
+        depends-on:
+          - package-centos
+          - deploy-platform-ansible-full-sanity
+      test-sanity-ansible-full-sanity:
+        job-name: test-sanity
+        stream: ansible-full-sanity
+        depends-on:
+          - deploy-tf-ansible-full-sanity
+      collect-logs-and-cleanup-ansible-full-sanity:
+        job-name: collect-logs-and-cleanup
+        stream: ansible-full-sanity
+        type: post-hook
+        depends-on:
+          - deploy-platform-ansible-full-sanity
+          - deploy-tf-ansible-full-sanity
+          - test-sanity-ansible-full-sanity

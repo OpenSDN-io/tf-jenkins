@@ -31,7 +31,6 @@
     name: juju-k8s
     streams:
       juju-k8s:
-        voting: false
         vars:
           MONITORING_DEPLOY_TARGET: AIO
           MONITORING_DEPLOYER: juju

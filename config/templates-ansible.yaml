@@ -13,6 +13,7 @@
     name: ansible-k8s
     streams:
       ansible-k8s:
+        voting: false
         vars:
           MONITORING_DEPLOY_TARGET: AIO
           MONITORING_DEPLOYER: ansible

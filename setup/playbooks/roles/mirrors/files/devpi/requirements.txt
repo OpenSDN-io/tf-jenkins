@@ -2,3 +2,4 @@ devpi-server==5.5.1
 devpi-client
 devpi-web
 ruamel_yaml
+requests>=2.32.0 # not directly required, pinned by Snyk to avoid a vulnerability

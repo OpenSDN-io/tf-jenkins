@@ -127,46 +127,6 @@
           - test-sanity-ansible-os
 
 - template:
-    name: ansible-os-yoga
-    streams:
-      ansible-os-yoga:
-        vars:
-          MONITORING_DEPLOY_TARGET: AIO
-          MONITORING_DEPLOYER: ansible
-          MONITORING_ORCHESTRATOR: os
-          USE_DATAPLANE_NETWORK: true
-          OPENSTACK_VERSION: yoga
-          ENVIRONMENT_OS: ubuntu22
-    parents:
-      - build-centos
-    jobs:
-      deploy-platform-ansible-os-yoga:
-        job-name: deploy-platform-ansible-os
-        stream: ansible-os-yoga
-        depends-on:
-          # temporary solution
-          - package-centos
-      deploy-tf-ansible-os-yoga:
-        job-name: deploy-tf-ansible-os
-        stream: ansible-os-yoga
-        depends-on:
-          - package-centos
-          - deploy-platform-ansible-os-yoga
-      test-sanity-ansible-os-yoga:
-        job-name: test-sanity
-        stream: ansible-os-yoga
-        depends-on:
-          - deploy-tf-ansible-os-yoga
-      collect-logs-and-cleanup-ansible-os-yoga:
-        job-name: collect-logs-and-cleanup
-        stream: ansible-os-yoga
-        type: post-hook
-        depends-on:
-          - deploy-platform-ansible-os-yoga
-          - deploy-tf-ansible-os-yoga
-          - test-sanity-ansible-os-yoga
-
-- template:
     name: ansible-os-ha
     streams:
       ansible-os-ha:

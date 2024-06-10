@@ -297,7 +297,7 @@
           deployer: ansible
           orchestrator: kubernetes
       - ansible-os:
-          environment_os: ubuntu20
+          environment_os: ubuntu22
           deployer: ansible
           orchestrator: openstack
       - rhosp16:

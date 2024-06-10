@@ -262,6 +262,8 @@
       ansible-os-tempest:
         vars:
           USE_DATAPLANE_NETWORK: true
+          OPENSTACK_VERSION: yoga
+          ENVIRONMENT_OS: ubuntu22
     parents:
       - build-centos
     jobs:

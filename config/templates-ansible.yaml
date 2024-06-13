@@ -237,11 +237,6 @@
         depends-on:
           - package-centos
           - deploy-platform-ansible-os-tempest
-      test-sanity-ansible-os-tempest:
-        job-name: test-sanity
-        stream: ansible-os-tempest
-        depends-on:
-          - deploy-tf-ansible-os-tempest
       test-tempest-ansible-os-tempest:
         job-name: test-tempest
         stream: ansible-os-tempest
@@ -254,7 +249,6 @@
         depends-on:
           - deploy-platform-ansible-os-tempest
           - deploy-tf-ansible-os-tempest
-          - test-sanity-ansible-os-tempest
           - test-tempest-ansible-os-tempest
 
 - template:

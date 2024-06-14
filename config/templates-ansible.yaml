@@ -289,3 +289,39 @@
           - deploy-platform-ansible-full-sanity
           - deploy-tf-ansible-full-sanity
           - test-sanity-ansible-full-sanity
+
+- template:
+    name: ansible-os-vanilla
+    streams:
+      ansible-os-vanilla:
+        vars:
+          USE_DATAPLANE_NETWORK: true
+          KOLLA_MODE: vanilla
+    parents:
+      - build-centos
+    jobs:
+      deploy-platform-ansible-os-vanilla:
+        job-name: deploy-platform-ansible-os
+        stream: ansible-os-vanilla
+        depends-on:
+          # temporary solution
+          - package-centos
+      deploy-tf-ansible-os-vanilla:
+        job-name: deploy-tf-ansible-os
+        stream: ansible-os-vanilla
+        depends-on:
+          - package-centos
+          - deploy-platform-ansible-os-vanilla
+      test-sanity-ansible-os-vanilla:
+        job-name: test-sanity
+        stream: ansible-os-vanilla
+        depends-on:
+          - deploy-tf-ansible-os-vanilla
+      collect-logs-and-cleanup-ansible-os-vanilla:
+        job-name: collect-logs-and-cleanup
+        stream: ansible-os-vanilla
+        type: post-hook
+        depends-on:
+          - deploy-platform-ansible-os-vanilla
+          - deploy-tf-ansible-os-vanilla
+          - test-sanity-ansible-os-vanilla

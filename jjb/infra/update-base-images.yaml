@@ -18,6 +18,7 @@
             - UBUNTU20
             - UBUNTU22
             - ROCKY9
+            - ROCKY92
           description: "Image type for update or ALL(default)"
     scm:
       - tf-jenkins

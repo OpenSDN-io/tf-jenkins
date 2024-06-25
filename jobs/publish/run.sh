@@ -8,6 +8,13 @@ my_dir="$(dirname $my_file)"
 
 source "$my_dir/definitions"
 
+function notify_discord() {
+  local tags=$1
+  echo "Notify discord of new publishes with $tags tags"
+  msg="New builds of OpenSDN containers with $tags tags were published to https://hub.docker.com/repositories/opensdn"
+  curl -H "Content-Type: application/json" -d '{"username": "Docker", "content": "'"$msg"'"}' $DISCORD_WEBHOOK_NIGHTLY_URL
+}
+
 if [[ -n "$PUBLISH_TAGS" ]]; then
   tags="$PUBLISH_TAGS"
 else
@@ -60,4 +67,5 @@ export PUBLISH_REGISTRY_PASSWORD=$DOCKERHUB_PASSWORD
 export PUBLISH_TAGS=$tags
 sudo -E ./publish.sh
 EOF
+notify_discord $tags || echo "Notify discord failed"
 echo "INFO: Publish containers done"

@@ -54,6 +54,9 @@
           - text:
               credential-id: OS_AUTH_URL
               variable: OS_AUTH_URL
+          - text:
+              credential-id: DISCORD_WEBHOOK_NIGHTLY_URL
+              variable: DISCORD_WEBHOOK_NIGHTLY_URL
       - credentials-binding:
           - username-password-separated:
               credential-id: dockerhub

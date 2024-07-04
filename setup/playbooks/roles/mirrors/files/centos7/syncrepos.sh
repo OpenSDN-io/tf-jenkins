@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-REPOS_CENTOS7=(base centosplus extras updates centos-sclo-rh base-debuginfo)
+REPOS_CENTOS7=(base centosplus extras updates centos-sclo-rh base-debuginfo cloud)
 REPOS_YUM7=(centos-openstack-queens dockerrepo epel k8s)
 MIRRORDIR=/repos
 DATE=$(date +"%Y%m%d")

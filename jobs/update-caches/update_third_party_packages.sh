@@ -87,10 +87,10 @@ kernels="
 
 # current packages - should be taken from archive after new release
 kernels+="
-  http://mirror.centos.org/centos/7/updates/x86_64/Packages/kernel-3.10.0-1160.53.1.el7.x86_64.rpm
-  http://mirror.centos.org/centos/7/updates/x86_64/Packages/kernel-devel-3.10.0-1160.53.1.el7.x86_64.rpm
-  http://mirror.centos.org/centos/7/updates/x86_64/Packages/kernel-3.10.0-1160.25.1.el7.x86_64.rpm
-  http://mirror.centos.org/centos/7/updates/x86_64/Packages/kernel-devel-3.10.0-1160.25.1.el7.x86_64.rpm
+  http://vault.centos.org/centos/7/updates/x86_64/Packages/kernel-3.10.0-1160.53.1.el7.x86_64.rpm
+  http://vault.centos.org/centos/7/updates/x86_64/Packages/kernel-devel-3.10.0-1160.53.1.el7.x86_64.rpm
+  http://vault.centos.org/centos/7/updates/x86_64/Packages/kernel-3.10.0-1160.25.1.el7.x86_64.rpm
+  http://vault.centos.org/centos/7/updates/x86_64/Packages/kernel-devel-3.10.0-1160.25.1.el7.x86_64.rpm
   https://vault.centos.org/8.4.2105/BaseOS/x86_64/os/Packages/kernel-4.18.0-305.12.1.el8_4.x86_64.rpm
   https://vault.centos.org/8.4.2105/BaseOS/x86_64/os/Packages/kernel-core-4.18.0-305.12.1.el8_4.x86_64.rpm
   https://vault.centos.org/8.4.2105/BaseOS/x86_64/os/Packages/kernel-devel-4.18.0-305.12.1.el8_4.x86_64.rpm

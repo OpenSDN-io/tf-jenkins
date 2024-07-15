@@ -56,7 +56,7 @@ source "$WORKSPACE/os-release-$instance_ip"
 echo "INFO: do not set default gateway for second interface"
 if [[ "${USE_DATAPLANE_NETWORK,,}" == "true" ]]; then
   $ssh_cmd $IMAGE_SSH_USER@$instance_ip \
-    "printf 'BOOTPROTO=dhcp\nDEVICE=eth1\nHWADDR=\$mac\nMTU=1500\nONBOOT=yes\nSTARTMODE=auto\nTYPE=Ethernet\nUSERCTL=no\nDEFROUTE=no\nPEERDNS=no\n' | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth1 ; sudo systemctl restart network.service"
+    "printf 'BOOTPROTO=dhcp\nDEVICE=eth1\nHWADDR=\$mac\nMTU=1500\nONBOOT=yes\nSTARTMODE=auto\nTYPE=Ethernet\nUSERCTL=no\nDEFROUTE=no\nPEERDNS=no\n' | sudo tee -a /etc/sysconfig/network-scripts/ifcfg-eth1 ; sudo systemctl restart NetworkManager.service"
 fi
 
 # enable ip_tables (used in UT for analytics)

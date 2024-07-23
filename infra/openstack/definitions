@@ -35,8 +35,7 @@ declare -A OS_IMAGES=( ['CENTOS7']='prepared-centos7' \
                        ['CENTOS8']='prepared-centos8' \
                        ['UBUNTU20']='prepared-ubuntu20' \
                        ['UBUNTU22']='prepared-ubuntu22' \
-                       ['ROCKY9']='prepared-rocky9' \
-                       ['ROCKY92']='prepared-rocky92')
+                       ['ROCKY9']='prepared-rocky92')
 
 declare -A OS_IMAGE_USERS=( ['CENTOS7']='centos' \
                             ['CENTOS8']='centos' \

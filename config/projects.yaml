@@ -288,7 +288,7 @@
     gate:
       templates:
         - build-centos
-        - build-r21.4-centos
+        - build-r24.1-centos
         - juju-k8s
         - ansible-os
         - cleanup

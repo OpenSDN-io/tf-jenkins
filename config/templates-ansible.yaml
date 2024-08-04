@@ -173,7 +173,7 @@
       ansible-os-ha-ziu:
         vars:
           CONTAINER_REGISTRY: nexus.$SLAVE_REGION.$CI_DOMAIN:5002
-          CONTRAIL_CONTAINER_TAG: nightly-r21.4-centos
+          CONTRAIL_CONTAINER_TAG: nightly-r24.1-centos
           MONITORING_DEPLOY_TARGET: HA,ZIU
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: os

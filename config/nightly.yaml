@@ -5,7 +5,7 @@
     nightly:
       templates:
         - docs-doxygen
-        - build-r21.4-centos
+        - build-r24.1-centos
         - test-unit
         - test-unit-ui
         - k8s-manifests
@@ -37,7 +37,7 @@
         #build-ubi8:
         #  vars:
         #    DEBUGINFO: "TRUE"
-        build-r21.4-centos:
+        build-r24.1-centos:
           vars:
             DEBUGINFO: "TRUE"
         # additional schedule for some streams
@@ -71,23 +71,23 @@
         #deploy-platform-ansible-os-ha-ziu:
         #  # additional deps
         #  depends-on:
-        #    - package-deployers-r21.4-centos
+        #    - package-deployers-r24.1-centos
         #deploy-tf-juju-hybrid-ha-ziu:
         #  # additional deps
         #  depends-on:
-        #    - package-r21.4-ubi
+        #    - package-r24.1-ubi
         #deploy-tf-rhosp16.2-ha-ziu:
         #  # additional deps
         #  depends-on:
-        #    - package-r21.4-ubi
+        #    - package-r24.1-ubi
 
-        publish-r21.4-centos-nightly:
+        publish-r24.1-centos-nightly:
           job-name: publish
           depends-on:
-            - package-r21.4-centos
+            - package-r24.1-centos
           vars:
-            TAG_SUFFIX: "-r21.4-centos"
-            GERRIT_BRANCH: "R21.4"
+            TAG_SUFFIX: "-r24.1-centos"
+            GERRIT_BRANCH: "R24.1"
 
         #aquascan-ubi-nightly:
         #  job-name: aquascan

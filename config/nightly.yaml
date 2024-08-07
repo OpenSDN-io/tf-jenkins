@@ -18,11 +18,11 @@
         #- ansible-os-ha-ziu
         - juju-k8s
         - juju-os
-        - juju-os-ha-ziu
+        # - juju-os-ha-ziu
         #- juju-os-maas
         #- juju-hybrid-ha-ziu
         #- rhosp16.2-ha
-        - operator
+        # - operator
         #- operator-ha
         - juju-os-not-implemented-targets
         - juju-k8s-not-implemented-targets

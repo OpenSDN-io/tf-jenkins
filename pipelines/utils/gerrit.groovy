@@ -21,25 +21,32 @@ def gerrit_build_started() {
   try {
     def msg = """TF CI Build Started (${env.GERRIT_PIPELINE}) ${BUILD_URL}"""
     notify_gerrit(msg, VERIFIED_STARTED_VALUES[env.GERRIT_PIPELINE])
-    def path = "c/${env.GERRIT_PROJECT}/+/${env.GERRIT_CHANGE_NUMBER}"
-    def msg_header = new String(env.GERRIT_CHANGE_COMMIT_MESSAGE.decodeBase64()).split('\n')[0]
-    def commit_message = "${msg_header.substring(0, msg_header.length() < 50 ? msg_header.length() : 50)}"
-    if (env.GERRIT_PATCHSET_NUMBER == "1" && env.GERRIT_PIPELINE == "check") {
-        def review_msg = "New review.\n"
-        review_msg += "[${commit_message}](${resolve_gerrit_url()}${path})"
-        notify_discord(review_msg, 'gerrit-event')
-    } else if (env.GERRIT_PIPELINE == 'post-merge') {
-        def merged_msg = "The review was merged.\n"
-        merged_msg += "[${commit_message}](${resolve_gerrit_url()}${path})"
-        notify_discord(merged_msg, 'gerrit-event')
-    }
+    notify_discord_for_patchset()
   } catch (err) {
     println("Failed to provide comment to gerrit")
     def msg = err.getMessage()
     if (msg != null) {
       println(msg)
+      println("Stacktrace - ${err.getStackTrace()}")
     }
   }
+}
+
+def notify_discord_for_patchset() {
+  println("Notify discord for new job is started")
+  def path = "c/${env.GERRIT_PROJECT}/+/${env.GERRIT_CHANGE_NUMBER}"
+  def msg_header = new String(env.GERRIT_CHANGE_COMMIT_MESSAGE.decodeBase64()).split('\n')[0]
+  def commit_message = "${msg_header.substring(0, msg_header.length() < 50 ? msg_header.length() : 50)}"
+  def msg = ""
+  if (env.GERRIT_PATCHSET_NUMBER == "1" && env.GERRIT_PIPELINE == "check") {
+    msg = "New review.\n"
+  } else if (env.GERRIT_PIPELINE == 'post-merge') {
+    msg = "The review was merged.\n"
+  } else {
+    return
+  }
+  merged_msg += "[${commit_message}](${resolve_gerrit_url()}${path})"
+  notify_discord(merged_msg, 'gerrit-event')
 }
 
 def publish_results(pre_build_done, streams, results, full_duration, err_msg=null) {

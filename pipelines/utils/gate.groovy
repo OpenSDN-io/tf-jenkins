@@ -1,4 +1,4 @@
-import groovy.json.JsonSlurper
+import groovy.json.JsonSlurperClassic
 import groovy.json.JsonOutput
 
 // TODO: Fill up list of projects that can't be run in concurrent mode
@@ -299,7 +299,7 @@ def _save_pachset_info(Integer base_build_id) {
 // all JSON calsulate to separate function
 def _get_result_patchset(Integer base_build_id) {
   def new_patchset_info_text = readFile("patchsets-info.json")
-  def sl = new JsonSlurper()
+  def sl = new JsonSlurperClassic()
   def new_patchset_info = sl.parseText(new_patchset_info_text)
   def base_patchset_info_text = ""
   // Read patchsets-info from base build
@@ -316,7 +316,7 @@ def _get_result_patchset(Integer base_build_id) {
       }
     }
   }
-  def sl2 = new JsonSlurper()
+  def sl2 = new JsonSlurperClassic()
   def base_patchset_info = sl2.parseText(base_patchset_info_text)
   if (!(base_patchset_info instanceof java.util.ArrayList))
     return false

@@ -31,7 +31,7 @@
             notbuilt: true
           trigger-on:
             - comment-added-contains-event:
-                comment-contains-value: '(?i)^(check|recheck) +(template|templates)( +[A-Za-z0-9\-\.]+)+\s*$'
+                comment-contains-value: '(?i)^(check|recheck) +(template|templates) .*$'
           comment-text-parameter-mode: PLAIN
           trigger-for-unreviewed-patches: true
           projects:

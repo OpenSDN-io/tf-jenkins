@@ -41,6 +41,10 @@ def main(def gate_utils, def gerrit_utils, def config_utils) {
       _run_gating(jobs, streams, gate_utils, gerrit_utils)
     else
       _run_jobs(jobs, streams)
+  } catch (err) {
+    println("ERROR: Failed to run ${err.getMessage()}")
+    println("Stacktrace - ${err.getStackTrace()}")
+    throw(err)
   } finally {
     println("Jobs results: ${job_results}")
     stage('gerrit vote') {
@@ -182,11 +186,11 @@ def _evaluate_env(def config_utils) {
       (streams, jobs, post_jobs) = config_utils.get_project_jobs(project_name, env.GERRIT_PIPELINE, env.GERRIT_BRANCH)
     } else {
       // It triggers by comment "(check|recheck) template(s) name1 name2 ...".
-      def full_comment = env.GERRIT_EVENT_COMMENT_TEXT.toLowerCase()
+      def full_comment = env.GERRIT_EVENT_COMMENT_TEXT
       def lines = full_comment.split("\n")
       def needed_line = ""
       for (line in lines) {
-        if (line.startsWith("check") || line.startsWith("recheck")) {
+        if (line.toLowerCase().startsWith("check") || line.toLowerCase().startsWith("recheck")) {
           needed_line = line
           break
         }
@@ -194,8 +198,8 @@ def _evaluate_env(def config_utils) {
       if (needed_line == "") {
         throw new Exception("ERROR: strange comment message: ${full_comment}")
       }
-      def template_names = needed_line.split()[2..-1]
-      (streams, jobs, post_jobs) = config_utils.get_templates_jobs(template_names)
+      def templates= needed_line.split()[2..-1].join(' ')
+      (streams, jobs, post_jobs) = config_utils.get_templates_jobs(templates)
     }
     println("Streams from  config: ${streams}")
     println("Jobs from config: ${jobs}")
@@ -204,6 +208,7 @@ def _evaluate_env(def config_utils) {
     msg = err.getMessage()
     if (err != null) {
       println("ERROR: Failed set environment ${msg}")
+      println("Stacktrace - ${err.getStackTrace()}")
     }
     throw(err)
   }

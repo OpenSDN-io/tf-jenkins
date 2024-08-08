@@ -1,16 +1,21 @@
 // config utils
 
 import groovy.lang.GroovyShell
+import groovy.json.JsonSlurperClassic
+import groovy.json.JsonOutput
 
-def get_templates_jobs(template_names) {
-  def data = _get_data()
-  def templates = _resolve_templates(data)
+def get_templates_jobs(templates_comment) {
+  def data = _get_config_data()
+  def templates_with_params = _parse_template_comment(templates_comment)
+  def res = _update_config_data_from_template_comment(data, templates_with_params)
+  def templates = _resolve_templates(res[0])
+  println(templates.keySet())
+  def templates_to_check = res[1]
 
   def streams = [:]
   def jobs = [:]
   def post_jobs = [:]
-  def branch = ''
-  _add_templates_jobs(branch, template_names, templates, streams, jobs, post_jobs)
+  _add_templates_jobs('', templates_to_check, templates, streams, jobs, post_jobs)
 
   // Set empty dict for dicts without params
   _set_default_values(streams)
@@ -27,7 +32,7 @@ def get_templates_jobs(template_names) {
 
 def get_project_jobs(project_name, gerrit_pipeline, gerrit_branch) {
   // get data
-  def data = _get_data()
+  def data = _get_config_data()
 
   // get templates
   def templates = _resolve_templates(data)
@@ -122,7 +127,7 @@ def _evaluate(evaluate_string) {
   return shell.evaluate(evaluate_string)
 }
 
-def _get_data() {
+def _get_config_data() {
   // read main file
   def data = readYaml(file: "${WORKSPACE}/src/opensdn-io/tf-jenkins/config/main.yaml")
   // read includes
@@ -135,7 +140,151 @@ def _get_data() {
     }
   }
   data += include_data
+
+  // set defaults
+  for (def item in data) {
+    if (!item.containsKey('template')) {
+      continue
+    }
+    def template = item['template']
+    if (!template.containsKey('streams'))
+      template['streams'] = [:]
+    if (!template.containsKey('jobs'))
+      template['jobs'] = [:]
+    if (!template.containsKey('post-jobs'))
+      template['post-jobs'] = [:]
+    item['template'] = template
+  }
+
   return data
+}
+
+def _parse_template_comment(templates_def) {
+  // from gerrit comment:
+  // templates_def = 'ansible-os  xxx  ansible-os ( ENVIRONMENT_OS : ubuntu20  )   ttt ansible-os (OPENSTACK_VERSION:ussuri,XXX:YYY)'
+  // from jenkins/config it should be just a list
+  // next code translates input string into map templates_list
+  // [[ansible-os, [:]], [xxx, [:]], [ansible-os, [ENVIRONMENT_OS:ubuntu20]], [ttt, [:]], [ansible-os, [OPENSTACK_VERSION:ussuri, XXX:YYY]]]
+  templates_list = []
+  current=''
+  for (i=0; i<templates_def.length(); i++) {
+    if (templates_def[i] != ' ' && templates_def[i] != '(') {
+      current += templates_def[i]
+      continue
+    }
+    for (; i<templates_def.length(); i++) {
+      if (templates_def[i] != ' ') {
+        break
+      }
+    }
+    if (i >= templates_def.length()) {
+      templates_list += [current, []]
+      break
+    }
+    vars = [:]
+    if (templates_def[i] == '(') {
+      params=''
+    for (j=i+1; j<templates_def.length(); j++) {
+        if (templates_def[j] == ')') {
+          break
+        }
+        params += templates_def[j]
+      }
+      for (pair in params.split(',')) {
+        kv = pair.split(':')
+        if (kv.size() > 1) {
+          vars[kv[0].trim()] = kv[1].trim()
+        } else {
+          vars[kv[0].trim()] = ''
+        }
+      }
+      for (i=j+1; i<templates_def.length(); i++) {
+        if (templates_def[i] != ' ') {
+          break
+        }
+      }
+    }
+    templates_list += [[current, vars]]
+    current = ''
+    i -= 1
+  }
+
+  return templates_list
+}
+
+def _update_config_data_from_template_comment(data, templates_list) {
+  def templates = [:]
+  for (def item in data) {
+    if (item.containsKey('template')) {
+      templates[item['template'].name] = item['template']
+    }
+  }
+
+  def templates_names = []
+  for (template_def in templates_list) {
+    def template_name = template_def[0]
+    def vars = template_def[1]
+    if (!templates.containsKey(template_name)) {
+      throw new Exception("ERROR: template ${template_name} is absent in configuration")
+    }
+    // apply vars if exist
+    if (vars.size() != 0) {
+      // deep copy original template from config
+      template = new JsonSlurperClassic().parseText(JsonOutput.toJson(templates[template_name]))
+      template = _apply_vars_to_template(template, vars)
+      data += ['template': template]
+      template_name = template['name']
+    }
+    templates_names += template_name
+  }
+
+  return [data, templates_names]
+}
+
+def _apply_vars_to_template(template, vars) {
+  suffix = '-' + vars.values().join('-')
+  template['name'] = template['name'] + suffix
+  for (s in template.getOrDefault('streams', [:]).keySet()) {
+    if (s.length() == 0) {
+      continue
+    }
+    def stream = template['streams'][s]
+    if (!stream.containsKey('vars')) {
+      stream['vars'] = [:]
+    }
+    for (k in vars.keySet()) {
+      stream['vars'][k] = vars[k]
+    }
+    template['streams'][s + suffix] = stream
+    template['streams'].remove(s)
+  }
+  job_names = template.getOrDefault('jobs', [:]).keySet()
+  for (j in job_names) {
+    if (j.length() == 0) {
+      continue
+    }
+    job = template['jobs'][j] 
+    if (!job.containsKey('job-name')) {
+      job['job-name'] = j
+    }
+    if (job.containsKey('stream')) {
+      job['stream'] = job['stream'] + suffix
+    }
+    deps = job.getOrDefault('depends-on', [])
+    new_deps = []
+    for (dep in deps) {
+      if (job_names.contains(dep)) {
+        new_deps += dep + suffix
+      } else {
+        new_deps += dep
+      }
+    }
+    job['depends-on'] = new_deps
+
+    template['jobs'][j + suffix] = job
+    template['jobs'].remove(j)
+  }
+  return template
 }
 
 def _add_templates_jobs(gerrit_branch, template_names, templates, streams, jobs, post_jobs) {
@@ -183,14 +332,7 @@ def _resolve_templates(def config_data) {
   def templates = [:]
   for (def item in config_data) {
     if (item.containsKey('template')) {
-      def template = item['template']
-      if (!template.containsKey('streams'))
-        template['streams'] = [:]
-      if (!template.containsKey('jobs'))
-        template['jobs'] = [:]
-      if (!template.containsKey('post-jobs'))
-        template['post-jobs'] = [:]
-      templates[template.name] = template
+      templates[item['template'].name] = item['template']
     }
   }
   // resolve parent templates
@@ -229,13 +371,13 @@ def _resolve_templates(def config_data) {
 
 def _update_map(items, new_items) {
   for (item in new_items) {
-    if (item.getClass() != java.util.LinkedHashMap$Entry) {
-      throw new Exception("Invalid item in config - '${item}'. It must be an entry of HashMap")
+    if (item.getClass() != java.util.LinkedHashMap$Entry && item.getClass() != java.util.TreeMap$Entry && item.getClass() != java.util.HashMap$Node) {
+      throw new Exception("Invalid item in config - '${item} of type ${item.getClass()}'. It must be an entry of HashMap")
     }
     if (!items.containsKey(item.key) || items[item.key] == null)
       items[item.key] = item.value
     else if (item.value != null) {
-      if (item.value.getClass() == java.util.LinkedHashMap) {
+      if (item.value.getClass() == java.util.LinkedHashMap || item.value.getClass() == java.util.TreeMap || item.value.getClass() == java.util.HashMap) {
         _update_map(items[item.key], item.value)
       } else if (item.value.getClass() == java.util.ArrayList) {
         for (val in item.value)

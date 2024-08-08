@@ -90,6 +90,7 @@ Each project is associated with several templates that are launched by default w
 Checking is started by Jenkins for each new patchset. To independently initiate the review of templates related to the current project, add a comment `check` to your review.
 
 To start checking a specific template, add a comment to your review with template name like `check template template-name`. For several templates at once comment is `check templates name1 name2`.
+It's also possible to add params for template with: 'check template ansible-os ansible-os(ENVIRONMENT_OS:ubuntu20) ansible-os(OPENSTACK_VERSION:ussuri)'. It's like a function call.
 
 Gating is started when gerrit labels are set to specific values. To start or restart gating comment is `gate`.
 

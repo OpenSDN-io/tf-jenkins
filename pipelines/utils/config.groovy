@@ -165,6 +165,7 @@ def _parse_template_comment(templates_def) {
   // from jenkins/config it should be just a list
   // next code translates input string into map templates_list
   // [[ansible-os, [:]], [xxx, [:]], [ansible-os, [ENVIRONMENT_OS:ubuntu20]], [ttt, [:]], [ansible-os, [OPENSTACK_VERSION:ussuri, XXX:YYY]]]
+  templates_def += ' '
   templates_list = []
   current=''
   for (i=0; i<templates_def.length(); i++) {
@@ -178,7 +179,7 @@ def _parse_template_comment(templates_def) {
       }
     }
     if (i >= templates_def.length()) {
-      templates_list += [current, []]
+      templates_list += [[current, [:]]]
       break
     }
     vars = [:]

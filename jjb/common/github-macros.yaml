@@ -8,8 +8,8 @@
           branches:
             - '*/master'
           clean:
-              after: true
-              before: true
+              before:
+                remove-stale-nested-repos: true
           prune: true
           wipe-workspace: true
           skip-tag: true
@@ -24,8 +24,8 @@
           branches:
             - '*/{branch}'
           clean:
-              after: true
-              before: true
+              before:
+                remove-stale-nested-repos: true
           prune: true
           wipe-workspace: true
           skip-tag: true

@@ -24,7 +24,7 @@
           python3 -m venv .venv
           source .venv/bin/activate
           pip3 install setuptools wheel --upgrade
-          pip3 install "jenkins-job-builder<6" "urllib3<2.0.0"
+          pip3 install "jenkins-job-builder" "urllib3<2.0.0"
           echo "--------------------------------------------------------------------- test"
           make test
           echo "--------------------------------------------------------------------- update"

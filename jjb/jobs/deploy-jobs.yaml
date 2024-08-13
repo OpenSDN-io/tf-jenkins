@@ -66,8 +66,8 @@
           which-build: upstream-build
       - shell: |
           source "$WORKSPACE/global.env"
-          desc="Pipeline: ${{PIPELINE_NAME}}-$PIPELINE_NUMBER    Random: ${{JOB_RND}}  Stream: ${{STREAM}}"
-          desc+="<br>Job logs: <a href=\"${{LOGS_URL}}/${{STREAM}}\">${{LOGS_URL}}/${{STREAM}}</a>"
+          desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER    Random: $JOB_RND  Stream: $STREAM"
+          desc+="<br>Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
           echo "DESCRIPTION $desc"
       - description-setter:
           regexp: "DESCRIPTION (.*)"
@@ -81,8 +81,8 @@
           export ENVIRONMENT_OS={environment_os}
           export ORCHESTRATOR={orchestrator}
           source "$WORKSPACE/global.env"
-          source "${{WORKSPACE}}/deps.${{JOB_NAME}}.${{JOB_RND}}.env" || /bin/true
-          source "${{WORKSPACE}}/vars.${{JOB_NAME}}.${{JOB_RND}}.env" || /bin/true
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
 
           res=0
           # do exit later when all context will be saved to env_file
@@ -91,13 +91,13 @@
           ENV_FILE="$WORKSPACE/stackrc.$JOB_NAME.env"
           echo "export ORCHESTRATOR=$ORCHESTRATOR" >> "$ENV_FILE"
           echo "export DEPLOYER={deployer}" >> "$ENV_FILE"
-          echo "export JOB_LOGS_PATH=${{STREAM}}" >> "$ENV_FILE"
+          echo "export JOB_LOGS_PATH=$STREAM" >> "$ENV_FILE"
           if [[ $res == 1 ]]; then
             echo "ERROR: workers creation failed"
             exit 1
           fi
           source "$WORKSPACE/stackrc.$JOB_NAME.env"
-          source ./src/opensdn-io/tf-jenkins/infra/${{SLAVE}}/definitions
+          source ./src/opensdn-io/tf-jenkins/infra/$SLAVE/definitions
 
           export FULL_LOGS_PATH="$LOGS_PATH/$JOB_LOGS_PATH"
           ssh -i $LOGS_HOST_SSH_KEY $SSH_OPTIONS $LOGS_HOST_USERNAME@$LOGS_HOST "mkdir -p $FULL_LOGS_PATH"
@@ -119,7 +119,7 @@
                       export ORCHESTRATOR={orchestrator}
                       source "$WORKSPACE/global.env"
                       source "$WORKSPACE/stackrc.$JOB_NAME.env"
-                      source ./src/opensdn-io/tf-jenkins/infra/${{SLAVE}}/definitions
+                      source ./src/opensdn-io/tf-jenkins/infra/$SLAVE/definitions
                       ./src/opensdn-io/tf-jenkins/jobs/devstack/{deployer}/remove_workers.sh
       - archive:
           artifacts: '*.env'
@@ -164,8 +164,8 @@
           which-build: upstream-build
       - shell: |
           source "$WORKSPACE/global.env"
-          desc="Pipeline: ${{PIPELINE_NAME}}-$PIPELINE_NUMBER  Random: ${{JOB_RND}}  Stream: ${{STREAM}}"
-          desc+="<br>Job logs: <a href=\"${{LOGS_URL}}/${{STREAM}}\">${{LOGS_URL}}/${{STREAM}}</a>"
+          desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND  Stream: $STREAM"
+          desc+="<br>Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
           echo "DESCRIPTION $desc"
       - description-setter:
           regexp: "DESCRIPTION (.*)"
@@ -177,9 +177,9 @@
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
-          source ./src/opensdn-io/tf-jenkins/infra/${{SLAVE}}/definitions
-          source "${{WORKSPACE}}/deps.${{JOB_NAME}}.${{JOB_RND}}.env" || /bin/true
-          source "${{WORKSPACE}}/vars.${{JOB_NAME}}.${{JOB_RND}}.env" || /bin/true
+          source ./src/opensdn-io/tf-jenkins/infra/$SLAVE/definitions
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
 
           export FULL_LOGS_PATH="$LOGS_PATH/$JOB_LOGS_PATH"
           ./src/opensdn-io/tf-jenkins/jobs/devstack/{deployer}/deploy_tf.sh || res=1
@@ -242,13 +242,13 @@
       - tf-devstack
     builders:
       - copyartifact:
-          project: ${PIPELINE_NAME}
+          project: ${{PIPELINE_NAME}}
           filter: "global.env,*.$JOB_RND.env,patchsets-info.json"
           which-build: upstream-build
       - shell: |
           source "$WORKSPACE/global.env"
-          desc="Pipeline: ${PIPELINE_NAME}-${PIPELINE_NUMBER}  Random: ${JOB_RND}  Stream: ${STREAM}"
-          desc+="<br>Job logs: <a href=\"${LOGS_URL}/${STREAM}\">${LOGS_URL}/${STREAM}</a>"
+          desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND  Stream: $STREAM"
+          desc+="<br>Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
           echo "DESCRIPTION $desc"
       - description-setter:
           regexp: "DESCRIPTION (.*)"
@@ -258,16 +258,16 @@
           ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-devstack ./patchsets-info.json
       - shell: |
           source "$WORKSPACE/global.env"
-          source "${WORKSPACE}/deps.${JOB_NAME}.${JOB_RND}.env" || /bin/true
-          source "${WORKSPACE}/vars.${JOB_NAME}.${JOB_RND}.env" || /bin/true
-          export FULL_LOGS_PATH="${LOGS_PATH}/${JOB_LOGS_PATH}"
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
+          export FULL_LOGS_PATH="$LOGS_PATH/$JOB_LOGS_PATH"
           # deploy platform kills env in case of error - skip all things for this case
           # TODO: think how to skip this job for some cases
           if [[ -n "$instance_ip" ]]; then
-            if ! "$WORKSPACE/src/opensdn-io/tf-jenkins/jobs/devstack/${DEPLOYER}/collect_logs.sh" ; then
+            if ! "$WORKSPACE/src/opensdn-io/tf-jenkins/jobs/devstack/$DEPLOYER/collect_logs.sh" ; then
               echo "WARNING: logs couldn't be collected"
             fi
-            "$WORKSPACE/src/opensdn-io/tf-jenkins/jobs/devstack/${DEPLOYER}/remove_workers.sh" || /bin/true
+            "$WORKSPACE/src/opensdn-io/tf-jenkins/jobs/devstack/$DEPLOYER/remove_workers.sh" || /bin/true
           fi
     publishers:
       - archive:

@@ -45,11 +45,11 @@
               variable: OS_AUTH_URL
     builders:
       - copyartifact:
-          project: ${PIPELINE_NAME}
+          project: ${{PIPELINE_NAME}}
           filter: "global.env"
           which-build: upstream-build
       - shell: |
-          desc="Pipeline: ${PIPELINE_NAME}-${PIPELINE_NUMBER}"
+          desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER"
           echo "DESCRIPTION $desc"
       - description-setter:
           regexp: "DESCRIPTION (.*)"
@@ -58,4 +58,4 @@
           ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
       - shell: |
           source "$WORKSPACE/global.env"
-          $WORKSPACE/src/opensdn-io/tf-jenkins/infra/${SLAVE}/cleanup_pipeline_workers.sh
+          $WORKSPACE/src/opensdn-io/tf-jenkins/infra/$SLAVE/cleanup_pipeline_workers.sh

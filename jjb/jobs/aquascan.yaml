@@ -64,13 +64,13 @@
               variable: OS_AUTH_URL
     builders:
       - copyartifact:
-          project: ${PIPELINE_NAME}
+          project: ${{PIPELINE_NAME}}
           filter: "global.env,*.$JOB_RND.env,patchsets-info.json"
           which-build: upstream-build
           optional: true
       - shell: |
           source "$WORKSPACE/global.env"
-          desc="Pipeline: ${PIPELINE_NAME}-${PIPELINE_NUMBER}  Random: ${JOB_RND}<br>Job logs: <a href=\"${LOGS_URL}/${STREAM}\">${LOGS_URL}/${STREAM}</a>"
+          desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND<br>Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
           echo "DESCRIPTION $desc"
       - description-setter:
           regexp: "DESCRIPTION (.*)"
@@ -81,11 +81,11 @@
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
-          source "${WORKSPACE}/deps.${JOB_NAME}.${JOB_RND}.env" || /bin/true
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
           # do it as a latest source to override all exports
-          source "${WORKSPACE}/vars.${JOB_NAME}.${JOB_RND}.env" || /bin/true
-          export FULL_LOGS_PATH="${LOGS_PATH}/${STREAM}"
-          export FULL_LOGS_URL="${LOGS_URL}/${STREAM}"
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
+          export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
+          export FULL_LOGS_URL="$LOGS_URL/$STREAM"
           # main run
           ./src/opensdn-io/tf-jenkins/jobs/aquascan/run.sh || res=1
           # collect logs

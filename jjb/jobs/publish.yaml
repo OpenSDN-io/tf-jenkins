@@ -69,12 +69,12 @@
               username-variable: LOGS_HOST_USERNAME
     builders:
       - copyartifact:
-          project: ${PIPELINE_NAME}
+          project: ${{PIPELINE_NAME}}
           filter: "global.env,*.$JOB_RND.env,patchsets-info.json"
           which-build: upstream-build
       - shell: |
           source "$WORKSPACE/global.env"
-          desc="Pipeline: ${PIPELINE_NAME}-${PIPELINE_NUMBER}  Random: ${JOB_RND}<br>Job logs: <a href=\"${LOGS_URL}/${STREAM}\">${LOGS_URL}/${STREAM}</a>"
+          desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND<br>Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
           echo "DESCRIPTION $desc"
       - description-setter:
           regexp: "DESCRIPTION (.*)"
@@ -97,10 +97,10 @@
           set -eo pipefail
           source "$WORKSPACE/global.env"
           source "$WORKSPACE/stackrc.$JOB_NAME.env"
-          source "${WORKSPACE}/deps.${JOB_NAME}.${JOB_RND}.env" || /bin/true
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
           # do it as a latest source to override all exports
-          source "${WORKSPACE}/vars.${JOB_NAME}.${JOB_RND}.env" || /bin/true
-          export FULL_LOGS_PATH="${LOGS_PATH}/${STREAM}"
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
+          export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
           # main run
           if (( VERIFIED > 0 )); then
             export STABLE=true
@@ -123,7 +123,7 @@
                 - shell: |
                     source "$WORKSPACE/global.env"
                     source "$WORKSPACE/stackrc.$JOB_NAME.env"
-                    $WORKSPACE/src/opensdn-io/tf-jenkins/infra/${SLAVE}/remove_workers.sh
+                    $WORKSPACE/src/opensdn-io/tf-jenkins/infra/$SLAVE/remove_workers.sh
                     rm -f "$WORKSPACE/stackrc.$JOB_NAME.env"
       - archive:
           artifacts: '*.env'

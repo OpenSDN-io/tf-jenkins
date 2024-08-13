@@ -64,7 +64,7 @@
         #       password: RHEL_PASSWORD
     builders:
       - copyartifact:
-          project: ${PIPELINE_NAME}
+          project: ${{PIPELINE_NAME}}
           filter: "global.env,*.$JOB_RND.env,patchsets-info.json"
           which-build: upstream-build
           optional: true
@@ -73,7 +73,7 @@
           source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
           source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND<br>"
-          desc+="Stage: {stage}  Target: {target}<br>"
+          desc+="Stage: {{stage}}  Target: {{target}}<br>"
           desc+="Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
           echo "DESCRIPTION $desc"
       - description-setter:
@@ -148,7 +148,7 @@
               variable: OS_AUTH_URL
     builders:
       - copyartifact:
-          project: ${PIPELINE_NAME}
+          project: ${PIPELINE_NAME}}
           filter: "global.env,*.$JOB_RND.env,patchsets-info.json"
           which-build: upstream-build
           optional: true
@@ -157,7 +157,7 @@
           source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
           source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND<br>"
-          desc+="Stage: {stage}  Target: {target}<br>"
+          desc+="Stage: {{stage}}  Target: {{target}}<br>"
           desc+="Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
           echo "DESCRIPTION $desc"
       - description-setter:

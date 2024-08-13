@@ -61,7 +61,7 @@
 
     builders:
       - copyartifact:
-          project: ${PIPELINE_NAME}
+          project: ${{PIPELINE_NAME}}
           filter: "global.env,*.$JOB_RND.env,patchsets-info.json"
           which-build: upstream-build
           optional: true
@@ -83,9 +83,9 @@
           set -eo pipefail
           source "$WORKSPACE/global.env"
           source "$WORKSPACE/stackrc.$JOB_NAME.env"
-          source "${WORKSPACE}/deps.${JOB_NAME}.${JOB_RND}.env" || /bin/true
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
           # do it as a latest source to override all exports
-          source "${WORKSPACE}/vars.${JOB_NAME}.${JOB_RND}.env" || /bin/true
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           echo "INFO: pull rhosp docker images and tag them as staging "
           $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/update-stage-images/run.sh
     publishers:
@@ -102,7 +102,7 @@
                 - shell: |
                     source "$WORKSPACE/global.env"
                     source "$WORKSPACE/stackrc.$JOB_NAME.env"
-                    $WORKSPACE/src/opensdn-io/tf-jenkins/infra/${SLAVE}/remove_workers.sh
+                    $WORKSPACE/src/opensdn-io/tf-jenkins/infra/$SLAVE/remove_workers.sh
                     rm -f "$WORKSPACE/stackrc.$JOB_NAME.env"
       - archive:
           artifacts: '*.env'
@@ -164,7 +164,7 @@
 
     builders:
       - copyartifact:
-          project: ${PIPELINE_NAME}
+          project: ${{PIPELINE_NAME}}
           filter: "global.env,*.$JOB_RND.env,patchsets-info.json"
           which-build: upstream-build
           optional: true
@@ -186,9 +186,9 @@
           set -eo pipefail
           source "$WORKSPACE/global.env"
           source "$WORKSPACE/stackrc.$JOB_NAME.env"
-          source "${WORKSPACE}/deps.${JOB_NAME}.${JOB_RND}.env" || /bin/true
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
           # do it as a latest source to override all exports
-          source "${WORKSPACE}/vars.${JOB_NAME}.${JOB_RND}.env" || /bin/true
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           echo "INFO: tag all rhosp images as latest"
           $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/update-stage-images/publish.sh
     publishers:
@@ -205,7 +205,7 @@
                 - shell: |
                     source "$WORKSPACE/global.env"
                     source "$WORKSPACE/stackrc.$JOB_NAME.env"
-                    $WORKSPACE/src/opensdn-io/tf-jenkins/infra/${SLAVE}/remove_workers.sh
+                    $WORKSPACE/src/opensdn-io/tf-jenkins/infra/$SLAVE/remove_workers.sh
                     rm -f "$WORKSPACE/stackrc.$JOB_NAME.env"
       - archive:
           artifacts: '*.env'

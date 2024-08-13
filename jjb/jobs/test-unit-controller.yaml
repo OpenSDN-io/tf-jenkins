@@ -64,10 +64,11 @@
           which-build: upstream-build
           optional: true
       - shell: |
+          export TARGET_SET={target_set}
           source "$WORKSPACE/global.env"
           source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND<br>"
-          desc+="Target set: {target_set}<br>"
+          desc+="Target set: $TARGET_SET<br>"
           desc+="Job logs: <a href=\"$LOGS_URL/$STREAM\">$LOGS_URL/$STREAM</a>"
           echo "DESCRIPTION $desc"
       - description-setter:

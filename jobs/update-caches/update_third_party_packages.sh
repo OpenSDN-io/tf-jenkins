@@ -118,6 +118,17 @@ for kernel in $kernels ; do
   wget -nv --no-check-certificate $kernel
 done
 
+# third-party packages from epel which is not available at build stage
+epel_packages="
+  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/u/uwsgi-2.0.18-8.el7.x86_64.rpm
+  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/u/uwsgi-plugin-python36-2.0.18-8.el7.x86_64.rpm
+  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/u/uwsgi-plugin-python36-gevent-2.0.18-8.el7.x86_64.rpm
+"
+
+for pkg in $epel_packages ; do
+  wget -nv --no-check-certificate $pkg
+done
+
 wget -nv -O - https://tf-ci.hb.ru-msk.vkcs.cloud/tpc.tar | tar -xv
 
 for file in $(find . -type f) ; do

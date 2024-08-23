@@ -45,8 +45,8 @@ def notify_discord_for_patchset() {
   } else {
     return
   }
-  merged_msg += "[${commit_message}](${resolve_gerrit_url()}${path})"
-  notify_discord(merged_msg, 'gerrit-event')
+  msg += "[${commit_message}](${resolve_gerrit_url()}${path})"
+  notify_discord(msg, 'gerrit-event')
 }
 
 def publish_results(pre_build_done, streams, results, full_duration, err_msg=null) {

@@ -13,7 +13,7 @@ import os
 
 DELAY = 1
 SSH_CMD = 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-SSH_DEST = '-p 29418 tf-gerrit@progmaticlab.com'
+SSH_DEST = '-p 29418 tf-gerrit@gerrit.opensdn.io'
 BRANCH = 'master'
 GERRIT_CMD = 'gerrit query --comments --patch-sets --format=JSON branch:' + BRANCH + ' status:merged projects:opensdn-io limit:{}'
 

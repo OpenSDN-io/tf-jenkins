@@ -56,6 +56,51 @@ contrail-vrouter-kernel-init \
 contrail-vrouter-kernel-init-dpdk \
 contrail-vrouter-plugin-mellanox-init-redhat \
 contrail-vrouter-plugin-mellanox-init-ubuntu \
+tf-analytics-alarm-gen \
+tf-analytics-api \
+tf-analytics-collector \
+tf-analytics-query-engine \
+tf-analytics-snmp-collector \
+tf-analytics-snmp-topology \
+tf-controller-config-api \
+tf-controller-config-devicemgr \
+tf-controller-config-dnsmasq \
+tf-controller-config-schema \
+tf-controller-config-svcmonitor \
+tf-controller-control-control \
+tf-controller-control-dns \
+tf-controller-control-named \
+tf-controller-webui-job \
+tf-controller-webui-web \
+tf-debug \
+tf-external-cassandra \
+tf-external-haproxy \
+tf-external-kafka \
+tf-external-rabbitmq \
+tf-external-redis \
+tf-external-rsyslogd \
+tf-external-stunnel \
+tf-external-zookeeper \
+tf-kubernetes-cni-init \
+tf-kubernetes-kube-manager \
+tf-node-init \
+tf-nodemgr \
+tf-openstack-compute-init \
+tf-openstack-heat-init \
+tf-openstack-neutron-init \
+tf-openstack-neutron-ml2-init \
+tf-provisioner \
+tf-status \
+tf-test-test \
+tf-tools \
+tf-tor-agent \
+tf-vrouter-agent \
+tf-vrouter-agent-dpdk \
+tf-vrouter-kernel-build-init \
+tf-vrouter-kernel-init \
+tf-vrouter-kernel-init-dpdk \
+tf-vrouter-plugin-mellanox-init-redhat \
+tf-vrouter-plugin-mellanox-init-ubuntu \
 tf-ansible-deployer-src \
 tf-build-manifest-src \
 tf-charms-src \
@@ -70,8 +115,8 @@ tf-tripleo-heat-templates-src \
 "
 
 for image in $images ; do
-  if ! sudo docker pull "opensdn-io/$image:$current_tag" ; then
-    echo "ERROR: image opensdn-io/$image:$current_tag is not present in dockerhub"
+  if ! sudo docker pull "opensdn/$image:$current_tag" ; then
+    echo "ERROR: image opensdn/$image:$current_tag is not present in dockerhub"
   fi
 done
 

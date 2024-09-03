@@ -212,9 +212,11 @@ for (( i=1; i<=$VM_BOOT_RETRIES ; ++i )) ; do
       --wait \
       ${instance_name_num} || res=1
 
-    nova server-tag-add ${instance_name_num} PipelineBuildTag=${PIPELINE_BUILD_TAG} \
+    if [[ $res == 0 ]]; then
+      nova server-tag-add ${instance_name_num} PipelineBuildTag=${PIPELINE_BUILD_TAG} \
                                        ${job_tag} ${group_tag} SLAVE=${SLAVE} \
                                        DOWN=${OS_IMAGES_DOWN["${ENVIRONMENT_OS^^}"]}
+    fi
   done
 
   if [[ $res == 1 ]]; then

@@ -118,11 +118,12 @@ for kernel in $kernels ; do
   wget -nv --no-check-certificate $kernel
 done
 
-# third-party packages from epel which is not available at build stage
+# third-party packages from epel which are not available at build stage
 epel_packages="
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/u/uwsgi-2.0.18-8.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/u/uwsgi-plugin-python36-2.0.18-8.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/u/uwsgi-plugin-python36-gevent-2.0.18-8.el7.x86_64.rpm
+  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python36-numpy-1.12.1-3.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-1.69.0-2.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-atomic-1.69.0-2.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-build-1.69.0-2.el7.noarch.rpm

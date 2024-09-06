@@ -124,6 +124,10 @@ epel_packages="
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/u/uwsgi-plugin-python36-2.0.18-8.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/u/uwsgi-plugin-python36-gevent-2.0.18-8.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python36-numpy-1.12.1-3.el7.x86_64.rpm
+  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/o/openblas-0.3.3-2.el7.x86_64.rpm
+  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/o/openblas-openmp-0.3.3-2.el7.x86_64.rpm
+  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/o/openblas-serial-0.3.3-2.el7.x86_64.rpm
+  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/o/openblas-threads-0.3.3-2.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-1.69.0-2.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-atomic-1.69.0-2.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-build-1.69.0-2.el7.noarch.rpm

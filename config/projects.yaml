@@ -201,7 +201,7 @@
       templates:
         - test-unit
         - ansible-os
-        - juju-os
+        - juju-k8s
         - cleanup
     gate:
       templates:

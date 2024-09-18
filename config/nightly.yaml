@@ -5,7 +5,7 @@
     nightly:
       templates:
         - docs-doxygen
-        - build-r24.1-centos
+        #- build-r24.1-centos
         - test-unit
         - test-unit-ui
         - k8s-manifests
@@ -37,9 +37,9 @@
         #build-ubi8:
         #  vars:
         #    DEBUGINFO: "TRUE"
-        build-r24.1-centos:
-          vars:
-            DEBUGINFO: "TRUE"
+        #build-r24.1-centos:
+        #  vars:
+        #    DEBUGINFO: "TRUE"
         # additional schedule for some streams
         ansible-k8s:
           frequency: 7
@@ -81,13 +81,13 @@
         #  depends-on:
         #    - package-r24.1-ubi
 
-        publish-r24.1-centos-nightly:
-          job-name: publish
-          depends-on:
-            - package-r24.1-centos
-          vars:
-            TAG_SUFFIX: "-r24.1-centos"
-            GERRIT_BRANCH: "R24.1"
+        #publish-r24.1-centos-nightly:
+        #  job-name: publish
+        #  depends-on:
+        #    - package-r24.1-centos
+        #  vars:
+        #    TAG_SUFFIX: "-r24.1-centos"
+        #    GERRIT_BRANCH: "R24.1"
 
         #aquascan-ubi-nightly:
         #  job-name: aquascan

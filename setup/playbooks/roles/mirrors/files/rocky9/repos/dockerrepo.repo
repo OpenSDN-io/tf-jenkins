@@ -1,0 +1,5 @@
+[dockerrepo]
+baseurl = https://download.docker.com/linux/centos/9/$basearch/stable
+gpgcheck = 1
+gpgkey = https://download.docker.com/linux/centos/gpg
+name = Docker Repository

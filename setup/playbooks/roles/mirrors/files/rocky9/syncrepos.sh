@@ -22,13 +22,13 @@ done
 
 for r in ${REPOS_ROCKY9[@]}; do
   echo "INFO: updating rocky9 repoid=$r"
-  reposync -l --repoid=${r} --download-metadata --downloadcomps --download_path=${MIRRORDIR}/rocky9/${DATE}
+  reposync --repoid=${r} --download-metadata --downloadcomps -p ${MIRRORDIR}/rocky9/${DATE}
   createrepo -v ${MIRRORDIR}/rocky9/${DATE}/${r}/
 done
 
 for r in ${REPOS_YUM9[@]}; do
   echo "INFO: updating yum9 repoid=$r"
-  reposync -l --repoid=${r} --download-metadata --downloadcomps --download_path=${MIRRORDIR}/yum9/${DATE}
+  reposync --repoid=${r} --download-metadata --downloadcomps -p ${MIRRORDIR}/yum9/${DATE}
   createrepo -v ${MIRRORDIR}/yum9/${DATE}/${r}/
 done
 

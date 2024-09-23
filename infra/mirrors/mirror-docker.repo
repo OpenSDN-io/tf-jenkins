@@ -4,3 +4,10 @@ baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/yum7/$REPOS_CHANNEL/doc
 enabled=1
 gpgcheck=0
 cost = 500
+
+[tf-mirrors.ci_repos_dockerrepo9]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/yum9/$REPOS_CHANNEL/dockerrepo/
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/yum9/$REPOS_CHANNEL/dockerrepo/
+enabled=1
+gpgcheck=0
+cost = 500

@@ -1,0 +1,83 @@
+[tf-mirrors.ci_repos_yum9-baseos]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/baseos
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/baseos
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-baseos-debug]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/baseos-debug
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/baseos-debug
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-baseos-source]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/baseos-source/
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/baseos-source/
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-appstream]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/appstream
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/appstream
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-appstream-debug]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/appstream-debug
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/appstream-debug
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-appstream-source]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/appstream-source/
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/appstream-source/
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-crb]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/crb
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/crb
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-crb-debug]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/crb-debug
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/crb-debug
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-crb-source]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/crb-source/
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/crb-source/
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-extras]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/extras
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/extras
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-extras-debug]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/extras-debug
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/extras-debug
+enabled=1
+gpgcheck=0
+cost = 500
+
+[tf-mirrors.ci_repos_yum9-extras-source]
+name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/extras-source/
+baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rocky9/$REPOS_CHANNEL/extras-source/
+enabled=1
+gpgcheck=0
+cost = 500

@@ -29,28 +29,20 @@ EOF
 $ssh_cmd $IMAGE_SSH_USER@$instance_ip "grep VERSION_ID /etc/os-release" 2>/dev/null >"$WORKSPACE/os-release-$instance_ip"
 source "$WORKSPACE/os-release-$instance_ip"
 
-# TODO: create rocky9 mirrors and uncomment this with updates
-# if [ -f $my_dir/../../mirrors/centos${VERSION_ID}-environment ]; then
-#   echo "INFO: copy additional environment to host"
-#   cat $my_dir/../../mirrors/centos${VERSION_ID}-environment | envsubst > "$WORKSPACE/centos${VERSION_ID}-environment"
-#   rsync -a -e "$ssh_cmd" "$WORKSPACE/centos${VERSION_ID}-environment" ${IMAGE_SSH_USER}@${instance_ip}:./centos${VERSION_ID}-environment
-#   $ssh_cmd $IMAGE_SSH_USER@$instance_ip "cat centos${VERSION_ID}-environment | sudo tee -a /etc/environment"
-# fi
+if [ -f $my_dir/../../mirrors/mirror-base-rocky9.repo ]; then
+  echo "INFO: copy mirror-base-rocky9.repo to host"
+  cat $my_dir/../../mirrors/mirror-base-rocky9.repo | envsubst > "$WORKSPACE/mirror-base-rocky9.repo"
+  rsync -a -e "$ssh_cmd" "$WORKSPACE/mirror-base-rocky9.repo" ${IMAGE_SSH_USER}@${instance_ip}:./mirror-base-rocky9.repo
+  $ssh_cmd $IMAGE_SSH_USER@$instance_ip "sudo rm -f /etc/yum.repos.d/*; sudo cp mirror-base-rocky9.repo /etc/yum.repos.d/"
+fi
 
-# if [ -f $my_dir/../../mirrors/mirror-base-centos${VERSION_ID}.repo ]; then
-#   echo "INFO: copy mirror-base-centos${VERSION_ID}.repo to host"
-#   cat $my_dir/../../mirrors/mirror-base-centos${VERSION_ID}.repo | envsubst > "$WORKSPACE/mirror-base-centos${VERSION_ID}.repo"
-#   rsync -a -e "$ssh_cmd" "$WORKSPACE/mirror-base-centos${VERSION_ID}.repo" ${IMAGE_SSH_USER}@${instance_ip}:./mirror-base-centos${VERSION_ID}.repo
-#   $ssh_cmd $IMAGE_SSH_USER@$instance_ip "sudo rm -f /etc/yum.repos.d/*; sudo cp mirror-base-centos${VERSION_ID}.repo /etc/yum.repos.d/"
-# fi
-
-# # must be after sync of mirror-base-centos as it does clea of /etc/yum.repos.d/*
-# if [ -f $my_dir/../../mirrors/mirror-epel${VERSION_ID}.repo ]; then
-#   echo "INFO: copy mirror-epel${VERSION_ID}.repo to host"
-#   cat $my_dir/../../mirrors/mirror-epel${VERSION_ID}.repo | envsubst > "$WORKSPACE/mirror-epel${VERSION_ID}.repo"
-#   rsync -a -e "$ssh_cmd" "$WORKSPACE/mirror-epel${VERSION_ID}.repo" ${IMAGE_SSH_USER}@${instance_ip}:./mirror-epel${VERSION_ID}.repo
-#   $ssh_cmd $IMAGE_SSH_USER@$instance_ip "sudo cp mirror-epel${VERSION_ID}.repo /etc/yum.repos.d/"
-# fi
+# must be after sync of mirror-base-centos as it does clea of /etc/yum.repos.d/*
+if [ -f $my_dir/../../mirrors/mirror-epel9.repo ]; then
+  echo "INFO: copy mirror-epel9.repo to host"
+  cat $my_dir/../../mirrors/mirror-epel9.repo | envsubst > "$WORKSPACE/mirror-epel9.repo"
+  rsync -a -e "$ssh_cmd" "$WORKSPACE/mirror-epel9.repo" ${IMAGE_SSH_USER}@${instance_ip}:./mirror-epel9.repo
+  $ssh_cmd $IMAGE_SSH_USER@$instance_ip "sudo cp mirror-epel9.repo /etc/yum.repos.d/"
+fi
 
 # TODO: detect interface name
 echo "INFO: do not set default gateway for second interface"

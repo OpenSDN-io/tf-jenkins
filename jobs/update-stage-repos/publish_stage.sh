@@ -9,6 +9,7 @@ declare -A REPOS=( \
     # ["rhel82"]="rhel82 ubi82" \
     # ["rhel84"]="rhel84 ubi84" \
     ["ubuntu"]="ubuntu" \
+    ["rocky9"]="rocky9 yum9" \
 )
 
 for repo in ${REPOS[$1]} ; do

@@ -29,6 +29,7 @@
     # - rhel82
     # - rhel84
     - ubuntu
+    - rocky9
 
 - name: Install required python modules
   pip:
@@ -55,6 +56,7 @@
     # - rhel82
     # - rhel84
     - ubuntu
+    - rocky9
 
 - name: Build repos images
   docker_image:
@@ -71,6 +73,7 @@
     # - rhel82
     # - rhel84
     - ubuntu
+    - rocky9
 
 - name: Set devpi secret
   copy:

@@ -18,6 +18,24 @@
           depends-on:
             - update-stage-repos-centos7
 
+- project:
+    name: init-repos-rocky9
+    init-repos:
+      templates:
+        - cleanup
+      jobs:
+        update-stage-repos-rocky9:
+          job-name: update-stage-repos
+          timeout: 600
+          vars:
+            REPOS_TYPE: 'rocky9'
+        publish-stage-repos-rocky9:
+          job-name: publish-stage-repos
+          vars:
+            REPOS_TYPE: 'rocky9'
+          depends-on:
+            - update-stage-repos-rocky9
+
 # - project:
 #     name: init-repos-rhel7
 #     init-repos:

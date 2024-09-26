@@ -24,6 +24,10 @@ rsync -a -e "ssh -i ${WORKER_SSH_KEY} ${SSH_OPTIONS}" "$WORKSPACE/mirror-docker-
 cat $my_dir/../../mirrors/ubuntu-sources.list | envsubst > "$WORKSPACE/ubuntu-sources.list"
 rsync -a -e "ssh -i ${WORKER_SSH_KEY} ${SSH_OPTIONS}" "$WORKSPACE/ubuntu-sources.list" ${IMAGE_SSH_USER}@${instance_ip}:./ubuntu-sources.list
 
+# disable tx checksumming to avoid communication issues between workers
+ssh -i $WORKER_SSH_KEY $SSH_OPTIONS $IMAGE_SSH_USER@$instance_ip "interface=\$(ip route show | grep 'default via' | awk '{print \$5}');
+if [ -n \"\$interface\" ]; then echo \"Found interface: \$interface\"; sudo ethtool -K \"\$interface\" tx off; else echo 'No physical interface found'; fi"
+
 # we have to wait for cloud-init finish cause it may overwrite our copy of sources.list
 cat <<EOF | ssh -i $WORKER_SSH_KEY $SSH_OPTIONS $IMAGE_SSH_USER@$instance_ip
 set -e

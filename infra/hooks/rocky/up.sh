@@ -29,6 +29,10 @@ EOF
 $ssh_cmd $IMAGE_SSH_USER@$instance_ip "grep VERSION_ID /etc/os-release" 2>/dev/null >"$WORKSPACE/os-release-$instance_ip"
 source "$WORKSPACE/os-release-$instance_ip"
 
+# disable tx checksumming to avoid communication issues between workers
+$ssh_cmd $IMAGE_SSH_USER@$instance_ip "interface=\$(ip route show | grep 'default via' | awk '{print \$5}');
+if [ -n \"\$interface\" ]; then echo \"Found interface: \$interface\"; sudo ethtool -K \"\$interface\" tx off; else echo 'No physical interface found'; fi"
+
 if [ -f $my_dir/../../mirrors/mirror-base-rocky9.repo ]; then
   echo "INFO: copy mirror-base-rocky9.repo to host"
   cat $my_dir/../../mirrors/mirror-base-rocky9.repo | envsubst > "$WORKSPACE/mirror-base-rocky9.repo"

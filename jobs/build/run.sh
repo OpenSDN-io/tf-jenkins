@@ -62,8 +62,8 @@ elif [[ "${LINUX_DISTR}" =~ 'ubi8' ]] ; then
   mirror_list_for_build="mirror-epel8.repo rhel84/ubi.repo rhel84/mirror-rhel84.repo"
   mirror_list="rhel84/ubi.repo rhel84/mirror-rhel84.repo"
 elif [[ ${LINUX_DISTR} == 'rockylinux' ]]; then
-  mirror_list_for_build="mirror-epel9.repo mirror-docker.repo mirror-base-rocky9.repo"
-  mirror_list="mirror-epel9.repo mirror-base-rocky9.repo mirror-docker.repo"
+  mirror_list_for_build="mirror-epel9.repo mirror-docker9.repo mirror-base-rocky9.repo"
+  mirror_list="mirror-epel9.repo mirror-base-rocky9.repo mirror-docker9.repo"
   # # add empty Rocky repos to disable them
   mirror_list_for_build+=" rocky9/rocky.repo rocky9/rocky-extras.repo rocky9/rocky-devel.repo rocky9/rocky-addons.repo"
   mirror_list+=" rocky9/rocky.repo rocky9/rocky-extras.repo rocky9/rocky-devel.repo rocky9/rocky-addons.repo"

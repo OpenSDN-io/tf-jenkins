@@ -34,8 +34,8 @@ if [[ ${LINUX_DISTR} == 'centos' ]]; then
   mirror_list+=" centos7/CentOS-Base.repo centos7/CentOS-CR.repo centos7/CentOS-Debuginfo.repo centos7/CentOS-Media.repo"
   mirror_list+=" centos7/CentOS-Sources.repo centos7/CentOS-Vault.repo centos7/CentOS-fasttrack.repo centos7/CentOS-x86_64-kernel.repo"
 elif [[ ${LINUX_DISTR} == 'rockylinux' ]]; then
-  mirror_list_for_build="mirror-epel9.repo mirror-docker.repo mirror-base-rocky9.repo"
-  mirror_list="mirror-epel9.repo mirror-base-rocky9.repo mirror-docker.repo"
+  mirror_list_for_build="mirror-epel9.repo mirror-docker9.repo mirror-base-rocky9.repo"
+  mirror_list="mirror-epel9.repo mirror-base-rocky9.repo mirror-docker9.repo"
   # # add empty Rocky repos to disable them
   mirror_list_for_build+=" rocky9/rocky.repo rocky9/rocky-extras.repo rocky9/rocky-devel.repo rocky9/rocky-addons.repo"
   mirror_list+=" rocky9/rocky.repo rocky9/rocky-extras.repo rocky9/rocky-devel.repo rocky9/rocky-addons.repo"

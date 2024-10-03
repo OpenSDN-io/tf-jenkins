@@ -5,7 +5,7 @@
     nightly:
       templates:
         - docs-doxygen
-        #- build-r24.1-centos
+        - build-r24.1-centos
         - test-unit
         - test-unit-ui
         - k8s-manifests
@@ -15,6 +15,7 @@
         - ansible-os
         - ansible-os-tempest
         - ansible-os-vanilla
+        - ansible-os-r24.1
         #- ansible-os-ha-ziu
         - juju-k8s
         - juju-os
@@ -37,9 +38,9 @@
         #build-ubi8:
         #  vars:
         #    DEBUGINFO: "TRUE"
-        #build-r24.1-centos:
-        #  vars:
-        #    DEBUGINFO: "TRUE"
+        build-r24.1-centos:
+         vars:
+           DEBUGINFO: "TRUE"
         # additional schedule for some streams
         ansible-k8s:
           frequency: 7

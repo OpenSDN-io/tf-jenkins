@@ -187,7 +187,7 @@ for pkg in $epel_packages ; do
   wget -nv --no-check-certificate $pkg
 done
 
-wget -nv -O - https://tf-ci.hb.ru-msk.vkcs.cloud/tpc.tar | tar -xv
+wget -nv -O - https://tf-ci.hb.ru-msk.vkcloud-storage.ru/tpc.tar | tar -xv
 
 for file in $(find . -type f) ; do
   echo "INFO: upload $file"

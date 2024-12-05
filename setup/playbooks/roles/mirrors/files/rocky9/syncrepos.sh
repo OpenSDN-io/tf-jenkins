@@ -23,6 +23,8 @@ done
 for r in ${REPOS_ROCKY9[@]}; do
   echo "INFO: updating rocky9 repoid=$r"
   reposync --repoid=${r} --download-metadata --downloadcomps -p ${MIRRORDIR}/rocky9/${DATE}
+  # some strange versions of some packages that couldn't be installed 
+  for repo in $(find ${MIRRORDIR}/rocky9/${DATE} -name *el9.4.0+20049+f35c064b*) ; do rm -rf ${MIRRORDIR}/rocky9/${DATE}/$repo ; done
   createrepo -v ${MIRRORDIR}/rocky9/${DATE}/${r}/
 done
 

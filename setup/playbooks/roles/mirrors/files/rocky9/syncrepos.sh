@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 REPOS_ROCKY9=(baseos baseos-debug baseos-source appstream appstream-debug appstream-source crb crb-source crb-debug extras extras-debug extras-source)
 REPOS_YUM9=(dockerrepo epel)

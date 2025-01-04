@@ -19,6 +19,7 @@
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: k8s
           ENVIRONMENT_OS: rocky9
+          CONFIG_API_WORKER_COUNT: 3
     parents:
       - build-centos
     jobs:

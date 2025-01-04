@@ -35,6 +35,7 @@
           MONITORING_DEPLOY_TARGET: AIO
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: k8s
+          CONFIG_API_WORKER_COUNT: 3
     parents:
       - build-centos
     jobs:

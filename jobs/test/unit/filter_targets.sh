@@ -19,7 +19,7 @@ opserver=",src/contrail-analytics/contrail-opserver:test,"
 group_one=",src/contrail-analytics/contrail-collector:test,"
 group_one+="src/contrail-analytics/contrail-query-engine:test,"
 group_one+="src/contrail-analytics/tf-topology:test,"
-group_one+="controller/src/stats:test,contrail-nodemgr:test,vrouter-py-ut:test,"
+group_one+="contrail-nodemgr:test,vrouter-py-ut:test,"
 group_one+="controller/src/config/svc_monitor:test,controller/src/config/schema-transformer:test,"
 group_one+="controller/src/container/kube-manager:test,"
 

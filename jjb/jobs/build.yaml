@@ -52,10 +52,6 @@
           - text:
               credential-id: OS_AUTH_URL
               variable: OS_AUTH_URL
-        #   - username-password-separated:
-        #       credential-id: rhel-creds
-        #       username: RHEL_USER
-        #       password: RHEL_PASSWORD
       - credentials-binding:
           - ssh-user-private-key:
               credential-id: logs_host

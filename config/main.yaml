@@ -73,8 +73,6 @@
     - templates-build.yaml
     - templates-juju.yaml
     - templates-k8s-manifests.yaml
-    - templates-operator.yaml
-    # - templates-rhosp.yaml
     - templates-tests.yaml
     - templates-docs.yaml
     - nightly.yaml

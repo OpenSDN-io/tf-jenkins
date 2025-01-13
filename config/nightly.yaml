@@ -16,28 +16,21 @@
         - ansible-os-tempest
         - ansible-os-vanilla
         - ansible-os-r24.1
-        #- ansible-os-ha-ziu
+        - ansible-os-ha-ziu
         - juju-k8s
         - juju-os
         # - juju-os-ha-ziu
         #- juju-os-maas
         #- juju-hybrid-ha-ziu
-        #- rhosp16.2-ha
-        # - operator
-        #- operator-ha
         - juju-os-not-implemented-targets
         - juju-k8s-not-implemented-targets
         - juju-hybrid-not-implemented-targets
-        #- rhosp16-os-not-implemented-targets
         - ansible-os-not-implemented-targets
         - cleanup
       streams:
         build-centos:
           vars:
             DEBUGINFO: "TRUE"
-        #build-ubi8:
-        #  vars:
-        #    DEBUGINFO: "TRUE"
         build-r24.1-centos:
          vars:
            DEBUGINFO: "TRUE"
@@ -45,8 +38,6 @@
         ansible-k8s:
           frequency: 7
         # hack with locks due to lack of resources
-        operator-ha:
-          lock: group-two-ha
         juju-os-ha-ziu:
           lock: group-two-ha
         juju-k8s-ha:
@@ -69,15 +60,11 @@
             - package-centos
 
         # to use just built nightly images
-        #deploy-platform-ansible-os-ha-ziu:
-        #  # additional deps
-        #  depends-on:
-        #    - package-deployers-r24.1-centos
+        deploy-platform-ansible-os-ha-ziu:
+          # additional deps
+          depends-on:
+            - package-deployers-r24.1-centos
         #deploy-tf-juju-hybrid-ha-ziu:
-        #  # additional deps
-        #  depends-on:
-        #    - package-r24.1-ubi
-        #deploy-tf-rhosp16.2-ha-ziu:
         #  # additional deps
         #  depends-on:
         #    - package-r24.1-ubi

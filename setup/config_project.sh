@@ -47,15 +47,12 @@ tf-jenkins \
 tf-kolla-ansible \
 tf-neutron-plugin \
 tf-nova-vif-driver \
-tf-operator \
 tf-packages \
 tf-specs \
 tf-test \
 tf-third-party \
 tf-third-party-cache \
 tf-third-party-packages \
-tf-tripleo-heat-templates \
-tf-tripleo-puppet \
 tf-vnc \
 tf-vrouter \
 tf-web-controller \

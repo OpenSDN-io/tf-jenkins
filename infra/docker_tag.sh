@@ -43,7 +43,6 @@ contrail-nodemgr \
 contrail-openstack-compute-init \
 contrail-openstack-heat-init \
 contrail-openstack-neutron-init \
-contrail-openstack-neutron-ml2-init \
 contrail-provisioner \
 contrail-status \
 contrail-test-test \
@@ -54,8 +53,6 @@ contrail-vrouter-agent-dpdk \
 contrail-vrouter-kernel-build-init \
 contrail-vrouter-kernel-init \
 contrail-vrouter-kernel-init-dpdk \
-contrail-vrouter-plugin-mellanox-init-redhat \
-contrail-vrouter-plugin-mellanox-init-ubuntu \
 tf-analytics-alarm-gen \
 tf-analytics-api \
 tf-analytics-collector \
@@ -88,7 +85,6 @@ tf-nodemgr \
 tf-openstack-compute-init \
 tf-openstack-heat-init \
 tf-openstack-neutron-init \
-tf-openstack-neutron-ml2-init \
 tf-provisioner \
 tf-status \
 tf-test-test \
@@ -99,19 +95,12 @@ tf-vrouter-agent-dpdk \
 tf-vrouter-kernel-build-init \
 tf-vrouter-kernel-init \
 tf-vrouter-kernel-init-dpdk \
-tf-vrouter-plugin-mellanox-init-redhat \
-tf-vrouter-plugin-mellanox-init-ubuntu \
 tf-ansible-deployer-src \
 tf-build-manifest-src \
 tf-charms-src \
 tf-container-builder-src \
 tf-deployment-test \
-tf-helm-deployer-src \
 tf-kolla-ansible-src \
-tf-operator \
-tf-operator-bundle
-tf-operator-src \
-tf-tripleo-heat-templates-src \
 "
 
 for image in $images ; do

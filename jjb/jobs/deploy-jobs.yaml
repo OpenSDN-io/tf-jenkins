@@ -49,13 +49,6 @@
           - text:
               credential-id: OS_AUTH_URL
               variable: OS_AUTH_URL
-        #   - username-password-separated:
-        #       credential-id: rhel-creds
-        #       username: RHEL_USER
-        #       password: RHEL_PASSWORD
-        #   - text:
-        #       credential-id: MAAS_API_KEY
-        #       variable: MAAS_API_KEY
     scm:
       - tf-jenkins
       - tf-devstack
@@ -300,14 +293,6 @@
           environment_os: ubuntu22
           deployer: ansible
           orchestrator: openstack
-      - rhosp16:
-          environment_os: rhel82
-          deployer: rhosp
-          orchestrator: openstack
-      - operator:
-          environment_os: rocky9
-          deployer: operator
-          orchestrator: kubernetes
     jobs:
       - 'deploy-platform-{project}'
       - 'deploy-tf-{project}'

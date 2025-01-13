@@ -37,7 +37,6 @@
       templates:
         - juju-k8s
         - ansible-os
-        # - operator
         - cleanup
 
 - project:
@@ -118,7 +117,6 @@
         - test-unit
         - juju-k8s
         - ansible-os
-        # - operator
         - cleanup
 
 # old web UI projects
@@ -189,7 +187,6 @@
       templates:
         - juju-k8s
         - ansible-os
-        # - operator
         - cleanup
     post-merge:
       jobs:
@@ -211,19 +208,6 @@
         - cleanup
 
 - project:
-    name: opensdn-io/tf-helm-deployer
-    check:
-      templates:
-        - helm-k8s
-        - helm-os
-        - cleanup
-    gate:
-      templates:
-        - helm-k8s
-        - helm-os
-        - cleanup
-
-- project:
     name: opensdn-io/tf-charms
     check:
       templates:
@@ -235,32 +219,6 @@
       templates:
         - juju-k8s
         - juju-os
-
-- project:
-    name: opensdn-io/tf-tripleo-puppet
-    check:
-      templates:
-    gate:
-      templates:
-
-- project:
-    name: opensdn-io/tf-tripleo-heat-templates
-    check:
-      templates:
-    gate:
-      templates:
-
-- project:
-    name: opensdn-io/tf-operator
-    check:
-      templates:
-        - operator
-        - test-unit-go
-        - cleanup
-    gate:
-      templates:
-        - operator
-        - cleanup
 
 - project:
     name: opensdn-io/tf-deployment-test
@@ -303,7 +261,6 @@
       templates:
         - build-centos
         - ansible-os
-        # - operator
         - cleanup
     post-merge:
       jobs:

@@ -1,5 +1,6 @@
 ---
 gerrit_user: "tf-gerrit"
+gc_start_time: "Fr 23:15"
 required_pkgs:
     - python3
     - python3-dev

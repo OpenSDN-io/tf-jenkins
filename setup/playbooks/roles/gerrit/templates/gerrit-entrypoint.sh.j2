@@ -18,6 +18,8 @@ then
   git config -f /var/gerrit/etc/gerrit.config --add user.email {{ gerrit_admin_email }}
   git config -f /var/gerrit/etc/gerrit.config --add sendemail.smtpServer {{ smtp_address }}
   git config -f /var/gerrit/etc/gerrit.config --add sendemail.from 'Gerrit Code Review <{{ gerrit_admin_email }}>'
+  git config -f /var/gerrit/etc/gerrit.config --add gc.startTime {{ gc_start_time }}
+  git config -f /var/gerrit/etc/gerrit.config --add gc.interval "1 day"
   git config -f /var/gerrit/etc/replication.config --add gerrit.autoReload true
   git config -f /var/gerrit/etc/replication.config --add remote.url 'git@github.com:${name}.git'
   git config -f /var/gerrit/etc/replication.config --add remote.push '+refs/heads/*:refs/heads/*'

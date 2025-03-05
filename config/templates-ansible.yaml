@@ -366,3 +366,41 @@
           - deploy-platform-ansible-os-r24.1
           - deploy-tf-ansible-os-r24.1
           - test-sanity-ansible-os-r24.1
+
+- template:
+    name: ansible-os-rocky9
+    streams:
+      ansible-os:
+        vars:
+          MONITORING_DEPLOY_TARGET: AIO
+          MONITORING_DEPLOYER: ansible
+          MONITORING_ORCHESTRATOR: os
+          USE_DATAPLANE_NETWORK: true
+          ENVIRONMENT_OS: rocky9
+    parents:
+      - build-rocky9
+    jobs:
+      deploy-platform-ansible-os-rocky9:
+        job-name: deploy-platform-ansible-os
+        stream: ansible-os-rocky9
+        depends-on:
+          - package-rocky9
+      deploy-tf-ansible-os-rocky9:
+        job-name: deploy-tf-ansible-os
+        stream: ansible-os-rocky9
+        depends-on:
+          - package-rocky9
+          - deploy-platform-ansible-os-rocky9
+      test-sanity-ansible-os-rocky9:
+        job-name: test-sanity
+        stream: ansible-os-rocky9
+        depends-on:
+          - deploy-tf-ansible-os-rocky9
+      collect-logs-and-cleanup-ansible-os-rocky9:
+        job-name: collect-logs-and-cleanup
+        stream: ansible-os-rocky9
+        type: post-hook
+        depends-on:
+          - deploy-platform-ansible-os-rocky9
+          - deploy-tf-ansible-os-rocky9
+          - test-sanity-ansible-os-rocky9

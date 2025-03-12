@@ -22,7 +22,7 @@ done
 
 for r in ${REPOS_ROCKY9[@]}; do
   echo "INFO: updating rocky9 repoid=$r"
-  reposync --repoid=${r} --download-metadata --downloadcomps --disable-modular-filtering -p ${MIRRORDIR}/rocky9/${DATE}
+  reposync --repoid=${r} --download-metadata --downloadcomps -p ${MIRRORDIR}/rocky9/${DATE}
   find ${MIRRORDIR}/rocky9/${DATE}/${r}/ -name "*.module+el9*" -delete
   createrepo -v ${MIRRORDIR}/rocky9/${DATE}/${r}/
 done

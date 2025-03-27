@@ -14,4 +14,4 @@ source "$WORKSPACE/global.env"
 instance_ip=$1
 instance_id=$(openstack server list | grep -E "${instance_ip}[^0-9]+" | awk '{print $2}')
 echo "INFO: reboot server with IP=$instance_ip and id=$instance_id"
-openstack server --hard --wait $instance_id
+openstack server reboot --hard --wait $instance_id

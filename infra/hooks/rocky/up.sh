@@ -58,6 +58,9 @@ fi
 # enable ip_tables (used in UT for analytics)
 $ssh_cmd $IMAGE_SSH_USER@$instance_ip "sudo modprobe ip_tables"
 
+# reinstall sshd to avoid message "OpenSSL version mismatch. Built against 30000070, you have 30200020"
+$ssh_cmd $IMAGE_SSH_USER@$instance_ip "sudo dnf install -y openssh-server openssl"
+
 echo "INFO: check dns"
 $ssh_cmd $IMAGE_SSH_USER@$instance_ip "time nslookup $(hostname)"
 echo "INFO: cat /etc/resolv.conf"

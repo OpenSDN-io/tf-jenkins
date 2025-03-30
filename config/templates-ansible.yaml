@@ -205,7 +205,7 @@
         job-name: test-sanity
         stream: ansible-os-ha-ziu
         vars:
-          TF_TEST_IMAGE: $CONTAINER_REGISTRY_ORIGINAL/contrail-test-test:$CONTRAIL_CONTAINER_TAG_ORIGINAL
+          TF_TEST_IMAGE: $CONTAINER_REGISTRY_ORIGINAL/opensdn-test-test:$CONTRAIL_CONTAINER_TAG_ORIGINAL
         depends-on:
           - test-deployment-ansible-os-ha-ziu
       collect-logs-and-cleanup-ansible-os-ha-ziu:

@@ -235,7 +235,7 @@
 #             CONTAINER_REGISTRY: 'tf-mirrors.$SLAVE_REGION.$CI_DOMAIN:5005'
 #             REPOS_TYPE: 'rhel7'
 #         prepare-sandbox-ubi:
-#           # it needs images job in deps cause contrail-general-base is based on clean ubi image
+#           # it needs images job in deps cause *-general-base is based on clean ubi image
 #           depends-on:
 #             - update-stage-repos-rhel7
 #             - update-stage-images-rhel7
@@ -321,7 +321,7 @@
 #             CONTAINER_REGISTRY: 'tf-mirrors.$SLAVE_REGION.$CI_DOMAIN:5005'
 #             REPOS_TYPE: 'rhel84'
 #         prepare-sandbox-ubi8:
-#           # it needs images job in deps cause contrail-general-base is based on clean ubi image
+#           # it needs images job in deps cause *-general-base is based on clean ubi image
 #           depends-on:
 #             - update-stage-repos-rhel84
 #             - update-stage-images-rhel84

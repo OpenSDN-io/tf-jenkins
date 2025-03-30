@@ -24,7 +24,7 @@
         depends-on:
           - prepare-sandbox-ut-sandbox
       # controller's UT requires a lot of stuff that is installed during configure stage
-      # UI UT requires build deps from contrail-web-core/contrail-web-controller
+      # UI UT requires build deps from *-web-core/*-web-controller
       configure-ut-sandbox:
         job-name: build-configure
         stream: prepare-ut-sandbox

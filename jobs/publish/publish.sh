@@ -26,8 +26,8 @@ log "Publish TF container"
 PUBLISH_REGISTRY=${PUBLISH_REGISTRY:-}
 PUBLISH_REGISTRY_USER=${PUBLISH_REGISTRY_USER:-}
 PUBLISH_REGISTRY_PASSWORD=${PUBLISH_REGISTRY_PASSWORD:-}
-PUBLISH_INCLUDE_REGEXP=${PUBLISH_INCLUDE_REGEXP:-"contrail-\|tf-"}
-PUBLISH_EXCLUDE_REGEXP=${PUBLISH_EXCLUDE_REGEXP:-"base\|contrail-third-party-packages\|${DEVENV_IMAGE_NAME}"}
+PUBLISH_INCLUDE_REGEXP=${PUBLISH_INCLUDE_REGEXP:-"contrail-\|tf-\|opensdn-"}
+PUBLISH_EXCLUDE_REGEXP=${PUBLISH_EXCLUDE_REGEXP:-"base\|third-party-packages\|${DEVENV_IMAGE_NAME}"}
 PUBLISH_CONTAINERS_LIST=${PUBLISH_CONTAINERS_LIST:-'auto'}
 
 log_msg="\n CONTAINER_REGISTRY=$CONTAINER_REGISTRY"
@@ -142,11 +142,6 @@ function do_publish_impl() {
 
 function do_publish() {
   local container=$1
-
-  if [[ "$container" == "contrail-vrouter-plugin-n3000-init-redhat" ]]; then
-    warn "$container skipped"
-    return 0
-  fi
 
   local full_name_list=$(get_container_full_name_list $container $CONTAINER_TAG)
   if [[ "$?" != "0" || -z "$full_name_list" ]] ; then

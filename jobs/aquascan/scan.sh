@@ -26,8 +26,8 @@ log "Scan TF containers"
 [ -z "${SCAN_REPORTS_STASH}" ] && { err "empty SCAN_REPORTS_STASH" && exit -1; }
 
 AQUASEC_REGISTRY=registry.aquasec.com
-SCAN_INCLUDE_REGEXP=${SCAN_INCLUDE_REGEXP:-"contrail-\|tf-"}
-SCAN_EXCLUDE_REGEXP=${SCAN_EXCLUDE_REGEXP:-"base\|contrail-third-party-packages\|${DEVENV_IMAGE_NAME}\|-src"}
+SCAN_INCLUDE_REGEXP=${SCAN_INCLUDE_REGEXP:-"contrail-\|tf-\|opensdn-"}
+SCAN_EXCLUDE_REGEXP=${SCAN_EXCLUDE_REGEXP:-"base\|third-party-packages\|${DEVENV_IMAGE_NAME}\|-src"}
 SCAN_CONTAINERS_LIST=${SCAN_CONTAINERS_LIST:-'auto'}
 
 log_msg="\n CONTAINER_REGISTRY=$CONTAINER_REGISTRY"

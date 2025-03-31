@@ -331,7 +331,7 @@
 - template:
     name: ansible-os-r24.1
     streams:
-      ansible-os:
+      ansible-os-r24.1:
         vars:
           CONTRAIL_CONTAINER_TAG: 'nightly-r24.1-centos'
           MONITORING_DEPLOY_TARGET: AIO

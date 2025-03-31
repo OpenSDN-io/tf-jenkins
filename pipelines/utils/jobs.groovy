@@ -201,7 +201,7 @@ def _evaluate_env(def config_utils) {
       def templates= needed_line.split()[2..-1].join(' ')
       (streams, jobs, post_jobs) = config_utils.get_templates_jobs(templates)
     }
-    println("Streams from config: ${streams}")
+    println("Streams from  config: ${streams}")
     println("Jobs from config: ${jobs}")
     println("Post Jobs from config: ${post_jobs}")
   } catch (err) {

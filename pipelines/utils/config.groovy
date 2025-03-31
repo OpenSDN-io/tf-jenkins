@@ -33,9 +33,11 @@ def get_templates_jobs(templates_comment) {
 def get_project_jobs(project_name, gerrit_pipeline, gerrit_branch) {
   // get data
   def data = _get_config_data()
+  println(data)
 
   // get templates
   def templates = _resolve_templates(data)
+  println(templates)
 
   // find project and pipeline inside it
   project = null
@@ -70,9 +72,14 @@ def get_project_jobs(project_name, gerrit_pipeline, gerrit_branch) {
     print("WARNING: project ${project_name} doesn't define pipeline ${gerrit_pipeline}")
     return [streams, jobs, post_jobs]
   }
+  println(project)
   // merge info from templates with project's jobs
   _update_map(streams, project[gerrit_pipeline].getOrDefault('streams', [:]))
+  println("streams")
+  println(streams)
   _update_map(jobs, project[gerrit_pipeline].getOrDefault('jobs', [:]))
+  println("jobs")
+  println(jobs)
   _update_map(post_jobs, project[gerrit_pipeline].getOrDefault('post-jobs', [:]))
   // then add templates to maintain higher precedence for job's definitions
   if (project[gerrit_pipeline].containsKey('templates')) {
@@ -81,13 +88,25 @@ def get_project_jobs(project_name, gerrit_pipeline, gerrit_branch) {
 
   // set empty dict for dicts without params
   _set_default_values(streams)
+  println("streams2")
+  println(streams)
   _set_default_values(jobs)
+  println("jobs2")
+  println(jobs)
   _set_default_values(post_jobs)
   // do some checks
   // check if all deps point to real jobs
   _check_dependencies(jobs)
   _check_dependencies(post_jobs)
   _fill_stream_jobs(streams, jobs)
+  println("streams3 + jobs2")
+  println(streams)
+  println(jobs)
+
+  def sstreams = [:]
+  def sjobs = [:]
+  def spost_jobs = [:]
+  return [sstreams, sjobs, spost_jobs]
 
   return [streams, jobs, post_jobs]
 }

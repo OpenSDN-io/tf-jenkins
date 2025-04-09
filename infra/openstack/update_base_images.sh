@@ -60,6 +60,17 @@ if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'UBUNTU22' ]]; then
   images="$images base-ubuntu22-$date_suffix"
 fi
 
+if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'UBUNTU24' ]]; then
+  echo "INFO: download ubuntu24 from cloud-images"
+  curl -LOs "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
+  curl -Ls "https://cloud-images.ubuntu.com/noble/current/SHA256SUMS" -o ubuntu24-SHA256SUMS
+  sha256sum -c ubuntu24-SHA256SUMS --ignore-missing --status
+  echo "INFO: upload ubuntu24 to openstack"
+  openstack image create --disk-format qcow2 --tag ubuntu24 --file noble-server-cloudimg-amd64.img base-ubuntu24-$date_suffix
+  rm -f noble-server-cloudimg-amd64.img
+  images="$images base-ubuntu24-$date_suffix"
+fi
+
 if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'ROCKY9' ]]; then
   # 9.1 has gcc 11.2.1 which is only available for centos7 to build the kernel module
   # echo "INFO: download rocky linux 9.1 from download.rockylinux.org"

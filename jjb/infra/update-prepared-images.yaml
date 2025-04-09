@@ -17,6 +17,7 @@
             - CENTOS8
             - UBUNTU20
             - UBUNTU22
+            - UBUNTU24
             - ROCKY9
             - ROCKY92
           description: "Image type for update or ALL(default)"

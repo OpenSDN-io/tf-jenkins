@@ -132,8 +132,11 @@ function update_vm_port() {
   fi
   echo "DEBUG: port_id=$port_id for $instance_id in $net_name"
   for (( i=1; i<=5 ; ++i )) ; do
-    if openstack port set --no-security-group --disable-port-security $port_id ; then
-      return
+    if openstack port set --no-security-group $port_id ; then
+      sleep 2
+      if openstack port set --disable-port-security $port_id ; then
+        return
+      fi
     fi
     sleep 10
   done

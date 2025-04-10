@@ -33,4 +33,10 @@ deb http://archive.ubuntu.com/ubuntu jammy-updates main restricted universe mult
 deb http://archive.ubuntu.com/ubuntu jammy-proposed main restricted universe multiverse
 deb http://archive.ubuntu.com/ubuntu jammy-backports main restricted universe multiverse
 
+deb http://archive.ubuntu.com/ubuntu noble main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu noble-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu noble-updates main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu noble-proposed main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu noble-backports main restricted universe multiverse
+
 clean http://archive.ubuntu.com/ubuntu

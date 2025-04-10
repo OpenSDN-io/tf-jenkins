@@ -14,7 +14,7 @@ sed -i "s|%SLAVE_REGION%|${SLAVE_REGION}|" /etc/apt/sources.list
 mkdir -p ${DATE}/lxd
 pushd ${DATE}/lxd
 
-for distro in "focal" "jammy"; do
+for distro in "focal" "jammy" "noble"; do
   rm -f $distro-server-cloudimg-amd64*
   wget -nv https://cloud-images.ubuntu.com/$distro/current/$distro-server-cloudimg-amd64-lxd.tar.xz
   wget -nv https://cloud-images.ubuntu.com/$distro/current/$distro-server-cloudimg-amd64-root.tar.xz

@@ -35,12 +35,14 @@ declare -A OS_IMAGES=( ['CENTOS7']='prepared-centos7' \
                        ['CENTOS8']='prepared-centos8' \
                        ['UBUNTU20']='prepared-ubuntu20' \
                        ['UBUNTU22']='prepared-ubuntu22' \
+                       ['UBUNTU24']='prepared-ubuntu24' \
                        ['ROCKY9']='prepared-rocky92')
 
 declare -A OS_IMAGE_USERS=( ['CENTOS7']='centos' \
                             ['CENTOS8']='centos' \
                             ['UBUNTU20']='ubuntu' \
                             ['UBUNTU22']='ubuntu' \
+                            ['UBUNTU24']='ubuntu' \
                             ['ROCKY9']='rocky' \
                             ['ROCKY92']='rocky')
 
@@ -48,6 +50,7 @@ declare -A OS_IMAGES_UP=( ['CENTOS7']='centos' \
                           ['CENTOS8']='centos' \
                           ['UBUNTU20']='ubuntu' \
                           ['UBUNTU22']='ubuntu' \
+                          ['UBUNTU24']='ubuntu' \
                           ['ROCKY9']='rocky' \
                           ['ROCKY92']='rocky' )
 
@@ -55,6 +58,7 @@ declare -A OS_IMAGES_DOWN=( ['CENTOS7']='' \
                             ['CENTOS8']='' \
                             ['UBUNTU20']='' \
                             ['UBUNTU22']='' \
+                            ['UBUNTU24']='' \
                             ['ROCKY9']='' \
                             ['ROCKY92']='' )
 

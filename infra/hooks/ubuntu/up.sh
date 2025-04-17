@@ -68,7 +68,9 @@ sudo cp -f /usr/share/unattended-upgrades/20auto-upgrades-disabled /etc/apt/apt.
 echo "INFO: disable ufw"
 sudo ufw disable
 
-if [[ "${USE_DATAPLANE_NETWORK,,}" == "true" ]]; then
+echo "INFO: version_id: $VERSION_ID"
+version_major=\$(echo $VERSION_ID | cut -d '.' -f 1)
+if [[ "${USE_DATAPLANE_NETWORK,,}" == "true" ]] && (( \$version_major < 24 )); then
   # hack to reconfig netplan
   # https://askubuntu.com/questions/1104285/how-do-i-reload-network-configuration-with-cloud-init/1503265#1503265
   wget http://launchpadlibrarian.net/713462297/cloud-init_23.4.3-0ubuntu0~22.04.1_all.deb
@@ -91,7 +93,7 @@ cat /etc/resolv.conf
 echo "INFO: cat /run/systemd/resolve/resolv.conf"
 cat /run/systemd/resolve/resolv.conf
 echo "INFO: check dns"
-time nslookup $(hostname)
+time nslookup \$(hostname)
 EOF
 
 if [ -f $my_dir/../../mirrors/ubuntu-environment ]; then

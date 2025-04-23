@@ -173,8 +173,11 @@
     streams:
       ansible-os-ha-ziu:
         vars:
+          CONTRAIL_DEPLOYER_BRANCH: R24.1
           CONTAINER_REGISTRY: nexus.$SLAVE_REGION.$CI_DOMAIN:5002
           CONTRAIL_CONTAINER_TAG: nightly-r24.1-centos
+          DEPLOYER_CONTAINER_REGISTRY: nexus.$SLAVE_REGION.$CI_DOMAIN:5002
+          CONTRAIL_DEPLOYER_CONTAINER_TAG: nightly-r24.1-centos
           MONITORING_DEPLOY_TARGET: HA,ZIU
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: os
@@ -333,7 +336,6 @@
     streams:
       ansible-os-r24.1:
         vars:
-          CONTRAIL_CONTAINER_TAG: 'nightly-r24.1-centos'
           MONITORING_DEPLOY_TARGET: AIO
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: os

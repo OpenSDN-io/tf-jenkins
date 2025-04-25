@@ -82,6 +82,9 @@ if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'ROCKY9' ]]; then
   curl -LOs "https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
   curl -Ls "https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2.CHECKSUM" -o rocky9-SHA256SUMS
 
+  # 9.5
+  # https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2
+
   sha256sum -c rocky9-SHA256SUMS --ignore-missing --status
 
   echo "INFO: upload rocky9 to openstack"

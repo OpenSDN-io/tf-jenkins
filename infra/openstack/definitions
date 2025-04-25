@@ -36,7 +36,7 @@ declare -A OS_IMAGES=( ['CENTOS7']='prepared-centos7' \
                        ['UBUNTU20']='prepared-ubuntu20' \
                        ['UBUNTU22']='prepared-ubuntu22' \
                        ['UBUNTU24']='prepared-ubuntu24' \
-                       ['ROCKY9']='prepared-rocky92')
+                       ['ROCKY9']='prepared-rocky95')
 
 declare -A OS_IMAGE_USERS=( ['CENTOS7']='centos' \
                             ['CENTOS8']='centos' \
@@ -44,7 +44,8 @@ declare -A OS_IMAGE_USERS=( ['CENTOS7']='centos' \
                             ['UBUNTU22']='ubuntu' \
                             ['UBUNTU24']='ubuntu' \
                             ['ROCKY9']='rocky' \
-                            ['ROCKY92']='rocky')
+                            ['ROCKY92']='rocky' \
+                            ['ROCKY95']='rocky')
 
 declare -A OS_IMAGES_UP=( ['CENTOS7']='centos' \
                           ['CENTOS8']='centos' \
@@ -52,7 +53,8 @@ declare -A OS_IMAGES_UP=( ['CENTOS7']='centos' \
                           ['UBUNTU22']='ubuntu' \
                           ['UBUNTU24']='ubuntu' \
                           ['ROCKY9']='rocky' \
-                          ['ROCKY92']='rocky' )
+                          ['ROCKY92']='rocky' \
+                          ['ROCKY95']='rocky' )
 
 declare -A OS_IMAGES_DOWN=( ['CENTOS7']='' \
                             ['CENTOS8']='' \
@@ -60,7 +62,8 @@ declare -A OS_IMAGES_DOWN=( ['CENTOS7']='' \
                             ['UBUNTU22']='' \
                             ['UBUNTU24']='' \
                             ['ROCKY9']='' \
-                            ['ROCKY92']='' )
+                            ['ROCKY92']='' \
+                            ['ROCKY95']='' )
 
 
 SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no"

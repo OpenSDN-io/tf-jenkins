@@ -62,6 +62,6 @@ $ssh_cmd $IMAGE_SSH_USER@$instance_ip "sudo modprobe ip_tables"
 $ssh_cmd $IMAGE_SSH_USER@$instance_ip "sudo dnf install -y openssh-server openssl"
 
 echo "INFO: check dns"
-$ssh_cmd $IMAGE_SSH_USER@$instance_ip "time nslookup $(hostname)"
+$ssh_cmd $IMAGE_SSH_USER@$instance_ip "time nslookup $(hostname)" || /bin/true
 echo "INFO: cat /etc/resolv.conf"
 $ssh_cmd $IMAGE_SSH_USER@$instance_ip "cat /etc/resolv.conf"

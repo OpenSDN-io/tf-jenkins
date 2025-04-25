@@ -20,6 +20,7 @@
           MONITORING_ORCHESTRATOR: k8s
           ENVIRONMENT_OS: rocky9
           CONFIG_API_WORKER_COUNT: 3
+          USE_DATAPLANE_NETWORK: true
     parents:
       - build-centos
     jobs:

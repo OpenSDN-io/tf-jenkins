@@ -20,6 +20,7 @@
             - UBUNTU24
             - ROCKY9
             - ROCKY92
+            - ROCKY95
           description: "Image type for update or ALL(default)"
     scm:
       - tf-jenkins

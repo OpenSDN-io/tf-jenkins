@@ -405,3 +405,49 @@
           - deploy-platform-ansible-os-rocky9
           - deploy-tf-ansible-os-rocky9
           - test-sanity-ansible-os-rocky9
+
+- template:
+    name: ansible-k8s-rocky9
+    streams:
+      ansible-k8s-rocky9:
+        voting: false
+        vars:
+          MONITORING_DEPLOY_TARGET: AIO
+          MONITORING_DEPLOYER: ansible
+          MONITORING_ORCHESTRATOR: k8s
+          ENVIRONMENT_OS: rocky9
+          CONFIG_API_WORKER_COUNT: 3
+    parents:
+      - build-rocky9
+    jobs:
+      deploy-platform-ansible-k8s-rocky9:
+        job-name: deploy-platform-ansible-k8s
+        stream: ansible-k8s-rocky9
+        depends-on:
+          # temporary solution
+          - compile-rocky9
+      deploy-tf-ansible-k8s-rocky9:
+        job-name: deploy-tf-ansible-k8s
+        stream: ansible-k8s-rocky9
+        depends-on:
+          - package-rocky9
+          - deploy-platform-ansible-k8s-rocky9
+      test-sanity-ansible-k8s-rocky9:
+        job-name: test-sanity
+        stream: ansible-k8s-rocky9
+        depends-on:
+          - deploy-tf-ansible-k8s-rocky9
+      test-deployment-ansible-k8s-rocky9:
+        job-name: test-deployment
+        stream: ansible-k8s-rocky9
+        depends-on:
+          - test-sanity-ansible-k8s-rocky9
+      collect-logs-and-cleanup-ansible-k8s-rocky9:
+        job-name: collect-logs-and-cleanup
+        stream: ansible-k8s-rocky9
+        type: post-hook
+        depends-on:
+          - deploy-platform-ansible-k8s-rocky9
+          - deploy-tf-ansible-k8s-rocky9
+          - test-sanity-ansible-k8s-rocky9
+          - test-deployment-ansible-k8s-rocky9

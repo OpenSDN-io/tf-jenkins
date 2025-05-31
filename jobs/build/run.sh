@@ -69,7 +69,12 @@ elif [[ ${LINUX_DISTR} == 'rockylinux' ]]; then
   mirror_list+=" rocky9/rocky.repo rocky9/rocky-extras.repo rocky9/rocky-devel.repo rocky9/rocky-addons.repo"
 fi
 
-export UBUNTU_CODENAME='jammy'
+if [[ "$GERRIT_BRANCH" != 'master' ]]; then
+  # add more branches to condition after release
+  export UBUNTU_CODENAME='jammy'
+else
+  export UBUNTU_CODENAME='noble'
+fi
 for repofile in $mirror_list_for_build $mirror_list mirror-base-centos7.repo mirror-docker.repo mirror-pip.conf mirror-docker-daemon.json ubuntu-sources.list ; do
   file="${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/${repofile}"
   cat $file | envsubst > $file.tmp

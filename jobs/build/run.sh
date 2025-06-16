@@ -49,7 +49,9 @@ if [[ ${LINUX_DISTR} == 'rhel7' ]]; then
 elif [[ ${LINUX_DISTR} == 'centos' ]]; then
   mirror_list_for_build="mirror-epel7.repo mirror-docker.repo mirror-base-centos7.repo"
   # epel must not be there - it cause incorrect installs and fails at runtime
+  # + rocky9 repo for build-init image
   mirror_list="mirror-base-centos7.repo mirror-openstack.repo mirror-docker.repo"
+  mirror_list+=" rocky9/rocky.repo rocky9/rocky-extras.repo rocky9/rocky-devel.repo rocky9/rocky-addons.repo mirror-base-rocky9.repo"
   # add empty CentOS repos to disable them
   mirror_list_for_build+=" centos7/CentOS-Base.repo centos7/CentOS-CR.repo centos7/CentOS-Debuginfo.repo centos7/CentOS-Media.repo"
   mirror_list_for_build+=" centos7/CentOS-Sources.repo centos7/CentOS-Vault.repo centos7/CentOS-fasttrack.repo centos7/CentOS-x86_64-kernel.repo"
@@ -136,6 +138,11 @@ case "${ENVIRONMENT_OS,,}" in
     # copy docker and base repos to local machine
     sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-docker.repo /etc/yum.repos.d/
     sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-base-centos7.repo /etc/yum.repos.d/
+    ;;
+  rocky9* )
+    # copy docker and base repos to local machine
+    sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-docker.repo /etc/yum.repos.d/
+    sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-base-rocky9.repo /etc/yum.repos.d/
     ;;
 esac
 for mirror in $mirror_list_for_build ; do

@@ -6,6 +6,7 @@
       templates:
         - docs-doxygen
         - build-r24.1-centos
+        - build-rocky9
         - test-unit
         - test-unit-ui
         - k8s-manifests
@@ -35,6 +36,9 @@
         build-r24.1-centos:
          vars:
            DEBUGINFO: "TRUE"
+        build-rocky9:
+          vars:
+            DEBUGINFO: "TRUE"
         # additional schedule for some streams
         ansible-k8s:
           frequency: 7
@@ -77,6 +81,13 @@
         #  vars:
         #    TAG_SUFFIX: "-r24.1-centos"
         #    GERRIT_BRANCH: "R24.1"
+
+        publish-rocky9-nightly:
+         job-name: publish
+         depends-on:
+           - package-rocky9
+         vars:
+           TAG_SUFFIX: "-rocky9"
 
         #aquascan-ubi-nightly:
         #  job-name: aquascan

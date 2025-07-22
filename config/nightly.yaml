@@ -13,6 +13,7 @@
         # - ansible-k8s
         # - ansible-k8s-ha
         - ansible-os
+        - ansible-os-ha
         - ansible-os-tempest
         - ansible-os-vanilla
         - ansible-os-r24.1

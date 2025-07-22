@@ -161,6 +161,7 @@
         stream: ansible-os-ha
         depends-on:
           - deploy-tf-ansible-os-ha
+        timeout: 480
       collect-logs-and-cleanup-ansible-os-ha:
         job-name: collect-logs-and-cleanup
         stream: ansible-os-ha

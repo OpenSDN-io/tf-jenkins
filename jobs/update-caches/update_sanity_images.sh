@@ -18,6 +18,9 @@ pushd sanity_images
 wget -nv https://tf-ci.hb.ru-msk.vkcs.cloud/images.tgz
 tar -xvf images.tgz
 rm images.tgz
+# images/converts already created by untar cmd
+wget -nv https://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img -O images/converts/cirros-0.4.0-x86_64-disk.img
+
 for file in $(find . -type f) ; do
   echo "INFO: upload $file"
   curl -fsS --user "${TPC_REPO_USER}:${TPC_REPO_PASS}" --ftp-create-dirs -T $file $REPO_SOURCE/$file

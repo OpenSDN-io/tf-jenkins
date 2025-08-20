@@ -140,21 +140,21 @@
           USE_DATAPLANE_NETWORK: true
           TF_TEST_TARGET: "sanity"
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-ansible-os-ha:
         job-name: deploy-platform-ansible-os
         stream: ansible-os-ha
         depends-on:
           # temporary solution
-          - package-centos
+          - package-rocky9
         vars:
           NODES: CONTROLLER_NODES:medium:3,AGENT_NODES:small:2
       deploy-tf-ansible-os-ha:
         job-name: deploy-tf-ansible-os
         stream: ansible-os-ha
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-ansible-os-ha
       test-sanity-ansible-os-ha:
         job-name: test-sanity

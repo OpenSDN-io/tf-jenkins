@@ -210,6 +210,7 @@
     name: build-r24.1-centos
     streams:
       build-r24.1-centos:
+        voting: false
         vars:
           LINUX_DISTR: centos
           GERRIT_BRANCH: "R24.1"

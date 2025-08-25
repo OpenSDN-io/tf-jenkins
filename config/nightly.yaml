@@ -36,9 +36,6 @@
         build-r24.1-centos:
          vars:
            DEBUGINFO: "TRUE"
-        build-rocky9:
-          vars:
-            DEBUGINFO: "TRUE"
         # additional schedule for some streams
         ansible-k8s:
           frequency: 7

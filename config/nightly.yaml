@@ -53,10 +53,10 @@
         k8s-manifests-ha:
           lock: group-one-ha
       jobs:
-        publish-centos-nightly:
-          job-name: publish
-          depends-on:
-            - package-centos
+        # publish-centos-nightly:
+        #   job-name: publish
+        #   depends-on:
+        #     - package-centos
 
         # to use just built nightly images
         deploy-platform-ansible-os-ha-ziu:

@@ -60,7 +60,6 @@
         vars:
           LINUX_DISTR: rockylinux
           LINUX_DISTR_VER: 9
-          TAG_SUFFIX: "-rocky9"
     jobs:
       prepare-sandbox-rocky9:
         # it creates worker

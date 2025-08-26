@@ -14,11 +14,11 @@
       - opensdn-io/tf-dpdk
     check:
       templates:
-        - build-centos
+        - build-rocky9
         - cleanup
     gate:
       templates:
-        - build-centos
+        - build-rocky9
         - cleanup
 
 # simple checks
@@ -76,7 +76,7 @@
         - cleanup
     gate:
       templates:
-        - build-centos
+        - build-rocky9
         - juju-k8s
         - ansible-os
         - cleanup
@@ -90,7 +90,7 @@
         - cleanup
     gate:
       templates:
-        - build-centos
+        - build-rocky9
         - juju-k8s
         - ansible-os
         - cleanup
@@ -131,7 +131,7 @@
         - cleanup
     gate:
       templates:
-        - build-centos
+        - build-rocky9
         - cleanup
     post-merge:
       jobs:
@@ -147,7 +147,7 @@
         - cleanup
     gate:
       templates:
-        - build-centos
+        - build-rocky9
         - cleanup
 
 - project:
@@ -229,7 +229,7 @@
         - cleanup
     gate:
       templates:
-        - build-centos
+        - build-rocky9
         - juju-k8s
         - ansible-os
         - cleanup
@@ -240,12 +240,12 @@
     name: opensdn-io/tf-dev-env
     check:
       templates:
-        - build-centos
+        - build-rocky9
         - ansible-os
         - cleanup
     gate:
       templates:
-        - build-centos
+        - build-rocky9
         - build-r24.1-centos
         - juju-k8s
         - ansible-os
@@ -259,7 +259,7 @@
     name: opensdn-io/tf-jenkins
     check:
       templates:
-        - build-centos
+        - build-rocky9
         - ansible-os
         - cleanup
     post-merge:

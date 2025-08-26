@@ -82,7 +82,7 @@ class Checker():
                 continue
             if merge_timestamp - last_gating_comment['timestamp'] > TIMDELTA_GATE_MERGE:
                 continue
-            if '- build-centos ' not in last_gating_comment['message']:
+            if '- build-rocky9 ' not in last_gating_comment['message']:
                 continue
 
             review = str(data['number'])

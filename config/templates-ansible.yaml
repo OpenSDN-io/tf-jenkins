@@ -22,17 +22,17 @@
           CONFIG_API_WORKER_COUNT: 3
           USE_DATAPLANE_NETWORK: true
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-ansible-k8s:
         stream: ansible-k8s
         depends-on:
           # temporary solution
-          - compile-centos
+          - compile-rocky9
       deploy-tf-ansible-k8s:
         stream: ansible-k8s
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-ansible-k8s
       test-sanity-ansible-k8s:
         job-name: test-sanity
@@ -63,21 +63,21 @@
           MONITORING_DEPLOYER: ansible
           MONITORING_ORCHESTRATOR: k8s
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-ansible-k8s-ha:
         job-name: deploy-platform-ansible-k8s
         stream: ansible-k8s-ha
         depends-on:
           # temporary solution
-          - compile-centos
+          - compile-rocky9
         vars:
           NODES: CONTROLLER_NODES:medium:3,AGENT_NODES:small:2
       deploy-tf-ansible-k8s-ha:
         job-name: deploy-tf-ansible-k8s
         stream: ansible-k8s-ha
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-ansible-k8s-ha
       test-sanity-ansible-k8s-ha:
         job-name: test-sanity
@@ -103,17 +103,17 @@
           MONITORING_ORCHESTRATOR: os
           USE_DATAPLANE_NETWORK: true
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-ansible-os:
         stream: ansible-os
         depends-on:
           # temporary solution
-          - package-centos
+          - package-rocky9
       deploy-tf-ansible-os:
         stream: ansible-os
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-ansible-os
       test-sanity-ansible-os:
         job-name: test-sanity
@@ -186,7 +186,7 @@
           MONITORING_ORCHESTRATOR: os
           USE_DATAPLANE_NETWORK: true
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-ansible-os-ha-ziu:
         job-name: deploy-platform-ansible-os
@@ -205,7 +205,7 @@
           DEPLOYMENT_TEST_TAGS: ziu
           TF_DEPLOYMENT_TEST_IMAGE: $CONTAINER_REGISTRY_ORIGINAL/tf-deployment-test:$CONTRAIL_CONTAINER_TAG_ORIGINAL
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-tf-ansible-os-ha-ziu
       test-sanity-ansible-os-ha-ziu:
         job-name: test-sanity
@@ -231,19 +231,19 @@
         vars:
           USE_DATAPLANE_NETWORK: true
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-ansible-os-tempest:
         job-name: deploy-platform-ansible-os
         stream: ansible-os-tempest
         depends-on:
           # temporary solution
-          - package-centos
+          - package-rocky9
       deploy-tf-ansible-os-tempest:
         job-name: deploy-tf-ansible-os
         stream: ansible-os-tempest
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-ansible-os-tempest
       test-tempest-ansible-os-tempest:
         job-name: test-tempest
@@ -271,18 +271,18 @@
           TF_TEST_TARGET: "full_sanity"
           ENVIRONMENT_OS: ubuntu20
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-ansible-full-sanity:
         job-name: deploy-platform-ansible-os
         stream: ansible-full-sanity
         depends-on:
-          - compile-centos
+          - compile-rocky9
       deploy-tf-ansible-full-sanity:
         job-name: deploy-tf-ansible-os
         stream: ansible-full-sanity
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-ansible-full-sanity
       test-sanity-ansible-full-sanity:
         job-name: test-sanity
@@ -306,19 +306,19 @@
           USE_DATAPLANE_NETWORK: true
           KOLLA_MODE: vanilla
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-ansible-os-vanilla:
         job-name: deploy-platform-ansible-os
         stream: ansible-os-vanilla
         depends-on:
           # temporary solution
-          - package-centos
+          - package-rocky9
       deploy-tf-ansible-os-vanilla:
         job-name: deploy-tf-ansible-os
         stream: ansible-os-vanilla
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-ansible-os-vanilla
       test-sanity-ansible-os-vanilla:
         job-name: test-sanity
@@ -371,86 +371,3 @@
           - deploy-platform-ansible-os-r24.1
           - deploy-tf-ansible-os-r24.1
           - test-sanity-ansible-os-r24.1
-
-- template:
-    name: ansible-os-rocky9
-    streams:
-      ansible-os:
-        vars:
-          MONITORING_DEPLOY_TARGET: AIO
-          MONITORING_DEPLOYER: ansible
-          MONITORING_ORCHESTRATOR: os
-          USE_DATAPLANE_NETWORK: true
-    parents:
-      - build-rocky9
-    jobs:
-      deploy-platform-ansible-os-rocky9:
-        job-name: deploy-platform-ansible-os
-        stream: ansible-os-rocky9
-        depends-on:
-          - package-rocky9
-      deploy-tf-ansible-os-rocky9:
-        job-name: deploy-tf-ansible-os
-        stream: ansible-os-rocky9
-        depends-on:
-          - package-rocky9
-          - deploy-platform-ansible-os-rocky9
-      test-sanity-ansible-os-rocky9:
-        job-name: test-sanity
-        stream: ansible-os-rocky9
-        depends-on:
-          - deploy-tf-ansible-os-rocky9
-      collect-logs-and-cleanup-ansible-os-rocky9:
-        job-name: collect-logs-and-cleanup
-        stream: ansible-os-rocky9
-        type: post-hook
-        depends-on:
-          - deploy-platform-ansible-os-rocky9
-          - deploy-tf-ansible-os-rocky9
-          - test-sanity-ansible-os-rocky9
-
-- template:
-    name: ansible-k8s-rocky9
-    streams:
-      ansible-k8s-rocky9:
-        voting: false
-        vars:
-          MONITORING_DEPLOY_TARGET: AIO
-          MONITORING_DEPLOYER: ansible
-          MONITORING_ORCHESTRATOR: k8s
-          ENVIRONMENT_OS: rocky9
-          CONFIG_API_WORKER_COUNT: 3
-    parents:
-      - build-rocky9
-    jobs:
-      deploy-platform-ansible-k8s-rocky9:
-        job-name: deploy-platform-ansible-k8s
-        stream: ansible-k8s-rocky9
-        depends-on:
-          # temporary solution
-          - compile-rocky9
-      deploy-tf-ansible-k8s-rocky9:
-        job-name: deploy-tf-ansible-k8s
-        stream: ansible-k8s-rocky9
-        depends-on:
-          - package-rocky9
-          - deploy-platform-ansible-k8s-rocky9
-      test-sanity-ansible-k8s-rocky9:
-        job-name: test-sanity
-        stream: ansible-k8s-rocky9
-        depends-on:
-          - deploy-tf-ansible-k8s-rocky9
-      test-deployment-ansible-k8s-rocky9:
-        job-name: test-deployment
-        stream: ansible-k8s-rocky9
-        depends-on:
-          - test-sanity-ansible-k8s-rocky9
-      collect-logs-and-cleanup-ansible-k8s-rocky9:
-        job-name: collect-logs-and-cleanup
-        stream: ansible-k8s-rocky9
-        type: post-hook
-        depends-on:
-          - deploy-platform-ansible-k8s-rocky9
-          - deploy-tf-ansible-k8s-rocky9
-          - test-sanity-ansible-k8s-rocky9
-          - test-deployment-ansible-k8s-rocky9

@@ -30,9 +30,6 @@
         - ansible-os-not-implemented-targets
         - cleanup
       streams:
-        build-centos:
-          vars:
-            DEBUGINFO: "TRUE"
         build-r24.1-centos:
          vars:
            DEBUGINFO: "TRUE"

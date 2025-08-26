@@ -9,14 +9,14 @@
           MONITORING_DEPLOYER: k8s_manifests
           MONITORING_ORCHESTRATOR: k8s
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-k8s-manifests:
         stream: k8s-manifests
       deploy-tf-k8s-manifests:
         stream: k8s-manifests
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-k8s-manifests
       test-sanity-k8s-manifests:
         job-name: test-sanity
@@ -41,7 +41,7 @@
           MONITORING_DEPLOYER: k8s_manifests
           MONITORING_ORCHESTRATOR: k8s
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-k8s-manifests-ha:
         job-name: deploy-platform-k8s-manifests
@@ -52,7 +52,7 @@
         job-name: deploy-tf-k8s-manifests
         stream: k8s-manifests-ha
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-k8s-manifests-ha
       test-sanity-k8s-manifests-ha:
         job-name: test-sanity

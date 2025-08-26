@@ -36,7 +36,7 @@
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: k8s
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-juju-k8s:
         stream: juju-k8s
@@ -45,7 +45,7 @@
       deploy-tf-juju-k8s:
         stream: juju-k8s
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-juju-k8s
       test-sanity-juju-k8s:
         job-name: test-sanity
@@ -76,7 +76,7 @@
           MONITORING_DEPLOYER: juju
           MONITORING_ORCHESTRATOR: k8s
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-juju-k8s-ha:
         job-name: deploy-platform-juju-k8s
@@ -87,7 +87,7 @@
         job-name: deploy-tf-juju-k8s
         stream: juju-k8s-ha
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-juju-k8s-ha
       test-sanity-juju-k8s-ha:
         job-name: test-sanity
@@ -112,7 +112,7 @@
           MONITORING_ORCHESTRATOR: k8s
           CONTAINER_RUNTIME: containerd
     parents:
-      - build-centos
+      - build-rocky9
     jobs:
       deploy-platform-juju-k8s-containerd:
         job-name: deploy-platform-juju-k8s
@@ -123,7 +123,7 @@
         job-name: deploy-tf-juju-k8s
         stream: juju-k8s-containerd
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-juju-k8s-containerd
       test-sanity-juju-k8s-containerd:
         job-name: test-sanity
@@ -142,7 +142,7 @@
 - template:
     name: juju-os
     parents:
-      - build-centos
+      - build-rocky9
     streams:
       juju-os:
         vars:
@@ -157,7 +157,7 @@
       deploy-tf-juju-os:
         stream: juju-os
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-juju-os
       test-sanity-juju-os:
         job-name: test-sanity
@@ -176,7 +176,7 @@
 - template:
     name: juju-os-ha
     parents:
-      - build-centos
+      - build-rocky9
     streams:
       juju-os-ha:
         vars:
@@ -193,7 +193,7 @@
         job-name: deploy-tf-juju-os
         stream: juju-os-ha
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-juju-os-ha
       test-sanity-juju-os-ha:
         job-name: test-sanity
@@ -212,7 +212,7 @@
 - template:
     name: juju-os-containerd
     parents:
-      - build-centos
+      - build-rocky9
     streams:
       juju-os-containerd:
         vars:
@@ -229,7 +229,7 @@
         job-name: deploy-tf-juju-os
         stream: juju-os-containerd
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-juju-os-containerd
       test-sanity-juju-os-containerd:
         job-name: test-sanity
@@ -248,7 +248,7 @@
 - template:
     name: juju-os-ha-containerd
     parents:
-      - build-centos
+      - build-rocky9
     streams:
       juju-os-ha-containerd:
         vars:
@@ -266,7 +266,7 @@
         job-name: deploy-tf-juju-os
         stream: juju-os-ha-containerd
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-juju-os-ha-containerd
       test-sanity-juju-os-ha-containerd:
         job-name: test-sanity
@@ -285,7 +285,7 @@
 - template:
     name: juju-hybrid-ha-ziu
     parents:
-      - build-centos
+      - build-rocky9
     streams:
       juju-hybrid-ha-ziu:
         vars:
@@ -316,7 +316,7 @@
           DEPLOYMENT_TEST_TAGS: ziu
           TF_DEPLOYMENT_TEST_IMAGE: $CONTAINER_REGISTRY_ORIGINAL/tf-deployment-test:$CONTRAIL_CONTAINER_TAG_ORIGINAL
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-tf-juju-hybrid-ha-ziu
       test-sanity-juju-hybrid-ha-ziu:
         job-name: test-sanity
@@ -338,7 +338,7 @@
 - template:
     name: juju-os-ha-ziu
     parents:
-      - build-centos
+      - build-rocky9
     streams:
       juju-os-ha-ziu:
         vars:
@@ -369,7 +369,7 @@
           DEPLOYMENT_TEST_TAGS: ziu
           TF_DEPLOYMENT_TEST_IMAGE: $CONTAINER_REGISTRY_ORIGINAL/tf-deployment-test:$CONTRAIL_CONTAINER_TAG_ORIGINAL
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-tf-juju-os-ha-ziu
       test-sanity-juju-os-ha-ziu:
         job-name: test-sanity
@@ -391,7 +391,7 @@
 - template:
     name: juju-os-maas
     parents:
-      - build-centos
+      - build-rocky9
     streams:
       juju-os-maas:
         lock: openlab2
@@ -435,7 +435,7 @@
 - template:
     name: juju-hybrid-ha
     parents:
-      - build-centos
+      - build-rocky9
     streams:
       juju-hybrid-ha:
         vars:
@@ -453,7 +453,7 @@
         job-name: deploy-tf-juju-hybrid
         stream: juju-hybrid-ha
         depends-on:
-          - package-centos
+          - package-rocky9
           - deploy-platform-juju-hybrid-ha
       test-sanity-juju-hybrid-ha:
         job-name: test-sanity

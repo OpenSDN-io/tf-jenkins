@@ -80,8 +80,6 @@
          job-name: publish
          depends-on:
            - package-rocky9
-         vars:
-           TAG_SUFFIX: "-rocky9"
 
         #aquascan-ubi-nightly:
         #  job-name: aquascan

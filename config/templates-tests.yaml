@@ -8,7 +8,8 @@
     streams:
       prepare-ut-sandbox:
         vars:
-          LINUX_DISTR: centos
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
     jobs:
       prepare-sandbox-ut-sandbox:
         # it creates worker
@@ -47,7 +48,8 @@
     streams:
       test-unit:
         vars:
-          LINUX_DISTR: centos
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
     jobs:
       test-unit-agent:
         stream: test-unit
@@ -104,7 +106,8 @@
               inherit-keys:
                 - DEVENV_TAG
         vars:
-          LINUX_DISTR: centos
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
 
 # this is sandbox for tox and go test of new style (without scons)
 # it prepares sandbox, runs fetch only and leave it for next jobs which will be run parallel
@@ -116,7 +119,8 @@
         job-name: build-prepare-sandbox
         type: no-report
         vars:
-          LINUX_DISTR: centos
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
           PUBLISH_TYPE: stable
           VM_TYPE: small
       fetch-sources-test-sandbox:
@@ -143,7 +147,8 @@
           - fetch-sources-test-sandbox
         vars:
           TARGET_SET: pep8
-          LINUX_DISTR: centos
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
       cleanup-worker-test-sandbox:
         depends-on:
           - test-unit-tox-pep8
@@ -160,7 +165,8 @@
           - fetch-sources-test-sandbox
         vars:
           TARGET_SET: unit
-          LINUX_DISTR: centos
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
       cleanup-worker-test-sandbox:
         depends-on:
           - test-unit-tox-unit
@@ -177,7 +183,8 @@
           - fetch-sources-test-sandbox
         vars:
           TARGET_SET: py36
-          LINUX_DISTR: centos
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
       cleanup-worker-test-sandbox:
         depends-on:
           - test-unit-tox-py36
@@ -191,7 +198,8 @@
         depends-on:
           - fetch-sources-test-sandbox
         vars:
-          LINUX_DISTR: centos
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
       cleanup-worker-test-sandbox:
         depends-on:
           - test-unit-go

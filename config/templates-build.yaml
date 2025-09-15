@@ -6,6 +6,7 @@
       build-centos:
         vars:
           LINUX_DISTR: centos
+          LINUX_DISTR_VER: 7
     jobs:
       prepare-sandbox-centos:
         # it creates worker
@@ -213,6 +214,7 @@
         voting: false
         vars:
           LINUX_DISTR: centos
+          LINUX_DISTR_VER: 7
           GERRIT_BRANCH: "R24.1"
           TAG_SUFFIX: "-r24.1-centos"
     jobs:

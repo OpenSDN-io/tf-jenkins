@@ -93,6 +93,12 @@ cat /etc/resolv.conf
 echo "INFO: cat /run/systemd/resolve/resolv.conf"
 cat /run/systemd/resolve/resolv.conf
 echo "INFO: check dns"
+for i in 1 2 3 4 5 ; do
+  if time nslookup \$(hostname) ; then
+    break
+  fi
+  sleep 3
+done
 time nslookup \$(hostname)
 EOF
 

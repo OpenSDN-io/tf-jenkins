@@ -122,7 +122,6 @@ cd src/opensdn-io/tf-dev-env
 # TODO: use in future generic mirror approach
 # Copy yum repos for rhel from host to containers to use local mirrors
 
-export BASE_EXTRA_RPMS=''
 rm -rf ./config/etc
 mkdir -p ./config/etc/yum.repos.d
 case "${ENVIRONMENT_OS,,}" in

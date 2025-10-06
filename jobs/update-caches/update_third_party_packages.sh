@@ -187,6 +187,16 @@ for pkg in $epel_packages ; do
   wget -nv --no-check-certificate $pkg
 done
 
+# third-party packages from epel which are not available at build stage
+third_party_packages="
+  https://rpms.remirepo.net/enterprise/9/remi/x86_64/cassandra-cpp-driver-2.17.0-1.el9.remi.x86_64.rpm
+  https://rpms.remirepo.net/enterprise/9/remi/x86_64/cassandra-cpp-driver-devel-2.17.0-1.el9.remi.x86_64.rpm
+"
+
+for pkg in $third_party_packages ; do
+  wget -nv --no-check-certificate $pkg
+done
+
 wget -nv -O - https://tf-ci.hb.ru-msk.vkcloud-storage.ru/tpc.tar | tar -xv
 
 for file in $(find . -type f) ; do

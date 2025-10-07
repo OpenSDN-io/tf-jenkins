@@ -128,59 +128,6 @@ epel_packages="
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/o/openblas-openmp-0.3.3-2.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/o/openblas-serial-0.3.3-2.el7.x86_64.rpm
   https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/o/openblas-threads-0.3.3-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-atomic-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-build-1.69.0-2.el7.noarch.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-chrono-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-container-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-context-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-contract-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-coroutine-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-date-time-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-doc-1.69.0-2.el7.noarch.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-doctools-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-examples-1.69.0-2.el7.noarch.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-fiber-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-filesystem-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-graph-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-graph-mpich-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-graph-openmpi-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-iostreams-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-jam-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-locale-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-log-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-math-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-mpich-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-mpich-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-mpich-python2-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-mpich-python2-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-mpich-python3-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-mpich-python3-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-numpy2-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-numpy3-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-openmpi-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-openmpi-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-openmpi-python2-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-openmpi-python2-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-openmpi-python3-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-openmpi-python3-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-program-options-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-python2-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-python2-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-python3-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-python3-devel-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-random-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-regex-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-serialization-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-stacktrace-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-static-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-system-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-test-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-thread-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-timer-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-type_erasure-1.69.0-2.el7.x86_64.rpm
-  https://archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/b/boost169-wave-1.69.0-2.el7.x86_64.rpm
 "
 
 for pkg in $epel_packages ; do

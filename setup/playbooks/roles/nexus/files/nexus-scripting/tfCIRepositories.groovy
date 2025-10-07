@@ -304,11 +304,8 @@ create_yum_hosted('yum-tpc-binary', 0)
 // hosted tpc source has build packages from third-party-packages repo and it doesn't depend on branch for now
 // because contrail-third-party-packages doesn't have branches
 create_yum_hosted('yum-tpc-source-el7', 0)
-create_yum_hosted('yum-tpc-source-el8', 0)
 create_yum_hosted('yum-tpc-source-el9', 0)
 create_yum_group('yum-tpc7', ['yum-tpc-binary', 'yum-tpc-source-el7'])
-create_yum_group('yum-tpc7Server', ['yum-tpc-binary', 'yum-tpc-source-el7'])
-create_yum_group('yum-tpc8', ['yum-tpc-binary', 'yum-tpc-source-el8'])
 create_yum_group('yum-tpc9', ['yum-tpc-binary', 'yum-tpc-source-el9'])
 // legacy - left for compatibility
 create_yum_group('yum-tpc', ['yum-tpc-binary', 'yum-tpc-source-el7'])

@@ -75,6 +75,14 @@
       - shell: |
           set -eo pipefail
           source "$WORKSPACE/global.env"
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
+          # switch branch to older version to able to build
+          if [[ "$GERRIT_BRANCH" == "R24.1" ]]; then
+            cd src/opensdn-io/tf-dev-env
+            git checkout rpms
+            cd -
+          fi
           ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
           ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-dev-env ./patchsets-info.json
       - shell: |

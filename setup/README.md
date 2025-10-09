@@ -113,7 +113,6 @@ Infra must be initiallised to be able to run CI and infra checks/jobs. Please ne
 - Run job **pipeline-init-repos** for CENTOS7, UBUNTU18, UBUNTU22, RHEL7, RHEL8. These jobs may take several hours and can be run in parallel.
 - Run job **update-base-images** for ALL. This will download and register in the cloud base images for CI workers. Redhat images (for rhel7 and rhel8) should be downloaded with appropriate subscription and registered manually to be ablle to run Redhat related checks. Here is a CLI command to register image `openstack image create --container-format bare --disk-format qcow2 --file rhel7.qcow --tag rhel7 --shared base-rhel7-202102100000`. Name and tag must be in exaclt this format. Numbers in name is a date of image in format YYYYMMDD0000.
 - Run job **update-prepared-images** for CENTOS7, UBUNTU18, UBUNTU22. This will prepare base images for workers to speed up CI checks.
-- Run job **update-tpc-source-repository**. This will compile and publish some yum packages to use them later in build Contrail process. These packages are changed rarely and should be pre-build.
 - Run job **update-caches** for all items in dropdown one by one. This will upload to CI caches some predefined yum packages, third-party cache, VM images for sanity tests, and other similar objects.
 - Run job **update-prepared-images** for RHEL7, RHEL8
 - Clear all parameters in GerritTrigger -> Edit gerrit node -> Gerrit Reporting Values and Gerrit Verified Commands

@@ -39,33 +39,6 @@
         - ansible-os
         - cleanup
 
-- project:
-    names:
-      - opensdn-io/tf-third-party-packages
-    check:
-      templates:
-        - ansible-os
-        - cleanup
-    gate:
-      templates:
-        - juju-k8s
-        - ansible-os
-        - cleanup
-    post-merge:
-      jobs:
-        update-tpc-source-repository-7:
-          job-name: update-tpc-source-repository
-          job-params:
-            TPC_VERSION: el7
-        update-tpc-source-repository-8:
-          job-name: update-tpc-source-repository
-          job-params:
-            TPC_VERSION: el8
-        update-tpc-source-repository-9:
-          job-name: update-tpc-source-repository
-          job-params:
-            TPC_VERSION: el9
-
 # simple checks with ubi in gating
 - project:
     names:

@@ -1,3 +1,0 @@
-export VM_TYPE=xsmall
-
-SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no"

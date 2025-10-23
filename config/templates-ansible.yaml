@@ -203,7 +203,7 @@
         stream: ansible-os-ha-ziu
         vars:
           DEPLOYMENT_TEST_TAGS: ziu
-          TF_DEPLOYMENT_TEST_IMAGE: $CONTAINER_REGISTRY_ORIGINAL/tf-deployment-test:$CONTRAIL_CONTAINER_TAG_ORIGINAL
+          TF_DEPLOYMENT_TEST_IMAGE: $CONTAINER_REGISTRY_ORIGINAL/opensdn-deployment-test:$CONTRAIL_CONTAINER_TAG_ORIGINAL
         depends-on:
           - package-rocky9
           - deploy-tf-ansible-os-ha-ziu

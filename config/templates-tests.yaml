@@ -172,22 +172,22 @@
           - test-unit-tox-unit
 
 - template:
-    name: test-tox-py36
+    name: test-tox-py3
     parents:
       - prepare-test-sandbox
     jobs:
-      test-unit-tox-py36:
+      test-unit-tox-py3:
         job-name: test-unit-tox
         lock: tox
         depends-on:
           - fetch-sources-test-sandbox
         vars:
-          TARGET_SET: py36
+          TARGET_SET: py3
           LINUX_DISTR: rockylinux
           LINUX_DISTR_VER: 9
       cleanup-worker-test-sandbox:
         depends-on:
-          - test-unit-tox-py36
+          - test-unit-tox-py3
 
 - template:
     name: test-unit-go

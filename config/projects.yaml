@@ -128,7 +128,7 @@
     check:
       templates:
         - test-tox-pep8
-        - test-tox-py36
+        - test-tox-py3
         - ansible-k8s
         - ansible-os
         - cleanup

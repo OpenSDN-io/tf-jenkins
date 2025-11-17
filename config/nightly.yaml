@@ -5,7 +5,7 @@
     nightly:
       templates:
         - docs-doxygen
-        - build-r24.1-centos
+        # - build-r24.1-centos
         - build-rocky9
         - test-unit
         - test-unit-ui
@@ -17,7 +17,7 @@
         - ansible-os-ha
         - ansible-os-tempest
         - ansible-os-vanilla
-        - ansible-os-r24.1
+        # - ansible-os-r24.1
         - ansible-os-ha-ziu
         - juju-k8s
         - juju-os

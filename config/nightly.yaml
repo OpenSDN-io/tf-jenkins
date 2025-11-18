@@ -61,8 +61,8 @@
         # to use just built nightly images
         deploy-platform-ansible-os-ha-ziu:
           # additional deps
-          depends-on:
-            - package-deployers-r24.1-centos
+          # depends-on:
+          #   - package-deployers-r24.1-centos
         #deploy-tf-juju-hybrid-ha-ziu:
         #  # additional deps
         #  depends-on:

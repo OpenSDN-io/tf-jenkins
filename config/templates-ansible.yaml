@@ -371,3 +371,41 @@
           - deploy-platform-ansible-os-r24.1
           - deploy-tf-ansible-os-r24.1
           - test-sanity-ansible-os-r24.1
+
+- template:
+    name: ansible-os-r25.1
+    streams:
+      ansible-os-r25.1:
+        vars:
+          MONITORING_DEPLOY_TARGET: AIO
+          MONITORING_DEPLOYER: ansible
+          MONITORING_ORCHESTRATOR: os
+          USE_DATAPLANE_NETWORK: true
+    parents:
+      - build-r25.1
+    jobs:
+      deploy-platform-ansible-os-r25.1:
+        job-name: deploy-platform-ansible-os
+        stream: ansible-os-r25.1
+        depends-on:
+          # temporary solution
+          - package-r25.1
+      deploy-tf-ansible-os-r25.1:
+        job-name: deploy-tf-ansible-os
+        stream: ansible-os-r25.1
+        depends-on:
+          - package-r25.1
+          - deploy-platform-ansible-os-r25.1
+      test-sanity-ansible-os-r25.1:
+        job-name: test-sanity
+        stream: ansible-os-r25.1
+        depends-on:
+          - deploy-tf-ansible-os-r25.1
+      collect-logs-and-cleanup-ansible-os-r25.1:
+        job-name: collect-logs-and-cleanup
+        stream: ansible-os-r25.1
+        type: post-hook
+        depends-on:
+          - deploy-platform-ansible-os-r25.1
+          - deploy-tf-ansible-os-r25.1
+          - test-sanity-ansible-os-r25.1

@@ -258,6 +258,54 @@
           - package-r24.1-centos
 
 - template:
+    name: build-r25.1
+    streams:
+      build-r25.1:
+        voting: false
+        vars:
+          GERRIT_BRANCH: "R25.1"
+          TAG_SUFFIX: "-r25.1"
+    jobs:
+      prepare-sandbox-r25.1:
+        # it creates worker
+        job-name: build-prepare-sandbox
+        stream: build-r25.1
+        vars:
+          PUBLISH_TYPE: stable
+      fetch-sources-r25.1:
+        job-name: build-fetch-sources
+        stream: build-r25.1
+        depends-on:
+          - prepare-sandbox-r25.1
+      configure-r25.1:
+        job-name: build-configure
+        stream: build-r25.1
+        depends-on:
+          - fetch-sources-r25.1
+      package-deployers-r25.1:
+        job-name: build-package-deployers
+        stream: build-r25.1
+        depends-on:
+          - configure-r25.1
+      compile-r25.1:
+        job-name: build-compile
+        stream: build-r25.1
+        depends-on:
+          - package-deployers-r25.1
+      package-r25.1:
+        job-name: build-package
+        stream: build-r25.1
+        depends-on:
+          - compile-r25.1
+      cleanup-r25.1:
+        # it doesn't call devenv - it removes worker completly
+        job-name: build-cleanup
+        stream: build-r25.1
+        type: post-hook
+        depends-on:
+          - package-r25.1
+
+- template:
     name: build-ubi8
     streams:
       build-ubi8:

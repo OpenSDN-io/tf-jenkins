@@ -6,6 +6,7 @@
       templates:
         - docs-doxygen
         # - build-r24.1-centos
+        - build-r25.1
         - build-rocky9
         - test-unit
         - test-unit-ui
@@ -17,7 +18,7 @@
         - ansible-os-ha
         - ansible-os-tempest
         - ansible-os-vanilla
-        # - ansible-os-r24.1
+        - ansible-os-r25.1
         - ansible-os-ha-ziu
         - juju-k8s
         - juju-os
@@ -31,6 +32,9 @@
         - cleanup
       streams:
         build-r24.1-centos:
+         vars:
+           DEBUGINFO: "TRUE"
+        build-r25.1:
          vars:
            DEBUGINFO: "TRUE"
         # additional schedule for some streams
@@ -68,13 +72,13 @@
         #  depends-on:
         #    - package-r24.1-ubi
 
-        #publish-r24.1-centos-nightly:
-        #  job-name: publish
-        #  depends-on:
-        #    - package-r24.1-centos
-        #  vars:
-        #    TAG_SUFFIX: "-r24.1-centos"
-        #    GERRIT_BRANCH: "R24.1"
+        publish-r25.1-nightly:
+          job-name: publish
+          depends-on:
+            - package-r25.1
+          vars:
+            TAG_SUFFIX: "-r25.1"
+            GERRIT_BRANCH: "R25.1"
 
         publish-rocky9-nightly:
          job-name: publish

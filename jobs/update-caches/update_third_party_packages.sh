@@ -8,7 +8,7 @@ if [[ -z ${TPC_REPO_USER} || -z ${TPC_REPO_PASS} ]] ; then
   exit 1
 fi
 
-sudo yum install -y wget curl python3 python3-lxml
+sudo dnf install -y wget curl python3 python3-lxml
 curl -fsS --retry 3 --retry-delay 10 https://bootstrap.pypa.io/pip/3.6/get-pip.py | sudo python3
 sudo python3 -m pip install urllib3
 

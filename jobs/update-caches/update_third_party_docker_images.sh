@@ -3,7 +3,7 @@ set -o pipefail
 
 [ "${DEBUG,,}" == "true" ] && set -x
 
-sudo yum install -y wget curl skopeo
+sudo dnf install -y wget curl skopeo
 
 echo "INFO: prepare list of docker image to cache from tf-devstack"
 ./src/opensdn-io/tf-devstack/common/get_image_cache.sh $(pwd)/imagelist

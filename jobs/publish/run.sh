@@ -48,8 +48,8 @@ if [ x"\$DISTRO" == x"ubuntu" ]; then
   export DEBIAN_FRONTEND=noninteractive
   sudo -E apt-get install -y jq curl
 else
-  sudo yum -y install epel-release
-  sudo yum install -y jq curl
+  sudo dnf -y install epel-release
+  sudo dnf install -y jq curl
 fi
 
 EOF

@@ -8,7 +8,7 @@ if [[ -z ${TPC_REPO_USER} || -z ${TPC_REPO_PASS} ]] ; then
   exit 1
 fi
 
-sudo yum install -y wget curl
+sudo dnf install -y wget curl
 
 rm -rf sanity_images
 mkdir -p sanity_images

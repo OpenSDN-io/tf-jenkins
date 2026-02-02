@@ -1,4 +1,4 @@
 export VM_TYPE=xsmall
-export ENVIRONMENT_OS=centos7
+export ENVIRONMENT_OS=rocky9
 
 SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no"

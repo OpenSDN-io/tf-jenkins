@@ -98,7 +98,7 @@
             exit 1
           fi
       - shell: |
-          export ENVIRONMENT_OS=centos7
+          export ENVIRONMENT_OS=rocky9
           source "$WORKSPACE/global.env"
           $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/publish/create_workers.sh
       - shell: |

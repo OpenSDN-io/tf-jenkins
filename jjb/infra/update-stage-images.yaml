@@ -76,7 +76,7 @@
       - description-setter:
           regexp: "DESCRIPTION (.*)"
       - shell: |
-          export ENVIRONMENT_OS=centos7
+          export ENVIRONMENT_OS=rocky9
           source "$WORKSPACE/global.env"
           $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/update-stage-images/create_workers.sh
       - shell: |
@@ -179,7 +179,7 @@
       - description-setter:
           regexp: "DESCRIPTION (.*)"
       - shell: |
-          export ENVIRONMENT_OS=centos7
+          export ENVIRONMENT_OS=rocky9
           source "$WORKSPACE/global.env"
           $WORKSPACE/src/opensdn-io/tf-jenkins/jobs/update-stage-images/create_workers.sh
       - shell: |

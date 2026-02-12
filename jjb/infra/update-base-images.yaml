@@ -21,6 +21,7 @@
             - ROCKY9
             - ROCKY92
             - ROCKY95
+            - ROCKY96
           description: "Image type for update or ALL(default)"
     scm:
       - tf-jenkins

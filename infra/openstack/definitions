@@ -45,7 +45,8 @@ declare -A OS_IMAGE_USERS=( ['CENTOS7']='centos' \
                             ['UBUNTU24']='ubuntu' \
                             ['ROCKY9']='rocky' \
                             ['ROCKY92']='rocky' \
-                            ['ROCKY95']='rocky')
+                            ['ROCKY95']='rocky' \
+                            ['ROCKY96']='rocky')
 
 declare -A OS_IMAGES_UP=( ['CENTOS7']='centos' \
                           ['CENTOS8']='centos' \
@@ -54,7 +55,8 @@ declare -A OS_IMAGES_UP=( ['CENTOS7']='centos' \
                           ['UBUNTU24']='ubuntu' \
                           ['ROCKY9']='rocky' \
                           ['ROCKY92']='rocky' \
-                          ['ROCKY95']='rocky' )
+                          ['ROCKY95']='rocky' \
+                          ['ROCKY96']='rocky')
 
 declare -A OS_IMAGES_DOWN=( ['CENTOS7']='' \
                             ['CENTOS8']='' \
@@ -63,7 +65,8 @@ declare -A OS_IMAGES_DOWN=( ['CENTOS7']='' \
                             ['UBUNTU24']='' \
                             ['ROCKY9']='' \
                             ['ROCKY92']='' \
-                            ['ROCKY95']='' )
+                            ['ROCKY95']='' \
+                            ['ROCKY96']='')
 
 
 SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no"

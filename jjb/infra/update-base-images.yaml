@@ -20,6 +20,8 @@
             - UBUNTU24
             - ROCKY9
             - ROCKY92
+            - ROCKY93
+            - ROCKY94
             - ROCKY95
             - ROCKY96
           description: "Image type for update or ALL(default)"

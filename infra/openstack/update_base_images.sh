@@ -107,6 +107,33 @@ if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'ROCKY92' ]]; then
   images="$images base-rocky92-$date_suffix"
 fi
 
+if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'ROCKY93' ]]; then
+  # 9.3 links
+  echo "INFO: download rocky linux 9.3 from dl.rockylinux.org"
+  curl -LOs "https://dl.rockylinux.org/vault/rocky/9.3/images/x86_64/Rocky-9-GenericCloud-Base-9.3-20231113.0.x86_64.qcow2"
+  curl -Ls "https://dl.rockylinux.org/vault/rocky/9.3/images/x86_64/Rocky-9-GenericCloud-Base-9.3-20231113.0.x86_64.qcow2.CHECKSUM" -o rocky93-SHA256SUMS
+  sha256sum -c rocky93-SHA256SUMS --ignore-missing --status
+
+  echo "INFO: upload rocky93 to openstack"
+  openstack image create --disk-format qcow2 --tag rocky93 --file Rocky-9-GenericCloud-Base-9.3-20231113.0.x86_64.qcow2 base-rocky93-$date_suffix
+  rm -f Rocky-9-GenericCloud-Base-9.3-20231113.0.x86_64.qcow2
+  images="$images base-rocky93-$date_suffix"
+fi
+
+if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'ROCKY94' ]]; then
+  # 9.4 links
+  echo "INFO: download rocky linux 9.4 from dl.rockylinux.org"
+  curl -LOs "https://dl.rockylinux.org/vault/rocky/9.4/images/x86_64/Rocky-9-GenericCloud-Base-9.4-20240609.0.x86_64.qcow2"
+  curl -Ls "https://dl.rockylinux.org/vault/rocky/9.4/images/x86_64/Rocky-9-GenericCloud-Base-9.4-20240609.0.x86_64.qcow2.CHECKSUM" -o rocky94-SHA256SUMS
+
+  sha256sum -c rocky94-SHA256SUMS --ignore-missing --status
+
+  echo "INFO: upload rocky94 to openstack"
+  openstack image create --disk-format qcow2 --tag rocky94 --file Rocky-9-GenericCloud-Base-9.4-20240609.0.x86_64.qcow2 base-rocky94-$date_suffix
+  rm -f Rocky-9-GenericCloud-Base-9.4-20240609.0.x86_64.qcow2
+  images="$images base-rocky94-$date_suffix"
+fi
+
 if [[ ${IMAGE_TYPE^^} == 'ALL' || ${IMAGE_TYPE^^} == 'ROCKY96' ]]; then
   # 9.6 links
   echo "INFO: download rocky linux 9.6 from dl.rockylinux.org"

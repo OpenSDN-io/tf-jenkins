@@ -4,10 +4,6 @@
 
 declare -A REPOS=( \
     ["centos7"]="centos7 yum7" \
-    # ["centos8"]="centos8 yum8" \
-    # ["rhel7"]="rhel7 ubi7" \
-    # ["rhel82"]="rhel82 ubi82" \
-    # ["rhel84"]="rhel84 ubi84" \
     ["ubuntu"]="ubuntu" \
     ["rocky9"]="rocky9 yum9" \
 )

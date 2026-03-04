@@ -1,8 +1,0 @@
-DEVICE={{ item.key }}
-TYPE=Ethernet
-HWADDR={{ ansible_facts[item.key]['macaddress']|default(None) }}
-NAME={{ item.key }}
-ONBOOT=yes
-BRIDGE={{ item.value }}
-NM_CONTROLLED=no
-

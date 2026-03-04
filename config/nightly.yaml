@@ -23,8 +23,8 @@
         - juju-k8s
         - juju-os
         # - juju-os-ha-ziu
-        #- juju-os-maas
-        #- juju-hybrid-ha-ziu
+        # - juju-os-maas
+        # - juju-hybrid-ha-ziu
         - juju-os-not-implemented-targets
         - juju-k8s-not-implemented-targets
         - juju-hybrid-not-implemented-targets
@@ -67,10 +67,6 @@
           # additional deps
           # depends-on:
           #   - package-deployers-r24.1-centos
-        #deploy-tf-juju-hybrid-ha-ziu:
-        #  # additional deps
-        #  depends-on:
-        #    - package-r24.1-ubi
 
         publish-r25.1-nightly:
           job-name: publish

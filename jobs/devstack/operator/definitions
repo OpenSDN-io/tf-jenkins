@@ -1,6 +1,0 @@
-if [[ "$ORCHESTRATOR" != 'kubernetes' ]]; then
-  echo "ERROR: only ORCHESTRATOR=kubernetes is supported"
-  exit 1
-fi
-
-export SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no"

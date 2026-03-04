@@ -1,6 +1,0 @@
-#export PROVIDER=kvm
-export IMAGE_SSH_USER=root
-
-export SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no"
-
-instance_ip=ubi8-build.englab.juniper.net

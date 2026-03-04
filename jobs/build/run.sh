@@ -43,10 +43,7 @@ mirror_list=""
 # list of repos for building of tf-dev-sandbox container itself
 mirror_list_for_build=""
 
-if [[ ${LINUX_DISTR} == 'rhel7' ]]; then
-  mirror_list_for_build="mirror-epel7.repo rhel84/mirror-rhel84-baseos.repo"
-  mirror_list=""
-elif [[ ${LINUX_DISTR} == 'centos' ]]; then
+if [[ ${LINUX_DISTR} == 'centos' ]]; then
   mirror_list_for_build="mirror-epel7.repo mirror-docker.repo mirror-base-centos7.repo"
   # epel must not be there - it cause incorrect installs and fails at runtime
   # + rocky9 repo for build-init image
@@ -57,12 +54,6 @@ elif [[ ${LINUX_DISTR} == 'centos' ]]; then
   mirror_list_for_build+=" centos7/CentOS-Sources.repo centos7/CentOS-Vault.repo centos7/CentOS-fasttrack.repo centos7/CentOS-x86_64-kernel.repo"
   mirror_list+=" centos7/CentOS-Base.repo centos7/CentOS-CR.repo centos7/CentOS-Debuginfo.repo centos7/CentOS-Media.repo"
   mirror_list+=" centos7/CentOS-Sources.repo centos7/CentOS-Vault.repo centos7/CentOS-fasttrack.repo centos7/CentOS-x86_64-kernel.repo"
-elif [[ "${LINUX_DISTR}" =~ 'ubi7' ]] ; then
-  mirror_list_for_build="mirror-epel7.repo rhel7/ubi.repo rhel7/mirror-rhel7.repo rhel84/mirror-rhel84-baseos.repo"
-  mirror_list="rhel7/ubi.repo rhel7/mirror-rhel7.repo"
-elif [[ "${LINUX_DISTR}" =~ 'ubi8' ]] ; then
-  mirror_list_for_build="mirror-epel8.repo rhel84/ubi.repo rhel84/mirror-rhel84.repo"
-  mirror_list="rhel84/ubi.repo rhel84/mirror-rhel84.repo"
 elif [[ ${LINUX_DISTR} == 'rockylinux' ]]; then
   mirror_list_for_build="mirror-epel9.repo mirror-docker9.repo mirror-base-rocky9.repo"
   mirror_list="mirror-epel9.repo mirror-base-rocky9.repo mirror-docker9.repo"
@@ -111,7 +102,6 @@ export CONTRAIL_CONTAINER_TAG=$CONTRAIL_CONTAINER_TAG$TAG_SUFFIX
 export CONTRAIL_KEEP_LOG_FILES=true
 export INSECURE_REGISTRIES=${INSECURE_REGISTRIES}
 export MULTI_KERNEL_BUILD=true
-export KERNEL_REPOSITORIES_RHEL8="--disablerepo=* --enablerepo=BaseOS"
 export BUILD_MODE=$BUILD_MODE
 export DEBUGINFO=$DEBUGINFO
 
@@ -120,20 +110,11 @@ export CONTRAIL_PARALLEL_BUILD=$CONTRAIL_PARALLEL_BUILD
 cd src/opensdn-io/tf-dev-env
 
 # TODO: use in future generic mirror approach
-# Copy yum repos for rhel from host to containers to use local mirrors
+# Copy yum repos from host to containers to use local mirrors
 
 rm -rf ./config/etc
 mkdir -p ./config/etc/yum.repos.d
 case "${ENVIRONMENT_OS,,}" in
-  rhel7* )
-    # TODO: now no way to put gpg keys into containers for repo mirrors
-    # disable gpgcheck as keys are not available inside the contianers
-    for frepo in \$(find /etc/yum.repos.d/ -name "*.repo" -printf "%P\\n") ; do
-      cp -f /etc/yum.repos.d/\$frepo ./config/etc/yum.repos.d/
-      sed -i 's/^gpgcheck.*/gpgcheck=0/g' ./config/etc/yum.repos.d/\$frepo
-      cp -f ./config/etc/yum.repos.d/\$frepo ./container/\$frepo
-    done
-    ;;
   centos* )
     # copy docker and base repos to local machine
     sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-docker.repo /etc/yum.repos.d/

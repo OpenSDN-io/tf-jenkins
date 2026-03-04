@@ -78,10 +78,6 @@ all:
     os_domain_name: "os_domain_name"
     os_auth_url: "os_auth_url"
 
-    rhel_user: "rhel_user"
-    rhel_password: "rhel_password"
-    rhel_pool_id: "rhel_pool_id"
-
     nameserver_list: "10.20.30.40,10.30.5.100"
 
     dockerhub_user: "dockerhub_user"

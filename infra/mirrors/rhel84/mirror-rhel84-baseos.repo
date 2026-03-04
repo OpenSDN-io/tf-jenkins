@@ -1,7 +1,0 @@
-[BaseOS]
-name=Red Hat Enterprise Linux 8.4 BaseOS
-enabled=0
-gpgcheck=0
-baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/rhel84/$REPOS_CHANNEL/rhel-8-for-x86_64-baseos-rpms/
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-cost = 500

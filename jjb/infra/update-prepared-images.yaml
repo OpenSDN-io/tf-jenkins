@@ -14,7 +14,6 @@
           choices:
             - ALL
             - CENTOS7
-            - CENTOS8
             - UBUNTU20
             - UBUNTU22
             - UBUNTU24
@@ -50,10 +49,6 @@
           - text:
               credential-id: OS_AUTH_URL
               variable: OS_AUTH_URL
-        #   - username-password-separated:
-        #       credential-id: rhel-creds
-        #       username: RHEL_USER
-        #       password: RHEL_PASSWORD
     builders:
       - shell: |
           echo "DESCRIPTION Image type=$IMAGE_TYPE"

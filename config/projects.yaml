@@ -8,7 +8,7 @@
       jobs:
         update-caches:
 
-# just build projects including ubi8
+# just build projects
 - project:
     names:
       - opensdn-io/tf-dpdk

@@ -1,6 +1,0 @@
-[tf-mirrors.ci_repos_epel8.repo]
-name=added from: http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/yum8/$REPOS_CHANNEL/epel/
-baseurl=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/yum8/$REPOS_CHANNEL/epel/
-enabled=1
-gpgcheck=0
-cost = 500

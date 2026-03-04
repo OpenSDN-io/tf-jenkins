@@ -25,9 +25,6 @@
   with_items:
     - devpi
     - centos7
-    # - rhel7
-    # - rhel82
-    # - rhel84
     - ubuntu
     - rocky9
 
@@ -51,10 +48,6 @@
     mode: '0755'
   with_items:
     - centos7
-    # - centos8
-    # - rhel7
-    # - rhel82
-    # - rhel84
     - ubuntu
     - rocky9
 
@@ -68,10 +61,6 @@
     force_source: yes
   with_items:
     - centos7
-    # - centos8
-    # - rhel7
-    # - rhel82
-    # - rhel84
     - ubuntu
     - rocky9
 

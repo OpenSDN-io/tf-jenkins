@@ -59,6 +59,7 @@
     streams:
       build-rocky9:
         vars:
+          DEBUGINFO: "TRUE"
           LINUX_DISTR: rockylinux
           LINUX_DISTR_VER: 9
     jobs:

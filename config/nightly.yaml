@@ -37,6 +37,9 @@
         build-r25.1:
          vars:
            DEBUGINFO: "TRUE"
+        build-rocky9:
+         vars:
+           DEBUGINFO: "TRUE"
         # additional schedule for some streams
         ansible-k8s:
           frequency: 7

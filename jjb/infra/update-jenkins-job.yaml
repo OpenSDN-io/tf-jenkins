@@ -23,7 +23,7 @@
           cd ./src/opensdn-io/tf-jenkins/jjb
           python3 -m venv .venv
           source .venv/bin/activate
-          pip3 install setuptools wheel --upgrade
+          pip3 install "setuptools<82" wheel --upgrade
           pip3 install "jenkins-job-builder" "urllib3<2.0.0"
           echo "--------------------------------------------------------------------- test"
           make test

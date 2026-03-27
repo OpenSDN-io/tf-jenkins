@@ -93,24 +93,18 @@
               inherit-keys:
                 - DEVENV_TAG
                 - UNITTEST_TARGETS
-
-- template:
-    name: code-coverage
-    parents:
-      - prepare-ut-sandbox
-    streams:
-      code-coverage:
-        vars:
-          LINUX_DISTR: rockylinux
-          LINUX_DISTR_VER: 9
-    jobs:
-      code-coverage:
-        stream: code-coverage
+      test-code-coverage:
+        stream: test-unit
         depends-on:
           - configure-ut-sandbox:
               inherit-keys:
                 - DEVENV_TAG
-                - UNITTEST_TARGETS
+          - test-unit-agent
+          - test-unit-bgp
+          - test-unit-opserver
+          - test-unit-group-one
+          - test-unit-group-two
+          - test-unit-ungrouped
 
 # TODO: think about moving these below jobs into k8s cluster somehow
 - template:

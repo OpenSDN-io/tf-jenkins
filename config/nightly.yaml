@@ -40,6 +40,10 @@
         build-rocky9:
          vars:
            DEBUGINFO: "TRUE"
+        # nightly unit tests include code-coverage
+        test-unit:
+         vars:
+           CODE_COVERAGE: "TRUE"
         # additional schedule for some streams
         ansible-k8s:
           frequency: 7

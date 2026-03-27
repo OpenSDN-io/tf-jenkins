@@ -94,6 +94,23 @@
                 - DEVENV_TAG
                 - UNITTEST_TARGETS
 
+- template:
+    name: code-coverage
+    parents:
+      - prepare-ut-sandbox
+    streams:
+      code-coverage:
+        vars:
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
+    jobs:
+      code-coverage:
+        stream: code-coverage
+        depends-on:
+          - configure-ut-sandbox:
+              - DEVENV_TAG
+              - UNITTEST_TARGETS
+
 # TODO: think about moving these below jobs into k8s cluster somehow
 - template:
     name: test-unit-ui

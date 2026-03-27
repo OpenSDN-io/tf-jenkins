@@ -108,8 +108,9 @@
         stream: code-coverage
         depends-on:
           - configure-ut-sandbox:
-              - DEVENV_TAG
-              - UNITTEST_TARGETS
+              inherit-keys:
+                - DEVENV_TAG
+                - UNITTEST_TARGETS
 
 # TODO: think about moving these below jobs into k8s cluster somehow
 - template:

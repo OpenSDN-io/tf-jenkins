@@ -78,9 +78,23 @@ if [[ "${USE_DATAPLANE_NETWORK,,}" == "true" ]] && (( \$version_major < 24 )); t
   sudo cloud-init clean --configs network
   sudo cloud-init init --local
 
-  echo "            dhcp4-overrides:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
-  echo "                use-routes: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
-  echo "                use-dns: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+  # NOTE: hard-coded name of second interface
+  if grep ens6 /etc/netplan/50-cloud-ini.yaml ; then
+    echo "            dhcp4-overrides:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "                use-routes: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "                use-dns: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+  else
+    mac=\$(ip l | grep -A 3 ens6 | grep -o "ether.*" | cut -d ' ' -f 2)
+    echo "        ens6:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "            dhcp4: true" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "            match:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "                macaddress: \$mac" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "            mtu: 1500" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "            set-name: ens6" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "            dhcp4-overrides:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "                use-routes: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "                use-dns: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+  fi
   sudo chmod 600 /etc/netplan/50-cloud-init.yaml
   sudo netplan apply
   sleep 1
@@ -99,7 +113,9 @@ for i in 1 2 3 4 5 ; do
   fi
   sleep 3
 done
-time nslookup \$(hostname)
+sudo resolvectl status
+time resolvectl query \$(hostname)
+nslookup \$(hostname)
 EOF
 
 if [ -f $my_dir/../../mirrors/ubuntu-environment ]; then

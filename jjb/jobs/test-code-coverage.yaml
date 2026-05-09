@@ -3,8 +3,7 @@
 - job:
     name: test-code-coverage
     description: >
-      Merge lcov tracefiles from all test-unit-* jobs (logs host …/STREAM/coverage/<job>/coverage.info),
-      genhtml merged report; runs in Docker. Depends on all controller UT jobs.
+      Merge per-TARGET_SET tracefiles on logs host, genhtml merged report in Docker.
     defaults: global
     scm:
       - tf-jenkins
@@ -24,6 +23,12 @@
       - workspace-cleanup:
           disable-deferred-wipeout: true
       - timestamps
+      - credentials-binding:
+          - ssh-user-private-key:
+              credential-id: worker
+              key-file-variable: WORKER_SSH_KEY
+              username-variable: WORKER_USER_NAME
+              passphrase-variable: WORKER_PASSPHRASE
       - credentials-binding:
           - ssh-user-private-key:
               credential-id: logs_host
@@ -59,7 +64,7 @@
           source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND<br>"
           desc+="Merged coverage report<br>"
-          desc+="Coverage: <a href=\"$LOGS_URL/$STREAM/coverage/merged\">$LOGS_URL/$STREAM/coverage/merged</a>"
+          desc+="Coverage: <a href=\"$LOGS_URL/$STREAM/logs/coverage/\">$LOGS_URL/$STREAM/logs/coverage/</a>"
           echo "DESCRIPTION $desc"
       - description-setter:
           regexp: "DESCRIPTION (.*)"
@@ -69,10 +74,42 @@
           source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
           source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-jenkins ./patchsets-info.json
+          ./src/opensdn-io/tf-jenkins/infra/gerrit/apply_patchsets.sh ./src opensdn-io/tf-dev-env ./patchsets-info.json
       - shell: |
           set -eo pipefail
-          chmod +x ./src/opensdn-io/tf-jenkins/jobs/test/unit/merge_code_coverage.sh
-          ./src/opensdn-io/tf-jenkins/jobs/test/unit/merge_code_coverage.sh
+          source "$WORKSPACE/global.env"
+          source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
+          source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
+
+          export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
+          export COVERAGE_LOGS_PATH="$LOGS_PATH/$STREAM/logs/coverage"
+
+          ./src/opensdn-io/tf-jenkins/jobs/test/unit/collect_coverage_info.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/test/unit/create_workers.sh
+          source "$WORKSPACE/stackrc.$JOB_NAME.env"
+          ./src/opensdn-io/tf-jenkins/jobs/test/unit/merge_code_coverage.sh || res=1
+          ./src/opensdn-io/tf-jenkins/jobs/test/unit/collect_logs.sh
+          exit $res
     publishers:
+      - postbuildscript:
+          builders:
+            - role: SLAVE
+              build-on:
+                - SUCCESS
+                - FAILURE
+                - ABORTED
+                - NOT_BUILT
+                - UNSTABLE
+              build-steps:
+                - shell: |
+                    source "$WORKSPACE/global.env"
+                    if [ -e "$WORKSPACE/stackrc.$JOB_NAME.env" ]; then
+                      echo "INFO: stackrc file found. remove workers."
+                      source "$WORKSPACE/stackrc.$JOB_NAME.env"
+                      ./src/opensdn-io/tf-jenkins/infra/$SLAVE/remove_workers.sh
+                    else
+                      echo "INFO: stackrc file could not be found."
+                    fi
+                    rm -f "$WORKSPACE/stackrc.$JOB_NAME.env"
       - archive:
           artifacts: '*.env'

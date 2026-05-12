@@ -73,7 +73,7 @@ Names of the node must coincide to their own hostnames (hostname -s)
 etc
 ```
 
-Edit /etc/kolla/globals.yml и multinode (inventory) according requirements
+Edit /etc/kolla/globals.yml and multinode (inventory) according to requirements
 (See the example files in this directory)
 
 Check ansible inventory and /etc/hosts

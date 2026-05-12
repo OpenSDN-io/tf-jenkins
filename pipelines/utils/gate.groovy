@@ -10,7 +10,7 @@ SERIAL_PROJECTS = [
 // get its base builds list if any, and then iterate over the list
 // check if items of the list is still working or SUCCESS or FAILURE.
 // If next build is fit to be a base build, the function add its id to BASE_BUILDS_LIST
-// return false if base build not found or build_id if foundпше
+// return false if base build not found or build_id if found
 // save BASE_BUILD_ID_LIST sting including base builds chain like "23,22,20"
 def save_base_builds() {
   def build_map = _prepare_build_map()

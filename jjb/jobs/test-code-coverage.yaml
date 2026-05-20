@@ -81,10 +81,11 @@
           source "$WORKSPACE/vars.$JOB_NAME.$JOB_RND.env" || /bin/true
           source "$WORKSPACE/deps.$JOB_NAME.$JOB_RND.env" || /bin/true
 
+          if [[ "${CODE_COVERAGE}" != "TRUE" ]]; then
+            echo "INFO: skipping test-code-coverage"
+            exit 0
+          fi
           export FULL_LOGS_PATH="$LOGS_PATH/$STREAM"
-          export COVERAGE_LOGS_PATH="$LOGS_PATH/$STREAM/logs/coverage"
-
-          ./src/opensdn-io/tf-jenkins/jobs/test/unit/collect_coverage_info.sh || res=1
           ./src/opensdn-io/tf-jenkins/jobs/test/unit/create_workers.sh
           source "$WORKSPACE/stackrc.$JOB_NAME.env"
           ./src/opensdn-io/tf-jenkins/jobs/test/unit/merge_code_coverage.sh || res=1

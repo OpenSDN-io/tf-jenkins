@@ -5,7 +5,6 @@
     nightly:
       templates:
         - docs-doxygen
-        # - build-r24.1-centos
         - build-r25.1
         - build-rocky9
         - test-unit
@@ -31,9 +30,6 @@
         - ansible-os-not-implemented-targets
         - cleanup
       streams:
-        build-r24.1-centos:
-         vars:
-           DEBUGINFO: "TRUE"
         build-r25.1:
          vars:
            DEBUGINFO: "TRUE"
@@ -68,8 +64,8 @@
         # to use just built nightly images
         deploy-platform-ansible-os-ha-ziu:
           # additional deps
-          # depends-on:
-          #   - package-deployers-r24.1-centos
+          depends-on:
+            - package-deployers-r25.1
 
         publish-r25.1-nightly:
           job-name: publish

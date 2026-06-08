@@ -116,6 +116,8 @@
         vars:
           GERRIT_BRANCH: "R25.1"
           TAG_SUFFIX: "-r25.1"
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
     jobs:
       prepare-sandbox-r25.1:
         # it creates worker

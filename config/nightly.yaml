@@ -6,6 +6,7 @@
       templates:
         - docs-doxygen
         - build-r25.1
+        - build-r26.1
         - build-rocky9
         - test-unit
         - test-unit-ui
@@ -17,7 +18,7 @@
         - ansible-os-ha
         - ansible-os-tempest
         - ansible-os-vanilla
-        - ansible-os-r25.1
+        - ansible-os-r26.1
         - ansible-os-ha-ziu
         - juju-k8s
         - juju-os
@@ -30,7 +31,7 @@
         - ansible-os-not-implemented-targets
         - cleanup
       streams:
-        build-r25.1:
+        build-r26.1:
          vars:
            DEBUGINFO: "TRUE"
         build-rocky9:
@@ -71,13 +72,13 @@
           depends-on:
             - package-deployers-r25.1
 
-        publish-r25.1-nightly:
+        publish-r26.1-nightly:
           job-name: publish
           depends-on:
-            - package-r25.1
+            - package-r26.1
           vars:
-            TAG_SUFFIX: "-r25.1"
-            GERRIT_BRANCH: "R25.1"
+            TAG_SUFFIX: "-r26.1"
+            GERRIT_BRANCH: "R26.1"
 
         publish-rocky9-nightly:
          job-name: publish

@@ -157,3 +157,53 @@
         type: post-hook
         depends-on:
           - package-r25.1
+
+- template:
+    name: build-r26.1
+    streams:
+      build-r26.1:
+        voting: false
+        vars:
+          GERRIT_BRANCH: "R26.1"
+          TAG_SUFFIX: "-r26.1"
+          LINUX_DISTR: rockylinux
+          LINUX_DISTR_VER: 9
+    jobs:
+      prepare-sandbox-r26.1:
+        # it creates worker
+        job-name: build-prepare-sandbox
+        stream: build-r26.1
+        vars:
+          PUBLISH_TYPE: stable
+      fetch-sources-r26.1:
+        job-name: build-fetch-sources
+        stream: build-r26.1
+        depends-on:
+          - prepare-sandbox-r26.1
+      configure-r26.1:
+        job-name: build-configure
+        stream: build-r26.1
+        depends-on:
+          - fetch-sources-r26.1
+      package-deployers-r26.1:
+        job-name: build-package-deployers
+        stream: build-r26.1
+        depends-on:
+          - configure-r26.1
+      compile-r26.1:
+        job-name: build-compile
+        stream: build-r26.1
+        depends-on:
+          - package-deployers-r26.1
+      package-r26.1:
+        job-name: build-package
+        stream: build-r26.1
+        depends-on:
+          - compile-r26.1
+      cleanup-r26.1:
+        # it doesn't call devenv - it removes worker completly
+        job-name: build-cleanup
+        stream: build-r26.1
+        type: post-hook
+        depends-on:
+          - package-r26.1

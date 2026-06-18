@@ -122,7 +122,7 @@ case "${ENVIRONMENT_OS,,}" in
     ;;
   rocky9* )
     # copy docker and base repos to local machine
-    sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-docker.repo /etc/yum.repos.d/
+    sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-docker9.repo /etc/yum.repos.d/
     sudo cp \${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/mirror-base-rocky9.repo /etc/yum.repos.d/
     ;;
 esac

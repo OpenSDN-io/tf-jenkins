@@ -69,7 +69,7 @@ else
   export UBUNTU_CODENAME='noble'
 fi
 # include mirror-base* always for later usage 
-for repofile in $mirror_list_for_build $mirror_list mirror-base-centos7.repo mirror-base-rocky9.repo mirror-docker.repo mirror-pip.conf mirror-docker-daemon.json ubuntu-sources.list ; do
+for repofile in $mirror_list_for_build $mirror_list mirror-base-centos7.repo mirror-base-rocky9.repo mirror-docker.repo mirror-docker9.repo mirror-pip.conf mirror-docker-daemon.json ubuntu-sources.list ; do
   file="${WORKSPACE}/src/opensdn-io/tf-jenkins/infra/mirrors/${repofile}"
   cat $file | envsubst > $file.tmp
   mv $file.tmp $file

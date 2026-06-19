@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 REPOS_ROCKY9=(baseos baseos-debug baseos-source appstream appstream-debug appstream-source crb crb-source crb-debug extras extras-debug extras-source)
-REPOS_YUM9=(dockerrepo epel)
+REPOS_YUM9=(dockerrepo epel k8s)
 MIRRORDIR=/repos
 DATE=$(date +"%Y%m%d")
 

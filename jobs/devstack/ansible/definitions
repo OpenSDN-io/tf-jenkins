@@ -6,7 +6,7 @@ export SSH_OPTIONS="-T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=
 function add_deployrc() {
   local file="$1"
   cat <<EOF >> "$file"
-export K8S_YUM_REPO_URL=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/yum7/$REPOS_CHANNEL/k8s/
+export K8S_YUM_REPO_URL=http://tf-mirrors.$SLAVE_REGION.$CI_DOMAIN/repos/yum9/$REPOS_CHANNEL/k8s/
 EOF
 }
 export -f add_deployrc

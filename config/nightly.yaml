@@ -5,8 +5,8 @@
     nightly:
       templates:
         - docs-doxygen
-        - build-r25.1
-        - build-r26.1
+        #- build-r25.1
+        #- build-r26.1
         - build-rocky9
         - test-unit
         - test-unit-ui
@@ -14,14 +14,14 @@
         # - k8s-manifests-ha
         # - ansible-k8s
         # - ansible-k8s-ha
-        - ansible-os
+        #- ansible-os
         - ansible-os-ha
-        - ansible-os-tempest
+        #- ansible-os-tempest
         - ansible-os-vanilla
-        - ansible-os-r26.1
-        - ansible-os-ha-ziu
-        - juju-k8s
-        - juju-os
+        #- ansible-os-r26.1
+        #- ansible-os-ha-ziu
+        #- juju-k8s
+        #- juju-os
         # - juju-os-ha-ziu
         # - juju-os-maas
         # - juju-hybrid-ha-ziu

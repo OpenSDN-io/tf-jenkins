@@ -65,6 +65,9 @@
           desc="Pipeline: $PIPELINE_NAME-$PIPELINE_NUMBER  Random: $JOB_RND<br>"
           desc+="Merged coverage report<br>"
           desc+="Coverage: <a href=\"$LOGS_URL/$STREAM/logs/coverage/\">$LOGS_URL/$STREAM/logs/coverage/</a>"
+          nightly_coverage_url="$LOGS_URL/../coverage/"
+          desc+="<br>Latest nightly coverage: <a href=\"${nightly_coverage_url}\">${nightly_coverage_url}</a><br>"
+          desc+="HTML report: <a href=\"${nightly_coverage_url}coverage-html/index.html\">${nightly_coverage_url}coverage-html/index.html</a>"
           echo "DESCRIPTION $desc"
       - description-setter:
           regexp: "DESCRIPTION (.*)"
@@ -91,6 +94,7 @@
           source "$WORKSPACE/stackrc.$JOB_NAME.env"
           ./src/opensdn-io/tf-jenkins/jobs/test/unit/merge_code_coverage.sh || res=1
           ./src/opensdn-io/tf-jenkins/jobs/test/unit/collect_logs.sh
+          ./src/opensdn-io/tf-jenkins/jobs/test/unit/publish_latest_coverage.sh
           exit $res
     publishers:
       - postbuildscript:

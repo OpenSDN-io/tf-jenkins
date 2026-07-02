@@ -6,7 +6,7 @@
       templates:
         - docs-doxygen
         #- build-r25.1
-        #- build-r26.1
+        - build-r26.1
         - build-rocky9
         - test-unit
         - test-unit-ui

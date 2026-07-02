@@ -3,6 +3,11 @@ set -eo pipefail
 
 [ "${DEBUG,,}" == "true" ] && set -x
 
+if [[ "$GERRIT_PIPELINE" != "nightly" ]]; then
+  echo "INFO: not a nightly pipeline, skip publishing latest coverage"
+  exit 0
+fi
+
 SSH_OPTIONS="${SSH_OPTIONS:--T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PasswordAuthentication=no}"
 
 coverage_path="${LOGS_PATH}/${STREAM}/logs/coverage"

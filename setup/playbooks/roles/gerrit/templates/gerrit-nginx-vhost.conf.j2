@@ -1,0 +1,11 @@
+# Block social/search crawlers from indexing Gitiles and archive endpoints.
+# Reduces load on Gerrit (meta-externalagent alone was ~90% of HTTP traffic).
+if ($http_user_agent ~* "(meta-externalagent|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|Slackbot|WhatsApp|Googlebot|bingbot|Baiduspider|YandexBot|Applebot|DuckDuckBot)") {
+    return 403;
+}
+
+# Tell well-behaved bots not to crawl (defense in depth alongside User-Agent blocking).
+location = /robots.txt {
+    default_type text/plain;
+    return 200 "User-agent: *\nDisallow: /\n";
+}

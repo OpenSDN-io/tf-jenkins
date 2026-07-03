@@ -18,7 +18,7 @@
         - ansible-os-ha
         #- ansible-os-tempest
         - ansible-os-vanilla
-        #- ansible-os-r26.1
+        - ansible-os-r26.1
         #- ansible-os-ha-ziu
         #- juju-k8s
         #- juju-os

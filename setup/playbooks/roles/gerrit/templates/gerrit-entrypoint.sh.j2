@@ -20,11 +20,14 @@ then
   git config -f /var/gerrit/etc/gerrit.config --add sendemail.from 'Gerrit Code Review <{{ gerrit_admin_email }}>'
   git config -f /var/gerrit/etc/gerrit.config --add gc.startTime {{ gc_start_time }}
   git config -f /var/gerrit/etc/gerrit.config --add gc.interval "1 day"
+  git config -f /var/gerrit/etc/gerrit.config --replace-all log.timeToKeep "10d"
+  git config -f /var/gerrit/etc/gerrit.config --replace-all log.rotate true
   git config -f /var/gerrit/etc/replication.config --add gerrit.autoReload true
-  git config -f /var/gerrit/etc/replication.config --add remote.url 'git@github.com:${name}.git'
-  git config -f /var/gerrit/etc/replication.config --add remote.push '+refs/heads/*:refs/heads/*'
-  git config -f /var/gerrit/etc/replication.config --add remote.push '+refs/tags/*:refs/tags/*'
-  git config -f /var/gerrit/etc/replication.config --add remote.threads 3
+  git config -f /var/gerrit/etc/replication.config --add remote.github.url 'git@github.com:${name}.git'
+  git config -f /var/gerrit/etc/replication.config --add remote.github.push '+refs/heads/*:refs/heads/*'
+  git config -f /var/gerrit/etc/replication.config --add remote.github.push '+refs/tags/*:refs/tags/*'
+  git config -f /var/gerrit/etc/replication.config --add remote.github.threads 3
+  git config -f /var/gerrit/etc/replication.config --add remote.github.projects '^opensdn-io/.*'
   java $JAVA_OPTS -jar /var/gerrit/bin/gerrit.war reindex -d /var/gerrit
 fi
 

@@ -53,8 +53,8 @@
           lock: group-two-ha
         ansible-os-ha:
           lock: group-one-ha
-        ansible-os-ha-ziu:
-          lock: group-one-ha
+        # ansible-os-ha-ziu:
+        #   lock: group-one-ha
         ansible-k8s-ha:
           frequency: 7
           lock: group-one-ha
@@ -67,10 +67,10 @@
         #     - package-centos
 
         # to use just built nightly images
-        deploy-platform-ansible-os-ha-ziu:
+        # deploy-platform-ansible-os-ha-ziu:
           # additional deps
-          depends-on:
-            - package-deployers-r25.1
+          # depends-on:
+          #  - package-deployers-r25.1
 
         publish-r26.1-nightly:
           job-name: publish

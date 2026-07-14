@@ -12,6 +12,7 @@ export RESERVED_CORES_COUNT=16
 export VM_BOOT_RETRIES="${VM_BOOT_RETRIES:-120}"
 export VM_BOOT_DELAY="${VM_BOOT_DELAY:-60}"
 export VOLUME_TYPE="${VOLUME_TYPE:-ceph-ssd}"
+export AVAILABILITY_ZONE="${AVAILABILITY_ZONE:-PA2}"
 
 # vm_type  CPU     Memory    AWS (Canada) analog
 # xsmall   1       4 GB      t2.small

@@ -10,7 +10,7 @@
    },
    "builders":[
       {
-         "availability_zone": "GZ1",
+         "availability_zone": "PA2",
          "type":"openstack",
          "flavor":"Standard-2-4-40",
          "image_name":"prepared-{{user `os_image`}}-{{isotime \"200601021504\"}}",

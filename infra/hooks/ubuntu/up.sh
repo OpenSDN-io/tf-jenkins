@@ -52,7 +52,8 @@ if [[ "${USE_DATAPLANE_NETWORK,,}" == "true" ]]; then
     echo "ERROR: second inteface is absent. exiting..."
     exit 1
   fi
-  echo "INFO: second interface found"
+  int2=\$(ip l | grep -o ': en[0-9a-zA-Z]*' | grep -o '[0-9a-zA-Z]*' | tail -1)
+  echo "INFO: second interface '\$int2' found"
   ip l
 fi
 
@@ -78,19 +79,18 @@ if [[ "${USE_DATAPLANE_NETWORK,,}" == "true" ]] && (( \$version_major < 24 )); t
   sudo cloud-init clean --configs network
   sudo cloud-init init --local
 
-  # NOTE: hard-coded name of second interface
-  if grep ens6 /etc/netplan/50-cloud-ini.yaml ; then
+  if grep \$int2 /etc/netplan/50-cloud-ini.yaml ; then
     echo "            dhcp4-overrides:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "                use-routes: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "                use-dns: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
   else
-    mac=\$(ip l | grep -A 3 ens6 | grep -o "ether.*" | cut -d ' ' -f 2)
-    echo "        ens6:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    mac=\$(ip l | grep -A 3 \$int2 | grep -o "ether.*" | cut -d ' ' -f 2)
+    echo "        \$int2:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "            dhcp4: true" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "            match:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "                macaddress: \$mac" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "            mtu: 1500" | sudo tee -a /etc/netplan/50-cloud-init.yaml
-    echo "            set-name: ens6" | sudo tee -a /etc/netplan/50-cloud-init.yaml
+    echo "            set-name: \$int2" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "            dhcp4-overrides:" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "                use-routes: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml
     echo "                use-dns: false" | sudo tee -a /etc/netplan/50-cloud-init.yaml

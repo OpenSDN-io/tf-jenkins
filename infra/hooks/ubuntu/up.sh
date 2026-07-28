@@ -73,7 +73,7 @@ version_major=\$(echo $VERSION_ID | cut -d '.' -f 1)
 if [[ "${USE_DATAPLANE_NETWORK,,}" == "true" ]] && (( \$version_major < 24 )); then
   # hack to reconfig netplan
   # https://askubuntu.com/questions/1104285/how-do-i-reload-network-configuration-with-cloud-init/1503265#1503265
-  wget http://launchpadlibrarian.net/713462297/cloud-init_23.4.3-0ubuntu0~22.04.1_all.deb
+  wget ${SITE_MIRROR:-http://launchpadlibrarian.net}${SITE_MIRROR:+/external-web-cache}/713462297/cloud-init_23.4.3-0ubuntu0~22.04.1_all.deb
   sudo apt-get install -y --allow-downgrades ./cloud-init_23.4.*.deb
   sudo cloud-init clean --configs network
   sudo cloud-init init --local

@@ -128,24 +128,34 @@ function get_volume_list() {
   echo $volumes
 }
 
-function wait_for_volume_ready() {
+function get_available_volume_id() {
   local volume_name=$1
-  for ((i=0; i<30; i++)) ; do
-    status=$(openstack volume show $volume_name | grep status)
-    if [[ "$status" =~ 'available' ]] ; then
-      echo "Volume $volume_name is available"
+  local list
+  list=$(openstack volume list --name "$volume_name" -c ID -c Status -f value 2>/dev/null) || return 0
+  echo "$list" | awk '$2=="available"{print $1}'
+  return 0
+}
+
+function wait_for_volume_ready() {
+  local volume_id=$1
+  local i
+  local status
+  for (( i=0; i<30; i++ )) ; do
+    status=$(openstack volume show "$volume_id" -c status -f value 2>/dev/null || true)
+    if [[ "$status" == "available" ]]; then
+      echo "Volume $volume_id is available"
       return 0
-    elif [[ "$status" =~ 'error' ]] ; then
-      echo "Volume $volume_name is in error state, would be deleted"
-      openstack volume show $volume_name
-      openstack volume delete $volume_name
+    elif [[ "$status" == "error" ]]; then
+      echo "Volume $volume_id is in error state, would be deleted"
+      openstack volume show "$volume_id" || true
+      openstack volume delete "$volume_id" || true
       return 1
     fi
     sleep 10
   done
-  echo "Waiting for availability of volume $volume_name too long, would be deleted"
-  openstack volume show $volume_name
-  openstack volume delete $volume_name
+  echo "Waiting for availability of volume $volume_id too long, would be deleted"
+  openstack volume show "$volume_id" || true
+  openstack volume delete "$volume_id" || true
   return 1
 }
 
@@ -177,7 +187,7 @@ function wait_for_free_resources() {
         sleep $VM_BOOT_DELAY
         continue
     fi
-    local instances_used=$(echo "$quotas" | jq .limits.absolute.totalInstacesUsed)
+    local instances_used=$(echo "$quotas" | jq .limits.absolute.totalInstancesUsed)
     local instances_limit=$(echo "$quotas" | jq .limits.absolute.maxTotalInstances)
     local cores_used=$(echo "$quotas" | jq .limits.absolute.totalCoresUsed)
     local cores_limit=$(echo "$quotas" | jq .limits.absolute.maxTotalCores)

@@ -85,6 +85,14 @@ function cleanup () {
   fi
 }
 
+function delete_job_volumes () {
+  local n
+  echo "INFO: deleting leftover volumes for ${instance_name}"
+  for n in $(seq 1 $NODES_COUNT) ; do
+    openstack volume delete "${instance_name}_${n}" || true
+  done
+}
+
 function wait_for_instance_availability () {
   local instance_ip=$1
   local res=0
@@ -176,37 +184,45 @@ for (( i=1; i<=$VM_BOOT_RETRIES ; ++i )) ; do
   res=0
 
   for i in $(seq 1 $NODES_COUNT) ; do
-    # Volumes creation
+    instance_name_num=${instance_name}_${i}
+    # Volumes creation: reuse an already available volume instead of creating a duplicate
     VOLUME_RETRIES=${VOLUME_RETRIES:-5}
     for (( k=1; k<=${VOLUME_RETRIES} ; ++k )) ; do
-      instance_name_num=${instance_name}_${i}
+      volume_id=$(get_available_volume_id "${instance_name_num}")
+      if [[ -n "$volume_id" ]]; then
+        echo "INFO: reusing existing volume ${volume_id} (${instance_name_num})"
+        break
+      fi
+
       echo "INFO: openstack volume create --type $VOLUME_TYPE --size $VOLUME_SIZE \
-        --availability-zone $AZ --image $IMAGE --bootable ${instance_name_num}_volume"
-      openstack volume create \
+        --availability-zone $AZ --image $IMAGE --bootable ${instance_name_num}"
+      volume_id=$(openstack volume create \
         --type "${VOLUME_TYPE}" \
         --size "${VOLUME_SIZE}" \
         --availability-zone "${AZ}" \
         --image "${IMAGE}" \
         --bootable \
-        ${instance_name_num}
+        -c id -f value \
+        ${instance_name_num}) || volume_id=""
 
-      if wait_for_volume_ready ${instance_name_num} ; then
+      if [[ -n "$volume_id" ]] && wait_for_volume_ready "${volume_id}" ; then
         break
       fi
       if [[ $k == ${VOLUME_RETRIES} ]] ; then
         echo "ERROR: Volume creation failed for ${VOLUME_RETRIES} times. Terminating"
         cleanup ${group_tag}
+        delete_job_volumes
         exit 1
       else
         echo "ERROR: Volume creation failed. Retry..."
       fi
     done
 
-    echo "INFO: openstack server create --volume ${instance_name_num} \
+    echo "INFO: openstack server create --volume ${volume_id} \
       --flavor ${INSTANCE_TYPE} --security-group ${OS_SG} --availability-zone ${AZ} \
       --key-name=worker --network ${OS_NETWORK} --wait ${instance_name_num}"
     openstack server create \
-      --volume ${instance_name_num} \
+      --volume ${volume_id} \
       --flavor ${INSTANCE_TYPE} \
       --security-group ${OS_SG} \
       --availability-zone ${AZ} \
@@ -275,5 +291,7 @@ for (( i=1; i<=$VM_BOOT_RETRIES ; ++i )) ; do
 done
 
 echo "INFO: Nodes are not created."
+cleanup ${group_tag}
+delete_job_volumes
 touch "$ENV_FILE"
 exit 1

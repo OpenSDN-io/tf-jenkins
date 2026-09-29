@@ -59,8 +59,8 @@
     streams:
       build-rocky9:
         vars:
-          LINUX_DISTR: rockylinux
-          LINUX_DISTR_VER: 9
+          LINUX_DISTR: rockylinux/rockylinux
+          LINUX_DISTR_VER: 9.8
     jobs:
       prepare-sandbox-rocky9:
         # it creates worker
